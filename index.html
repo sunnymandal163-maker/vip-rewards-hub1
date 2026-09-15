@@ -3,130 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VIP Rewards Hub</title>
+  <title>MQM Casino & Kids Fun Hub</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background: #0f101c; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
-    .app-card { background: #1a1c2e; width: 100%; max-width: 420px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #2d325a; }
-    .header { text-align: center; margin-bottom: 20px; }
-    .header h2 { color: #ffd700; font-size: 24px; letter-spacing: 1px; }
-    .user-badge { font-size: 13px; color: #4ade80; margin-top: 4px; display: block; }
-    .coin-box { background: linear-gradient(135deg, #f39c12, #d35400); padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(243,156,18,0.3); }
-    .coin-box h3 { font-size: 32px; font-weight: bold; }
-    .coin-box p { font-size: 13px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
+    body { background: #0b0c16; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
+    .app-card { background: #161829; width: 100%; max-width: 440px; border-radius: 18px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); border: 2px solid #3d426b; position: relative; }
+    .header { text-align: center; margin-bottom: 12px; position: relative; }
+    .header h2 { color: #ffd700; font-size: 22px; letter-spacing: 1px; text-shadow: 0 2px 10px rgba(255,215,0,0.4); }
+    .user-badge { font-size: 12px; color: #4ade80; margin-top: 3px; display: block; }
     
-    .action-btn { width: 100%; padding: 13px; margin-bottom: 10px; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-    .btn-ad { background: #4e54c8; color: white; }
-    .btn-ad:hover { background: #3f44a5; }
-    .btn-share { background: #25d366; color: white; }
-    .btn-share:hover { background: #1ebe57; }
-    .btn-claim { background: #ffd700; color: #111; }
-    .btn-claim:hover { background: #e6c200; }
+    .sound-toggle-btn { position: absolute; top: 0; right: 0; background: #2a2e52; color: #ffd700; border: 1px solid #444; padding: 5px 10px; border-radius: 8px; font-size: 11px; cursor: pointer; font-weight: bold; }
+    .sound-toggle-btn:hover { background: #383e6b; }
 
-    .ref-box { background: #131524; border: 1px dashed #25d366; padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 12px; font-size: 13px; color: #ccc; }
-    .ref-box strong { color: #25d366; }
-    .progress-bar-bg { width: 100%; background: #2a2a3e; height: 10px; border-radius: 5px; margin-top: 8px; overflow: hidden; }
-    .progress-bar-fill { height: 100%; width: 0%; background: #25d366; transition: width 0.4s; }
+    .coin-box { background: linear-gradient(135deg, #00c6ff, #0072ff); padding: 12px; border-radius: 12px; text-align: center; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(0,114,255,0.4); border: 1px solid #60a5fa; }
+    .coin-box h3 { font-size: 30px; font-weight: bold; color: #fff; text-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+    .coin-box p { font-size: 11px; opacity: 0.95; text-transform: uppercase; letter-spacing: 1px; color: #e0f2fe; }
+    
+    .action-btn { width: 100%; padding: 11px; margin-bottom: 7px; border: none; border-radius: 10px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+    .btn-ad { background: linear-gradient(135deg, #4e54c8, #8f94fb); color: white; box-shadow: 0 4px 12px rgba(78,84,200,0.4); }
+    .btn-share { background: linear-gradient(135deg, #11998e, #38ef7d); color: white; }
+    .btn-claim { background: linear-gradient(135deg, #f7971e, #ffd200); color: #111; }
 
-    .rules-card { background: #131524; padding: 14px; border-radius: 10px; font-size: 13px; color: #a0a5c0; line-height: 1.6; margin-top: 15px; border-left: 3px solid #ffd700; }
-    .rules-card strong { color: #ffd700; }
+    .game-section-title { font-size: 12px; color: #ffd700; margin: 10px 0 5px 2px; text-transform: uppercase; letter-spacing: 0.5px; border-left: 3px solid #ffd700; padding-left: 6px; }
+    
+    .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; max-height: 155px; overflow-y: auto; padding-right: 4px; }
+    .game-grid::-webkit-scrollbar { width: 4px; }
+    .game-grid::-webkit-scrollbar-thumb { background: #3d426b; border-radius: 4px; }
+
+    .game-item { background: #1f2238; border: 1px solid #363b63; padding: 7px 4px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.2s; }
+    .game-item:hover { border-color: #ffd700; background: #262a45; transform: translateY(-2px); }
+    .game-item span { font-size: 18px; display: block; margin-bottom: 2px; }
+    .game-item h4 { font-size: 11px; color: #ffd700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .ref-box { background: #111320; border: 1px dashed #38ef7d; padding: 8px; border-radius: 10px; text-align: center; margin-bottom: 8px; font-size: 11px; color: #ccc; }
+    .ref-box strong { color: #38ef7d; }
+    .progress-bar-bg { width: 100%; background: #2a2a3e; height: 6px; border-radius: 3px; margin-top: 5px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; width: 0%; background: #38ef7d; transition: width 0.4s; }
+
+    .rules-card { background: #111320; padding: 10px; border-radius: 10px; font-size: 11px; color: #a0a5c0; line-height: 1.4; margin-top: 8px; border-left: 3px solid #00c6ff; }
+    .rules-card strong { color: #00c6ff; }
 
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; justify-content: center; align-items: center; padding: 15px; }
-    .modal-box { background: #1e1e2f; color: #fff; padding: 22px; border-radius: 14px; max-width: 380px; width: 100%; text-align: center; border: 1px solid #3d426b; }
+    .modal-box { background: #1e1e2f; color: #fff; padding: 20px; border-radius: 14px; max-width: 380px; width: 100%; text-align: center; border: 1px solid #3d426b; position: relative; max-height: 90vh; overflow-y: auto; }
     .modal-box h3 { color: #ffd700; margin-bottom: 8px; }
-    .input-group { text-align: left; margin-bottom: 12px; }
-    .input-group label { font-size: 13px; color: #ccc; display: block; margin-bottom: 5px; }
-    .input-group input, .input-group select { width: 100%; padding: 11px; border-radius: 8px; border: 1px solid #444; background: #2a2a3e; color: #fff; outline: none; font-size: 14px; }
-    .btn-submit { width: 100%; padding: 12px; background: #28a745; color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; margin-top: 8px; }
-    .btn-close { width: 100%; padding: 8px; background: transparent; color: #bbb; border: none; margin-top: 5px; cursor: pointer; font-size: 13px; }
     
-    #adVideoPlayer { width: 100%; border-radius: 10px; margin-bottom: 12px; background: #000; pointer-events: none; }
-    #videoStatus { font-size: 14px; color: #ffd700; margin-bottom: 10px; font-weight: bold; }
+    .cross-close-btn { display: none; position: absolute; top: 12px; right: 14px; background: #e84118; color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; font-weight: bold; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(232,65,24,0.4); }
+
+    .input-group { text-align: left; margin-bottom: 10px; }
+    .input-group label { font-size: 12px; color: #ccc; display: block; margin-bottom: 4px; }
+    .input-group input, .input-group select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444; background: #2a2a3e; color: #fff; outline: none; font-size: 13px; }
+    .btn-submit { width: 100%; padding: 11px; background: #28a745; color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; margin-top: 6px; }
+    .btn-close { width: 100%; padding: 7px; background: transparent; color: #bbb; border: none; margin-top: 4px; cursor: pointer; font-size: 12px; }
+    
+    #adVideoPlayer { width: 100%; border-radius: 8px; margin-bottom: 10px; background: #000; pointer-events: none; }
+    #videoStatus { font-size: 13px; color: #ffd700; margin-bottom: 8px; font-weight: bold; }
   </style>
 </head>
 <body>
 
+<audio id="bgMusic" loop>
+  <source src="https://commondatastorage.googleapis.com/codesandbox-demos/que-sera-sera.mp3" type="audio/mp3">
+</audio>
+
 <div class="app-card">
   <div class="header">
-    <h2>VIP REWARDS HUB</h2>
+    <button id="soundBtn" class="sound-toggle-btn" onclick="toggleSound()">🔊 Sound: ON</button>
+    <h2>MQM CASINO & KIDS HUB</h2>
     <span id="currentUserDisplay" class="user-badge">Not Logged In</span>
   </div>
 
   <div class="coin-box">
     <h3 id="coinCount">0</h3>
-    <p>Current Coin Balance</p>
+    <p>Free Coin Balance (No Deposit)</p>
   </div>
 
-  <div class="ref-box">
-    <span>Verified Referrals: <strong id="refCount">0</strong> / 7</span>
-    <div class="progress-bar-bg">
-      <div id="refProgress" class="progress-bar-fill"></div>
+  <div class="game-section-title">🔥 20+ Trending Games (Free Play)</div>
+  <div class="game-grid">
+    <div class="game-item" onclick="openGameModal('Teen Patti', 40)"><span>🃏</span><h4>Teen Patti</h4></div>
+    <div class="game-item" onclick="openGameModal('Rummy Master', 40)"><span>🎴</span><h4>Rummy</h4></div>
+    <div class="game-item" onclick="openGameModal('Call Break', 40)"><span>📐</span><h4>Call Break</h4></div>
+    <div class="game-item" onclick="openGameModal('Aviator Crash', 40)"><span>✈️</span><h4>Aviator</h4></div>
+    <div class="game-item" onclick="openGameModal('Car Racing', 40)"><span>🏎️</span><h4>Car Racing</h4></div>
+    <div class="game-item" onclick="openGameModal('Subway Surfers', 40)"><span>🛹</span><h4>Subway Run</h4></div>
+    <div class="game-item" onclick="openGameModal('Mini Cricket', 40)"><span>🏏</span><h4>Cricket</h4></div>
+    <div class="game-item" onclick="openGameModal('Football Match', 40)"><span>⚽</span><h4>Football</h4></div>
+    <div class="game-item" onclick="openGameModal('Fruit Slot', 40)"><span>🎰</span><h4>Fruit Slot</h4></div>
+    <div class="game-item" onclick="openGameModal('Ludo King', 40)"><span>🎲</span><h4>Ludo</h4></div>
+    <div class="game-item" onclick="openGameModal('Andar Bahar', 40)"><span>🎴</span><h4>Andar Bahar</h4></div>
+    <div class="game-item" onclick="openGameModal('Dragon Tiger', 40)"><span>🐉</span><h4>Dragon Tiger</h4></div>
+    <div class="game-item" onclick="openGameModal('Pool 8 Ball', 40)"><span>🎱</span><h4>8 Ball Pool</h4></div>
+    <div class="game-item" onclick="openGameModal('Candy Crush', 40)"><span>🍬</span><h4>Candy Crush</h4></div>
+    <div class="game-item" onclick="openGameModal('Jackpot Slot', 40)"><span>🎰</span><h4>Jackpot Slot</h4></div>
+    <div class="game-item" onclick="openGameModal('Poker Arena', 40)"><span>🃏</span><h4>Poker Arena</h4></div>
+    <div class="game-item" onclick="openGameModal('Bumper Car', 40)"><span>🚗</span><h4>Bumper Car</h4></div>
+    <div class="game-item" onclick="openGameModal('Penalty Shoot', 40)"><span>🥅</span><h4>Penalty Shoot</h4></div>
+    <div class="game-item" onclick="openGameModal('Spin Win', 40)"><span>🎡</span><h4>Spin Win</h4></div>
+    <div class="game-item" onclick="openGameModal('Fishing Slot', 40)"><span>🦈</span><h4>Fishing Slot</h4></div>
+  </div>
+
+  <div class="game-section-title">🧸 Kids Cartoon Zone (Dynamic Ads & Rewards)</div>
+  <div class="game-grid" style="max-height: 105px;">
+    <div class="game-item" onclick="openCartoonModal('Kids Nursery Rhymes (Short - 3 Mins)', 30)"><span>🎶</span><h4>Rhymes (3m)</h4></div>
+    <div class="game-item" onclick="openCartoonModal('Tom & Jerry Fun Show (Short - 4 Mins)', 30)"><span>🐱</span><h4>Tom & Jerry</h4></div>
+    <div class="game-item" onclick="openCartoonModal('Chhota Bheem Adventure (Full - 8 Mins)', 75)"><span>🦸‍♂️</span><h4>Bheem (8m)</h4></div>
+    <div class="game-item" onclick="openCartoonModal('Doraemon Gadget Show (Full - 10 Mins)', 90)"><span>🐱🤖</span><h4>Doraemon (10m)</h4></div>
+    <div class="game-item" onclick="openCartoonModal('Motu Patlu Comedy (Full - 10 Mins)', 90)"><span>🚴‍♂️</span><h4>Motu Patlu</h4></div>
+    <div class="game-item" onclick="openCartoonModal('Dragon Ball Z Action (Full - 10 Mins)', 90)"><span>⚡</span><h4>DBZ (10m)</h4></div>
+  </div>
+
+  <div style="margin-top: 6px;">
+    <div class="game-item" onclick="openSpinWheel()" style="width: 100%; padding: 8px; background: linear-gradient(135deg, #f7971e, #ffd200); color: #111; font-weight: bold;">
+      <span style="font-size: 20px; display:inline;">🎡</span> <h4 style="display:inline; font-size: 13px; color: #111;">Lucky Wheel (7h) - <span id="spinTimerText">Ready!</span></h4>
     </div>
-    <small style="color: #8890b5; display: block; margin-top: 6px;">Invite 7 friends to reload the special ₹10 code offer!</small>
   </div>
 
-  <button class="action-btn btn-share" onclick="sharePersonalReferralLink()">📲 Invite Friends (Win 30 - 100 Coins)</button>
-  <button class="action-btn btn-ad" onclick="openVideoModal()">🎬 Watch Video (+10 Coins)</button>
+  <div class="ref-box" style="margin-top: 6px;">
+    <span>Referrals: <strong id="refCount">0</strong> / 14 | Ads Streak: <strong id="adStreakCount">0</strong>/10</span>
+    <div class="progress-bar-bg">
+      <div id="refProgress" class="progress-bar-fill" style="width: 0%;"></div>
+    </div>
+    <small style="color: #38ef7d; display: block; margin-top: 3px;">🎯 Milestone: 7 Refs = +120c | 14 Refs = +250c!</small>
+  </div>
+
+  <button class="action-btn btn-share" onclick="sharePersonalReferralLink()">📢 Invite Friends & Earn Commission</button>
+  <button class="action-btn btn-ad" onclick="openVideoModal()">🎬 Watch Video Ad (Ad Booster / Recovery)</button>
   <button class="action-btn btn-claim" onclick="openRewardModal()">🎁 Claim Reward</button>
 
   <div class="rules-card">
-    📌 <strong>Reward Rates:</strong><br>
-    • <strong>₹10 Play Code:</strong> 250c (Special) / 300c (Direct)<br>
-    • <strong>₹20 Play Code:</strong> 480c | <strong>₹25 Play Code:</strong> 600c<br>
-    • <strong>₹50 Play Code:</strong> 1200c<br>
-    • <strong>1GB/2GB/3GB Data:</strong> 350c / 600c / 800c<br>
-    • <strong>₹25/₹50 Amazon Voucher:</strong> 500c / 950c
+    📌 <strong>100% Free & Secure Rules:</strong><br>
+    • No real money deposit. Free games & cartoons via Ads!<br>
+    • Short cartoons have 30-45s ads; Long cartoons have 1-1.5m ads!<br>
+    • <strong>₹10 Play Code:</strong> 250c (Special) / 300c (Direct)
   </div>
 </div>
 
-<!-- Login / Registration Modal -->
+<!-- Login Modal -->
 <div id="login-modal" class="modal" style="display: flex;">
   <div class="modal-box">
-    <h3>👋 Welcome to VIP Rewards</h3>
-    <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Login with your phone number to earn & claim rewards:</p>
-
+    <h3>👋 Welcome to MQM Hub</h3>
+    <p style="font-size: 12px; color: #aaa; margin-bottom: 12px;">Login with your phone number (Free Coins):</p>
     <div class="input-group">
       <label>Your Name:</label>
-      <input type="text" id="loginName" placeholder="Enter your full name">
+      <input type="text" id="loginName" placeholder="Enter full name">
     </div>
-
     <div class="input-group">
-      <label>WhatsApp / Phone Number (10 Digits):</label>
+      <label>Mobile Number (10 Digits):</label>
       <input type="tel" id="loginPhone" placeholder="Enter 10-digit number" maxlength="10">
     </div>
-
-    <button class="btn-submit" onclick="performLogin()">Login & Start Earning</button>
+    <button class="btn-submit" onclick="performLogin()">Login & Get 100 Free Coins</button>
   </div>
 </div>
 
-<!-- Video Watch Modal -->
+<!-- Game Simulator Modal -->
+<div id="game-modal" class="modal">
+  <div class="modal-box">
+    <button class="cross-close-btn" style="display: flex;" onclick="closeGameModal()">×</button>
+    <h3 id="gameModalTitle">🎮 Game Arena</h3>
+    <p id="gameModalDesc" style="font-size: 13px; color: #aaa; margin: 15px 0;">Bet 40 free coins to play!</p>
+    <button class="btn-submit" id="gamePlayBtn" onclick="executeGamePlay()">Play & Bet 40 Coins</button>
+    <button class="btn-close" onclick="closeGameModal()">Close</button>
+  </div>
+</div>
+
+<!-- Cartoon Watch Modal with Dynamic Ad Duration Notice -->
+<div id="cartoon-modal" class="modal">
+  <div class="modal-box">
+    <button class="cross-close-btn" style="display: flex;" onclick="closeCartoonModal()">×</button>
+    <h3 id="cartoonModalTitle">🧸 Cartoon Zone</h3>
+    <p style="font-size: 12px; color: #ffd700; margin: 8px 0;" id="cartoonAdNotice">⏳ Playing sponsored ad before video...</p>
+    <video id="cartoonVideoPlayer" controls playsinline style="width: 100%; border-radius: 8px; margin-bottom: 10px; background: #000;">
+      <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+      Your browser does not support video.
+    </video>
+    <button class="btn-submit" id="cartoonClaimBtn" onclick="claimCartoonReward()">Claim Free Coins</button>
+    <button class="btn-close" onclick="closeCartoonModal()">Close</button>
+  </div>
+</div>
+
+<!-- Video Watch Modal (Max Ad Booster) -->
 <div id="video-modal" class="modal">
   <div class="modal-box">
-    <h3>🎬 Watch Video Ad</h3>
+    <button id="videoCrossBtn" class="cross-close-btn" onclick="finishAndCloseAd()">×</button>
+    <h3>🎬 Watch Video Ad (Ad Booster)</h3>
     <p id="videoStatus">Tap below to start video</p>
     <video id="adVideoPlayer" playsinline>
       <source id="videoSource" src="" type="video/mp4">
       Your browser does not support video.
     </video>
-    <button id="startVideoBtn" class="btn-submit" onclick="playAdVideo()">Play Video</button>
+    <button id="startVideoBtn" class="btn-submit" onclick="playAdVideo()">Play Ad</button>
     <button id="closeVideoBtn" class="btn-close" onclick="closeVideoModal()">Cancel</button>
   </div>
 </div>
 
-<!-- Claim Popup Modal -->
+<!-- Claim Reward Modal -->
 <div id="reward-modal" class="modal">
   <div class="modal-box">
+    <button class="cross-close-btn" style="display: flex;" onclick="closeRewardModal()">×</button>
     <h3>🎁 Claim Your Reward</h3>
-    <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Select your reward & confirm details:</p>
-
+    <p style="font-size: 12px; color: #aaa; margin-bottom: 12px;">Select reward & confirm details:</p>
+    
     <div class="input-group">
       <label>Select Reward Option:</label>
       <select id="claimRewardType" onchange="toggleSimSelect()">
-        <option value="₹10 Play Code (Special 250c)" data-cost="250" id="specialPlayCodeOption">🎮 ₹10 Google Play Code - Special (250 Coins) [3/day]</option>
-        <option value="₹10 Play Code (Direct 300c)" data-cost="300">⚡ ₹10 Google Play Code - Direct Instant (300 Coins)</option>
-        <option value="₹20 Play Code (480c)" data-cost="480">🎮 ₹20 Google Play Redeem Code (480 Coins)</option>
-        <option value="₹25 Play Code (600c)" data-cost="600">🎮 ₹25 Google Play Redeem Code (600 Coins)</option>
-        <option value="₹50 Play Code (1200c)" data-cost="1200">🎮 ₹50 Google Play Redeem Code (1200 Coins)</option>
+        <option value="₹10 Play Code (Special 250c)" data-cost="250" id="specialPlayCodeOption">🎮 ₹10 Play Code - Special (250 Coins) [3/day]</option>
+        <option value="₹10 Play Code (Direct 300c)" data-cost="300">⚡ ₹10 Play Code - Direct Instant (300 Coins)</option>
+        <option value="₹20 Play Code (480c)" data-cost="480">🎮 ₹20 Play Code (480 Coins)</option>
+        <option value="₹25 Play Code (600c)" data-cost="600">🎮 ₹25 Play Code (600 Coins)</option>
+        <option value="₹50 Play Code (1200c)" data-cost="1200">🎮 ₹50 Play Code (1200 Coins)</option>
         <option value="1GB Data Pack" data-cost="350">📶 1GB Data Pack (350 Coins)</option>
         <option value="2GB Data Pack" data-cost="600">📶 2GB Data Pack (600 Coins)</option>
         <option value="3GB Data Pack" data-cost="800">📶 3GB Data Pack (800 Coins)</option>
@@ -135,8 +218,13 @@
       </select>
     </div>
 
+    <div class="input-group">
+      <label>Delivery WhatsApp No. or Email:</label>
+      <input type="text" id="deliveryContact" placeholder="Enter WhatsApp number or Email">
+    </div>
+
     <div class="input-group" id="simSelectDiv" style="display: none;">
-      <label>SIM Operator (Only for Data Packs):</label>
+      <label>SIM Operator (Data Packs):</label>
       <select id="claimSimOperator">
         <option value="Jio">Jio</option>
         <option value="Airtel">Airtel</option>
@@ -153,7 +241,12 @@
   let currentUser = null;
   let userCoins = 100;
   let invitedFriends = 0;
+  let adStreak = 0;
   let specialClaimCount = 0;
+  let isSoundEnabled = false;
+  let activeGame = '';
+  let currentEntryFee = 40;
+  let currentCartoonReward = 15;
   const MAX_SPECIAL_CLAIMS = 3;
 
   const TG_BOT_TOKEN = "8681623026:AAG9aNaiA7Q-wUwkUjTnOys6VSM6Ki0bO10";
@@ -163,35 +256,64 @@
   const referredBy = urlParams.get('ref');
 
   window.onload = function() {
-    const savedUser = localStorage.getItem("vip_user");
+    const savedUser = localStorage.getItem("mqm_user");
     if (savedUser) {
       currentUser = JSON.parse(savedUser);
-      userCoins = parseInt(localStorage.getItem("vip_coins") || "100");
-      invitedFriends = parseInt(localStorage.getItem("vip_refs") || "0");
+      userCoins = parseInt(localStorage.getItem("mqm_coins") || "100");
+      invitedFriends = parseInt(localStorage.getItem("mqm_refs") || "0");
+      adStreak = parseInt(localStorage.getItem("mqm_ad_streak") || "0");
       document.getElementById("login-modal").style.display = "none";
       updateUI();
+      checkSpinCooldown();
     }
   };
+
+  function toggleSound() {
+    const bgMusic = document.getElementById("bgMusic");
+    const soundBtn = document.getElementById("soundBtn");
+    bgMusic.volume = 0.2;
+
+    if (isSoundEnabled) {
+      bgMusic.pause();
+      isSoundEnabled = false;
+      soundBtn.innerText = "🔇 Sound: OFF";
+    } else {
+      bgMusic.play().catch(e => {});
+      isSoundEnabled = true;
+      soundBtn.innerText = "🔊 Sound: ON";
+    }
+  }
 
   function performLogin() {
     const name = document.getElementById("loginName").value.trim();
     const phone = document.getElementById("loginPhone").value.trim();
-
     if (!name || phone.length < 10) {
-      alert("Please enter a valid full name and a 10-digit mobile number!");
+      alert("Please enter a valid name and 10-digit mobile number!");
       return;
     }
-
     currentUser = { name, phone };
-    localStorage.setItem("vip_user", JSON.stringify(currentUser));
-    localStorage.setItem("vip_coins", userCoins);
-    localStorage.setItem("vip_refs", invitedFriends);
 
+    if (referredBy && referredBy !== phone && !localStorage.getItem("mqm_user")) {
+      userCoins += 20;
+      alert(`🎉 Welcome! You joined via referral from ${referredBy} and received an extra +20 Free Coins!`);
+    }
+
+    localStorage.setItem("mqm_user", JSON.stringify(currentUser));
+    localStorage.setItem("mqm_coins", userCoins);
+    localStorage.setItem("mqm_refs", invitedFriends);
     document.getElementById("login-modal").style.display = "none";
     updateUI();
+    checkSpinCooldown();
+
+    const bgMusic = document.getElementById("bgMusic");
+    bgMusic.volume = 0.2;
+    bgMusic.play().then(() => {
+      isSoundEnabled = true;
+      document.getElementById("soundBtn").innerText = "🔊 Sound: ON";
+    }).catch(e => {});
 
     if (referredBy && referredBy !== phone) {
-      const refAlert = `🤝 *New Referral Registered!*%0A%0A👤 *New User:* ${name}%0A📱 *New Phone:* ${phone}%0A🎯 *Referred By:* ${referredBy}%0A⏰ *Time:* ${new Date().toLocaleString()}`;
+      const refAlert = `🤝 *Casino & Kids Hub Referral!*%0A%0A👤 *New User:* ${name}%0A📱 *New Phone:* ${phone}%0A🎯 *Referrer:* ${referredBy}%0A⏰ *Time:* ${new Date().toLocaleString()}`;
       fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${refAlert}&parse_mode=Markdown`);
     }
   }
@@ -201,29 +323,158 @@
       document.getElementById("currentUserDisplay").innerText = `👤 ${currentUser.name} (${currentUser.phone})`;
       document.getElementById("coinCount").innerText = userCoins;
       document.getElementById("refCount").innerText = invitedFriends;
-      document.getElementById("refProgress").style.width = ((invitedFriends / 7) * 100) + "%";
+      document.getElementById("refProgress").style.width = Math.min(100, (invitedFriends / 14) * 100) + "%";
+      document.getElementById("adStreakCount").innerText = adStreak;
+      document.getElementById("deliveryContact").value = currentUser.phone;
     }
   }
 
-  function sharePersonalReferralLink() {
-    if (!currentUser) {
-      alert("Please login first to get your referral link!");
+  function openGameModal(gameName, entryFee) {
+    activeGame = gameName;
+    currentEntryFee = entryFee;
+    document.getElementById("gameModalTitle").innerText = `🎮 ${gameName}`;
+    document.getElementById("gameModalDesc").innerHTML = `Bet <strong>${entryFee} Free Coins</strong> to play ${gameName}.<br>No-Deposit Play: Win big or watch ads to recover!`;
+    document.getElementById("gamePlayBtn").innerText = `Play & Bet ${entryFee} Coins`;
+    document.getElementById("game-modal").style.display = "flex";
+  }
+
+  function openCartoonModal(cartoonName, rewardCoins) {
+    document.getElementById("cartoonModalTitle").innerText = `🧸 ${cartoonName}`;
+    currentCartoonReward = rewardCoins;
+    
+    const notice = document.getElementById("cartoonAdNotice");
+    if (cartoonName.includes("Short")) {
+      notice.innerText = "⏳ 30-45s Sponsor Ad playing before short video...";
+    } else {
+      notice.innerText = "⏳ 1 to 1.5 Min Sponsor Ad playing before full episode...";
+    }
+
+    document.getElementById("cartoon-modal").style.display = "flex";
+  }
+
+  function closeCartoonModal() {
+    const vid = document.getElementById("cartoonVideoPlayer");
+    vid.pause();
+    vid.currentTime = 0;
+    document.getElementById("cartoon-modal").style.display = "none";
+  }
+
+  function claimCartoonReward() {
+    userCoins += currentCartoonReward;
+    localStorage.setItem("mqm_coins", userCoins);
+    updateUI();
+    closeCartoonModal();
+    alert(`🎉 Fantastic! You watched the cartoon and earned +${currentCartoonReward} Free Coins!`);
+  }
+
+  function openSpinWheel() {
+    const lastSpinTime = parseInt(localStorage.getItem("mqm_last_spin") || "0");
+    const currentTime = new Date().getTime();
+    const sevenHours = 7 * 60 * 60 * 1000;
+
+    if (currentTime - lastSpinTime < sevenHours) {
+      const remainingMs = sevenHours - (currentTime - lastSpinTime);
+      const remainingHours = Math.floor(remainingMs / (1000 * 60 * 60));
+      const remainingMins = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
+      alert(`⏳ Lucky Wheel is on 7-Hour Cooldown! Come back in ${remainingHours}h ${remainingMins}m or watch video ads.`);
       return;
     }
 
+    activeGame = "Lucky Wheel";
+    currentEntryFee = 0;
+    document.getElementById("gameModalTitle").innerText = `🎡 Lucky Wheel Bonus`;
+    document.getElementById("gameModalDesc").innerText = `Spin after your 7-hour cooldown to win 20-50 free coins!`;
+    document.getElementById("gamePlayBtn").innerText = `Spin & Win Free Coins`;
+    document.getElementById("game-modal").style.display = "flex";
+  }
+
+  function checkSpinCooldown() {
+    const lastSpinTime = parseInt(localStorage.getItem("mqm_last_spin") || "0");
+    const currentTime = new Date().getTime();
+    const sevenHours = 7 * 60 * 60 * 1000;
+    const spinTimerText = document.getElementById("spinTimerText");
+
+    if (currentTime - lastSpinTime < sevenHours) {
+      spinTimerText.innerText = "Locked (7h)";
+      spinTimerText.style.color = "#e84118";
+    } else {
+      spinTimerText.innerText = "Ready!";
+      spinTimerText.style.color = "#4ade80";
+    }
+  }
+
+  function closeGameModal() {
+    document.getElementById("game-modal").style.display = "none";
+  }
+
+  function executeGamePlay() {
+    if (activeGame === "Lucky Wheel") {
+      localStorage.setItem("mqm_last_spin", new Date().getTime());
+      const earned = Math.floor(Math.random() * 30) + 20;
+      userCoins += earned;
+      localStorage.setItem("mqm_coins", userCoins);
+      updateUI();
+      checkSpinCooldown();
+      closeGameModal();
+      alert(`🎡 Spin Successful! You won +${earned} Free Coins!`);
+      return;
+    }
+
+    if (userCoins < currentEntryFee) {
+      closeGameModal();
+      alert(`❌ Insufficient coins! You need ${currentEntryFee} free coins. Watch Video Ads below to recover balance instantly.`);
+      return;
+    }
+
+    userCoins -= currentEntryFee; 
+    const isWin = Math.random() < 0.35;
+
+    if (isWin) {
+      const reward = Math.floor(Math.random() * 60) + currentEntryFee;
+      userCoins += reward;
+      localStorage.setItem("mqm_coins", userCoins);
+      updateUI();
+      alert(`🎉 JACKPOT WIN! You won +${reward} Coins in ${activeGame}!`);
+    } else {
+      localStorage.setItem("mqm_coins", userCoins);
+      updateUI();
+      alert(`💥 ROUND LOST! You lost in ${activeGame} (-${currentEntryFee} coins). Watch Video Ads to recover your balance!`);
+    }
+    closeGameModal();
+  }
+
+  function sharePersonalReferralLink() {
+    if (!currentUser) { alert("Please login first!"); return; }
     const baseUrl = window.location.origin + window.location.pathname;
     const myRefLink = `${baseUrl}?ref=${currentUser.phone}`;
-    const shareText = encodeURIComponent(`🔥 Join VIP Rewards Hub! Register and get FREE Google Play Codes & Data Packs! Register with my link: ${myRefLink}`);
-
+    const shareText = encodeURIComponent(`🔥 Play 20+ Free Games & Watch Cartoons to Win Free Google Play Codes! Join via my link: ${myRefLink}`);
     window.open(`https://api.whatsapp.com/send?text=${shareText}`, '_blank');
-    alert("Share this link on WhatsApp! When your friend opens it and logs in with their phone number, your referral will be verified!");
+    
+    invitedFriends++;
+    let earnedCommission = 10; 
+
+    if (invitedFriends === 1) {
+      earnedCommission = 20;
+    } else if (invitedFriends === 7) {
+      earnedCommission = 50;
+      alert("🏆 Milestone Reached! 7 Referrals completed (+120 Coins total reward)!");
+    } else if (invitedFriends === 14) {
+      earnedCommission = 130;
+      alert("🔥 GRAND MILESTONE UNLOCKED! 14 Referrals completed (+250 Coins total reward)!");
+    }
+
+    userCoins += earnedCommission;
+    localStorage.setItem("mqm_refs", invitedFriends);
+    localStorage.setItem("mqm_coins", userCoins);
+    updateUI();
+    alert(`📢 Link shared! +${earnedCommission} Commission Coins added safely.`);
   }
 
   function updateSpecialOption() {
     const opt = document.getElementById("specialPlayCodeOption");
     const remaining = MAX_SPECIAL_CLAIMS - specialClaimCount;
     if (remaining <= 0) {
-      opt.text = "🔒 ₹10 Play Code - 250c (LOCKED - Use Direct or invite 7 friends)";
+      opt.text = "🔒 ₹10 Play Code - 250c (LOCKED)";
     } else {
       opt.text = `🎮 ₹10 Play Code - Special (250 Coins) [${remaining} left]`;
     }
@@ -232,11 +483,13 @@
   const videoList = [
     { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", duration: 25 },
     { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", duration: 30 },
-    { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", duration: 35 }
+    { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", duration: 35 },
+    { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", duration: 30 }
   ];
 
   let countdownTimer = null;
-  let remainingTime = 25;
+  let remainingTime = 30;
+  let adCompletedSuccessfully = false;
 
   const videoModal = document.getElementById("video-modal");
   const adVideo = document.getElementById("adVideoPlayer");
@@ -244,16 +497,19 @@
   const videoStatus = document.getElementById("videoStatus");
   const startVideoBtn = document.getElementById("startVideoBtn");
   const closeVideoBtn = document.getElementById("closeVideoBtn");
+  const videoCrossBtn = document.getElementById("videoCrossBtn");
 
   function openVideoModal() {
     const randomPick = videoList[Math.floor(Math.random() * videoList.length)];
     remainingTime = randomPick.duration;
+    adCompletedSuccessfully = false;
     
     videoSource.src = randomPick.url;
     adVideo.load();
+    videoCrossBtn.style.display = "none";
 
     videoModal.style.display = "flex";
-    videoStatus.innerText = `Watch for ${remainingTime} seconds to earn +10 Coins`;
+    videoStatus.innerText = `Watch Ad Booster | Duration: ${remainingTime}s (Streak: ${adStreak}/10)`;
     startVideoBtn.style.display = "block";
     closeVideoBtn.style.display = "block";
   }
@@ -263,29 +519,56 @@
     adVideo.pause();
     adVideo.currentTime = 0;
     videoModal.style.display = "none";
+
+    if (!adCompletedSuccessfully) {
+      alert("❌ Ad cancelled! Complete the video to recover coins.");
+    }
   }
 
   function playAdVideo() {
     startVideoBtn.style.display = "none";
     closeVideoBtn.style.display = "none";
     adVideo.play();
-
-    videoStatus.innerText = `⏳ Reward in: ${remainingTime}s remaining...`;
+    videoStatus.innerText = `⏳ Watching Ad Booster: ${remainingTime}s remaining...`;
 
     countdownTimer = setInterval(() => {
       remainingTime--;
       if (remainingTime > 0) {
-        videoStatus.innerText = `⏳ Reward in: ${remainingTime}s remaining...`;
+        videoStatus.innerText = `⏳ Watching Ad Booster: ${remainingTime}s remaining...`;
       } else {
         clearInterval(countdownTimer);
         adVideo.pause();
-        userCoins += 10;
-        localStorage.setItem("vip_coins", userCoins);
-        updateUI();
-        alert("🎉 Congratulations! You watched the full video and earned +10 Coins!");
-        closeVideoModal();
+        adCompletedSuccessfully = true;
+
+        videoStatus.innerText = "✅ Ad Completed! Tap (×) to claim coins.";
+        videoCrossBtn.style.display = "flex";
       }
     }, 1000);
+  }
+
+  function finishAndCloseAd() {
+    if (!adCompletedSuccessfully) {
+      closeVideoModal();
+      return;
+    }
+
+    adStreak++;
+    let earned = 10;
+    let msg = "🎉 Ad Booster Success! You received +10 Coins!";
+
+    if (adStreak >= 10) {
+      earned = 25;
+      adStreak = 0;
+      msg = "🔥 MEGA BONUS UNLOCKED! You completed 10 Ads and received +25 Mega Coins!";
+    }
+
+    userCoins += earned;
+    localStorage.setItem("mqm_coins", userCoins);
+    localStorage.setItem("mqm_ad_streak", adStreak);
+    updateUI();
+    
+    videoModal.style.display = "none";
+    alert(msg);
   }
 
   function openRewardModal() {
@@ -302,7 +585,6 @@
     const select = document.getElementById("claimRewardType");
     const selectedVal = select.value;
     const simDiv = document.getElementById("simSelectDiv");
-    
     if (selectedVal.includes("Data Pack")) {
       simDiv.style.display = "block";
     } else {
@@ -313,21 +595,26 @@
   function sendClaimToTelegram() {
     const select = document.getElementById("claimRewardType");
     const selectedOption = select.options[select.selectedIndex];
-    
     const rewardName = selectedOption.value;
     const requiredCoins = parseInt(selectedOption.getAttribute("data-cost"));
+    const deliveryContact = document.getElementById("deliveryContact").value.trim();
     const isData = rewardName.includes("Data Pack");
-    const sim = isData ? document.getElementById("claimSimOperator").value : "Voucher Code (Sent to registered phone)";
+    const sim = isData ? document.getElementById("claimSimOperator").value : "N/A (Gift Code / Voucher)";
+
+    if (!deliveryContact) {
+      alert("❌ Please enter your WhatsApp number or Email!");
+      return;
+    }
 
     if (rewardName.includes("Special 250c")) {
       if (specialClaimCount >= MAX_SPECIAL_CLAIMS) {
-        alert("❌ 250 Coins special offer is locked! Please select another code denomination or invite 7 friends to unlock it!");
+        alert("❌ 250 Coins special offer is locked!");
         return;
       }
     }
 
     if (userCoins < requiredCoins) {
-      alert(`Insufficient balance! You need ${requiredCoins} coins for this reward.`);
+      alert(`Insufficient balance! You need ${requiredCoins} coins.`);
       return;
     }
 
@@ -335,7 +622,7 @@
     btn.disabled = true;
     btn.innerText = "Submitting...";
 
-    const messageText = `🎉 *New Reward Claim Request!*%0A%0A👤 *User Name:* ${currentUser.name}%0A📱 *Contact/WhatsApp:* ${currentUser.phone}%0A🎁 *Selected Reward:* ${rewardName}%0A💰 *Coins Deducted:* ${requiredCoins}%0A📶 *Delivery/SIM:* ${sim}%0A⏰ *Timestamp:* ${new Date().toLocaleString()}`;
+    const messageText = `🎉 *New Free Reward Claim Request!*%0A%0A👤 *User Name:* ${currentUser.name}%0A📱 *Registered Phone:* ${currentUser.phone}%0A🎯 *Delivery Contact:* ${deliveryContact}%0A🎁 *Selected Reward:* ${rewardName}%0A💰 *Coins Deducted:* ${requiredCoins}%0A📶 *SIM Operator:* ${sim}%0A⏰ *Timestamp:* ${new Date().toLocaleString()}`;
 
     const tgUrl = `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${messageText}&parse_mode=Markdown`;
 
@@ -344,7 +631,7 @@
       .then(data => {
         if (data.ok) {
           userCoins -= requiredCoins;
-          localStorage.setItem("vip_coins", userCoins);
+          localStorage.setItem("mqm_coins", userCoins);
           updateUI();
 
           if (rewardName.includes("Special 250c")) {
@@ -352,14 +639,14 @@
             updateSpecialOption();
           }
 
-          alert("Success! Your claim request has been sent to the admin. You will receive your reward shortly.");
+          alert("Success! Claim request sent. You will receive your reward shortly.");
           closeRewardModal();
         } else {
-          alert("Error! Could not connect to Telegram bot.");
+          alert("Error connecting to Telegram.");
         }
       })
       .catch(err => {
-        alert("Network error! Please check your connection.");
+        alert("Network error!");
       })
       .finally(() => {
         btn.disabled = false;
