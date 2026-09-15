@@ -1,87 +1,142 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VIP Rewards App</title>
+  <title>VIP Rewards Hub</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body { background: #0f101c; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
     .app-card { background: #1a1c2e; width: 100%; max-width: 420px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #2d325a; }
     .header { text-align: center; margin-bottom: 20px; }
-    .header h2 { color: #ffd700; font-size: 24px; }
+    .header h2 { color: #ffd700; font-size: 24px; letter-spacing: 1px; }
+    .user-badge { font-size: 13px; color: #4ade80; margin-top: 4px; display: block; }
     .coin-box { background: linear-gradient(135deg, #f39c12, #d35400); padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(243,156,18,0.3); }
-    .coin-box h3 { font-size: 30px; font-weight: bold; }
-    .coin-box p { font-size: 14px; opacity: 0.9; }
-    .action-btn { width: 100%; padding: 14px; margin-bottom: 12px; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+    .coin-box h3 { font-size: 32px; font-weight: bold; }
+    .coin-box p { font-size: 13px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
+    
+    .action-btn { width: 100%; padding: 13px; margin-bottom: 10px; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.2s; }
     .btn-ad { background: #4e54c8; color: white; }
     .btn-ad:hover { background: #3f44a5; }
+    .btn-share { background: #25d366; color: white; }
+    .btn-share:hover { background: #1ebe57; }
     .btn-claim { background: #ffd700; color: #111; }
     .btn-claim:hover { background: #e6c200; }
-    .rules-card { background: #131524; padding: 12px; border-radius: 10px; font-size: 13px; color: #a0a5c0; line-height: 1.5; margin-top: 15px; }
+
+    .ref-box { background: #131524; border: 1px dashed #25d366; padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 12px; font-size: 13px; color: #ccc; }
+    .ref-box strong { color: #25d366; }
+    .progress-bar-bg { width: 100%; background: #2a2a3e; height: 10px; border-radius: 5px; margin-top: 8px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; width: 0%; background: #25d366; transition: width 0.4s; }
+
+    .rules-card { background: #131524; padding: 14px; border-radius: 10px; font-size: 13px; color: #a0a5c0; line-height: 1.6; margin-top: 15px; border-left: 3px solid #ffd700; }
     .rules-card strong { color: #ffd700; }
 
-    /* Modal Styling */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 15px; }
-    .modal-box { background: #1e1e2f; color: #fff; padding: 20px; border-radius: 14px; max-width: 380px; width: 100%; text-align: center; border: 1px solid #3d426b; }
-    .modal-box h3 { color: #ffd700; margin-bottom: 10px; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; justify-content: center; align-items: center; padding: 15px; }
+    .modal-box { background: #1e1e2f; color: #fff; padding: 22px; border-radius: 14px; max-width: 380px; width: 100%; text-align: center; border: 1px solid #3d426b; }
+    .modal-box h3 { color: #ffd700; margin-bottom: 8px; }
     .input-group { text-align: left; margin-bottom: 12px; }
-    .input-group label { font-size: 13px; color: #ccc; display: block; margin-bottom: 4px; }
-    .input-group input, .input-group select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444; background: #2a2a3e; color: #fff; outline: none; font-size: 14px; }
-    .btn-submit { width: 100%; padding: 12px; background: #28a745; color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; margin-top: 5px; }
+    .input-group label { font-size: 13px; color: #ccc; display: block; margin-bottom: 5px; }
+    .input-group input, .input-group select { width: 100%; padding: 11px; border-radius: 8px; border: 1px solid #444; background: #2a2a3e; color: #fff; outline: none; font-size: 14px; }
+    .btn-submit { width: 100%; padding: 12px; background: #28a745; color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; margin-top: 8px; }
     .btn-close { width: 100%; padding: 8px; background: transparent; color: #bbb; border: none; margin-top: 5px; cursor: pointer; font-size: 13px; }
+    
+    #adVideoPlayer { width: 100%; border-radius: 10px; margin-bottom: 12px; background: #000; pointer-events: none; }
+    #videoStatus { font-size: 14px; color: #ffd700; margin-bottom: 10px; font-weight: bold; }
   </style>
 </head>
 <body>
 
 <div class="app-card">
   <div class="header">
-    <h2>VIP REWARDS</h2>
-    <p style="font-size: 13px; color: #8890b5;">ऐड्स देखें और 1GB डेटा व रिडीम कोड पाएँ</p>
+    <h2>VIP REWARDS HUB</h2>
+    <span id="currentUserDisplay" class="user-badge">Not Logged In</span>
   </div>
 
   <div class="coin-box">
-    <h3 id="coinCount">350</h3>
-    <p>कुल कॉइन्स बैलेंस</p>
+    <h3 id="coinCount">0</h3>
+    <p>Current Coin Balance</p>
   </div>
 
-  <button class="action-btn btn-ad" onclick="watchAd()">🎬 वीडियो देखें (+10 कॉइन्स)</button>
-  <button class="action-btn btn-claim" onclick="openRewardModal()">🎁 रिवॉर्ड क्लेम करें</button>
+  <div class="ref-box">
+    <span>Verified Referrals: <strong id="refCount">0</strong> / 7</span>
+    <div class="progress-bar-bg">
+      <div id="refProgress" class="progress-bar-fill"></div>
+    </div>
+    <small style="color: #8890b5; display: block; margin-top: 6px;">Invite 7 friends to reload the special ₹10 code offer!</small>
+  </div>
+
+  <button class="action-btn btn-share" onclick="sharePersonalReferralLink()">📲 Invite Friends (Win 30 - 100 Coins)</button>
+  <button class="action-btn btn-ad" onclick="openVideoModal()">🎬 Watch Video (+10 Coins)</button>
+  <button class="action-btn btn-claim" onclick="openRewardModal()">🎁 Claim Reward</button>
 
   <div class="rules-card">
-    📌 <strong>ऑफ़र व नियम:</strong><br>
-    • <strong>250 कॉइन्स</strong> = ₹10 Play Store कोड (पहले 3 बार)<br>
-    • <strong>350 कॉइन्स</strong> = 1GB इंटरनेट डेटा पैक<br>
-    • <strong>7 दोस्तों को शेयर करें</strong> = दोबारा 250 कॉइन में ₹10 कोड अनलॉक
+    📌 <strong>Reward Rates:</strong><br>
+    • <strong>₹10 Play Code:</strong> 250c (Special) / 300c (Direct)<br>
+    • <strong>₹20 Play Code:</strong> 480c | <strong>₹25 Play Code:</strong> 600c<br>
+    • <strong>₹50 Play Code:</strong> 1200c<br>
+    • <strong>1GB/2GB/3GB Data:</strong> 350c / 600c / 800c<br>
+    • <strong>₹25/₹50 Amazon Voucher:</strong> 500c / 950c
+  </div>
+</div>
+
+<!-- Login / Registration Modal -->
+<div id="login-modal" class="modal" style="display: flex;">
+  <div class="modal-box">
+    <h3>👋 Welcome to VIP Rewards</h3>
+    <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Login with your phone number to earn & claim rewards:</p>
+
+    <div class="input-group">
+      <label>Your Name:</label>
+      <input type="text" id="loginName" placeholder="Enter your full name">
+    </div>
+
+    <div class="input-group">
+      <label>WhatsApp / Phone Number (10 Digits):</label>
+      <input type="tel" id="loginPhone" placeholder="Enter 10-digit number" maxlength="10">
+    </div>
+
+    <button class="btn-submit" onclick="performLogin()">Login & Start Earning</button>
+  </div>
+</div>
+
+<!-- Video Watch Modal -->
+<div id="video-modal" class="modal">
+  <div class="modal-box">
+    <h3>🎬 Watch Video Ad</h3>
+    <p id="videoStatus">Tap below to start video</p>
+    <video id="adVideoPlayer" playsinline>
+      <source id="videoSource" src="" type="video/mp4">
+      Your browser does not support video.
+    </video>
+    <button id="startVideoBtn" class="btn-submit" onclick="playAdVideo()">Play Video</button>
+    <button id="closeVideoBtn" class="btn-close" onclick="closeVideoModal()">Cancel</button>
   </div>
 </div>
 
 <!-- Claim Popup Modal -->
 <div id="reward-modal" class="modal">
   <div class="modal-box">
-    <h3>🎁 रिवॉर्ड क्लेम करें</h3>
-    <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">अपनी जानकारी दर्ज करें:</p>
+    <h3>🎁 Claim Your Reward</h3>
+    <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Select your reward & confirm details:</p>
 
     <div class="input-group">
-      <label>रिवॉर्ड चुनें:</label>
+      <label>Select Reward Option:</label>
       <select id="claimRewardType" onchange="toggleSimSelect()">
-        <option value="1GB Data Pack (350 Coins)">1GB डेटा पैक (350 कॉइन्स)</option>
-        <option value="₹10 Google Play Code (250 Coins)">₹10 Google Play Code (250 कॉइन्स)</option>
+        <option value="₹10 Play Code (Special 250c)" data-cost="250" id="specialPlayCodeOption">🎮 ₹10 Google Play Code - Special (250 Coins) [3/day]</option>
+        <option value="₹10 Play Code (Direct 300c)" data-cost="300">⚡ ₹10 Google Play Code - Direct Instant (300 Coins)</option>
+        <option value="₹20 Play Code (480c)" data-cost="480">🎮 ₹20 Google Play Redeem Code (480 Coins)</option>
+        <option value="₹25 Play Code (600c)" data-cost="600">🎮 ₹25 Google Play Redeem Code (600 Coins)</option>
+        <option value="₹50 Play Code (1200c)" data-cost="1200">🎮 ₹50 Google Play Redeem Code (1200 Coins)</option>
+        <option value="1GB Data Pack" data-cost="350">📶 1GB Data Pack (350 Coins)</option>
+        <option value="2GB Data Pack" data-cost="600">📶 2GB Data Pack (600 Coins)</option>
+        <option value="3GB Data Pack" data-cost="800">📶 3GB Data Pack (800 Coins)</option>
+        <option value="₹25 Amazon Pay Voucher" data-cost="500">🛒 ₹25 Amazon Pay Gift Card (500 Coins)</option>
+        <option value="₹50 Amazon Pay Voucher" data-cost="950">🛒 ₹50 Amazon Pay Gift Card (950 Coins)</option>
       </select>
     </div>
 
-    <div class="input-group">
-      <label>आपका नाम:</label>
-      <input type="text" id="claimUserName" placeholder="नाम लिखें">
-    </div>
-
-    <div class="input-group">
-      <label>मोबाइल नंबर / WhatsApp:</label>
-      <input type="tel" id="claimUserNumber" placeholder="10 अंकों का नंबर" maxlength="10">
-    </div>
-
-    <div class="input-group" id="simSelectDiv">
-      <label>सिम ऑपरेटर (डेटा के लिए):</label>
+    <div class="input-group" id="simSelectDiv" style="display: none;">
+      <label>SIM Operator (Only for Data Packs):</label>
       <select id="claimSimOperator">
         <option value="Jio">Jio</option>
         <option value="Airtel">Airtel</option>
@@ -89,24 +144,154 @@
       </select>
     </div>
 
-    <button class="btn-submit" id="claimSubmitBtn" onclick="sendClaimToTelegram()">तुरंत क्लेम भेजें</button>
-    <button class="btn-close" onclick="closeRewardModal()">रद्द करें</button>
+    <button class="btn-submit" id="claimSubmitBtn" onclick="sendClaimToTelegram()">Submit Claim</button>
+    <button class="btn-close" onclick="closeRewardModal()">Cancel</button>
   </div>
 </div>
 
 <script>
-  let userCoins = 350;
+  let currentUser = null;
+  let userCoins = 100;
+  let invitedFriends = 0;
+  let specialClaimCount = 0;
+  const MAX_SPECIAL_CLAIMS = 3;
+
   const TG_BOT_TOKEN = "8681623026:AAG9aNaiA7Q-wUwkUjTnOys6VSM6Ki0bO10";
   const TG_CHAT_ID = "6344614701";
 
-  function watchAd() {
-    userCoins += 10;
-    document.getElementById("coinCount").innerText = userCoins;
-    alert("बधाई! ऐड देखने पर आपको 10 कॉइन्स मिले।");
+  const urlParams = new URLSearchParams(window.location.search);
+  const referredBy = urlParams.get('ref');
+
+  window.onload = function() {
+    const savedUser = localStorage.getItem("vip_user");
+    if (savedUser) {
+      currentUser = JSON.parse(savedUser);
+      userCoins = parseInt(localStorage.getItem("vip_coins") || "100");
+      invitedFriends = parseInt(localStorage.getItem("vip_refs") || "0");
+      document.getElementById("login-modal").style.display = "none";
+      updateUI();
+    }
+  };
+
+  function performLogin() {
+    const name = document.getElementById("loginName").value.trim();
+    const phone = document.getElementById("loginPhone").value.trim();
+
+    if (!name || phone.length < 10) {
+      alert("Please enter a valid full name and a 10-digit mobile number!");
+      return;
+    }
+
+    currentUser = { name, phone };
+    localStorage.setItem("vip_user", JSON.stringify(currentUser));
+    localStorage.setItem("vip_coins", userCoins);
+    localStorage.setItem("vip_refs", invitedFriends);
+
+    document.getElementById("login-modal").style.display = "none";
+    updateUI();
+
+    if (referredBy && referredBy !== phone) {
+      const refAlert = `🤝 *New Referral Registered!*%0A%0A👤 *New User:* ${name}%0A📱 *New Phone:* ${phone}%0A🎯 *Referred By:* ${referredBy}%0A⏰ *Time:* ${new Date().toLocaleString()}`;
+      fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${refAlert}&parse_mode=Markdown`);
+    }
+  }
+
+  function updateUI() {
+    if (currentUser) {
+      document.getElementById("currentUserDisplay").innerText = `👤 ${currentUser.name} (${currentUser.phone})`;
+      document.getElementById("coinCount").innerText = userCoins;
+      document.getElementById("refCount").innerText = invitedFriends;
+      document.getElementById("refProgress").style.width = ((invitedFriends / 7) * 100) + "%";
+    }
+  }
+
+  function sharePersonalReferralLink() {
+    if (!currentUser) {
+      alert("Please login first to get your referral link!");
+      return;
+    }
+
+    const baseUrl = window.location.origin + window.location.pathname;
+    const myRefLink = `${baseUrl}?ref=${currentUser.phone}`;
+    const shareText = encodeURIComponent(`🔥 Join VIP Rewards Hub! Register and get FREE Google Play Codes & Data Packs! Register with my link: ${myRefLink}`);
+
+    window.open(`https://api.whatsapp.com/send?text=${shareText}`, '_blank');
+    alert("Share this link on WhatsApp! When your friend opens it and logs in with their phone number, your referral will be verified!");
+  }
+
+  function updateSpecialOption() {
+    const opt = document.getElementById("specialPlayCodeOption");
+    const remaining = MAX_SPECIAL_CLAIMS - specialClaimCount;
+    if (remaining <= 0) {
+      opt.text = "🔒 ₹10 Play Code - 250c (LOCKED - Use Direct or invite 7 friends)";
+    } else {
+      opt.text = `🎮 ₹10 Play Code - Special (250 Coins) [${remaining} left]`;
+    }
+  }
+
+  const videoList = [
+    { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", duration: 25 },
+    { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", duration: 30 },
+    { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", duration: 35 }
+  ];
+
+  let countdownTimer = null;
+  let remainingTime = 25;
+
+  const videoModal = document.getElementById("video-modal");
+  const adVideo = document.getElementById("adVideoPlayer");
+  const videoSource = document.getElementById("videoSource");
+  const videoStatus = document.getElementById("videoStatus");
+  const startVideoBtn = document.getElementById("startVideoBtn");
+  const closeVideoBtn = document.getElementById("closeVideoBtn");
+
+  function openVideoModal() {
+    const randomPick = videoList[Math.floor(Math.random() * videoList.length)];
+    remainingTime = randomPick.duration;
+    
+    videoSource.src = randomPick.url;
+    adVideo.load();
+
+    videoModal.style.display = "flex";
+    videoStatus.innerText = `Watch for ${remainingTime} seconds to earn +10 Coins`;
+    startVideoBtn.style.display = "block";
+    closeVideoBtn.style.display = "block";
+  }
+
+  function closeVideoModal() {
+    clearInterval(countdownTimer);
+    adVideo.pause();
+    adVideo.currentTime = 0;
+    videoModal.style.display = "none";
+  }
+
+  function playAdVideo() {
+    startVideoBtn.style.display = "none";
+    closeVideoBtn.style.display = "none";
+    adVideo.play();
+
+    videoStatus.innerText = `⏳ Reward in: ${remainingTime}s remaining...`;
+
+    countdownTimer = setInterval(() => {
+      remainingTime--;
+      if (remainingTime > 0) {
+        videoStatus.innerText = `⏳ Reward in: ${remainingTime}s remaining...`;
+      } else {
+        clearInterval(countdownTimer);
+        adVideo.pause();
+        userCoins += 10;
+        localStorage.setItem("vip_coins", userCoins);
+        updateUI();
+        alert("🎉 Congratulations! You watched the full video and earned +10 Coins!");
+        closeVideoModal();
+      }
+    }, 1000);
   }
 
   function openRewardModal() {
+    updateSpecialOption();
     document.getElementById("reward-modal").style.display = "flex";
+    toggleSimSelect();
   }
 
   function closeRewardModal() {
@@ -114,9 +299,11 @@
   }
 
   function toggleSimSelect() {
-    const rewardType = document.getElementById("claimRewardType").value;
+    const select = document.getElementById("claimRewardType");
+    const selectedVal = select.value;
     const simDiv = document.getElementById("simSelectDiv");
-    if (rewardType.includes("1GB Data")) {
+    
+    if (selectedVal.includes("Data Pack")) {
       simDiv.style.display = "block";
     } else {
       simDiv.style.display = "none";
@@ -124,28 +311,31 @@
   }
 
   function sendClaimToTelegram() {
-    const name = document.getElementById("claimUserName").value.trim();
-    const phone = document.getElementById("claimUserNumber").value.trim();
-    const reward = document.getElementById("claimRewardType").value;
-    const sim = reward.includes("1GB Data") ? document.getElementById("claimSimOperator").value : "लागू नहीं";
+    const select = document.getElementById("claimRewardType");
+    const selectedOption = select.options[select.selectedIndex];
+    
+    const rewardName = selectedOption.value;
+    const requiredCoins = parseInt(selectedOption.getAttribute("data-cost"));
+    const isData = rewardName.includes("Data Pack");
+    const sim = isData ? document.getElementById("claimSimOperator").value : "Voucher Code (Sent to registered phone)";
 
-    let requiredCoins = reward.includes("1GB Data") ? 350 : 250;
-
-    if (userCoins < requiredCoins) {
-      alert("आपके पास पर्याप्त कॉइन्स नहीं हैं! आवश्यक: " + requiredCoins + " कॉइन्स।");
-      return;
+    if (rewardName.includes("Special 250c")) {
+      if (specialClaimCount >= MAX_SPECIAL_CLAIMS) {
+        alert("❌ 250 Coins special offer is locked! Please select another code denomination or invite 7 friends to unlock it!");
+        return;
+      }
     }
 
-    if (!name || phone.length < 10) {
-      alert("कृपया सही नाम और 10 अंकों का मोबाइल नंबर डालें!");
+    if (userCoins < requiredCoins) {
+      alert(`Insufficient balance! You need ${requiredCoins} coins for this reward.`);
       return;
     }
 
     const btn = document.getElementById("claimSubmitBtn");
     btn.disabled = true;
-    btn.innerText = "भेजा जा रहा है...";
+    btn.innerText = "Submitting...";
 
-    const messageText = `🎉 *नया रिवॉर्ड क्लेम आया है!*%0A%0A👤 *नाम:* ${name}%0A📱 *मोबाइल:* ${phone}%0A🎁 *रिवॉर्ड:* ${reward}%0A📶 *सिम:* ${sim}%0A⏰ *समय:* ${new Date().toLocaleString()}`;
+    const messageText = `🎉 *New Reward Claim Request!*%0A%0A👤 *User Name:* ${currentUser.name}%0A📱 *Contact/WhatsApp:* ${currentUser.phone}%0A🎁 *Selected Reward:* ${rewardName}%0A💰 *Coins Deducted:* ${requiredCoins}%0A📶 *Delivery/SIM:* ${sim}%0A⏰ *Timestamp:* ${new Date().toLocaleString()}`;
 
     const tgUrl = `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${messageText}&parse_mode=Markdown`;
 
@@ -154,19 +344,26 @@
       .then(data => {
         if (data.ok) {
           userCoins -= requiredCoins;
-          document.getElementById("coinCount").innerText = userCoins;
-          alert("बधाई! आपका क्लेम सबमिट हो गया है। जल्द ही आपको रिवॉर्ड मिल जाएगा।");
+          localStorage.setItem("vip_coins", userCoins);
+          updateUI();
+
+          if (rewardName.includes("Special 250c")) {
+            specialClaimCount++;
+            updateSpecialOption();
+          }
+
+          alert("Success! Your claim request has been sent to the admin. You will receive your reward shortly.");
           closeRewardModal();
         } else {
-          alert("एरर! बॉट से संपर्क नहीं हो पाया।");
+          alert("Error! Could not connect to Telegram bot.");
         }
       })
       .catch(err => {
-        alert("इंटरनेट एरर! कृपया दोबारा कोशिश करें।");
+        alert("Network error! Please check your connection.");
       })
       .finally(() => {
         btn.disabled = false;
-        btn.innerText = "तुरंत क्लेम भेजें";
+        btn.innerText = "Submit Claim";
       });
   }
 </script>
