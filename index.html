@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>VIP Rewards Hub</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body {
+      background-color: #0b0e14;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 14px;
+      gap: 14px;
+    }
+    .header {
+      width: 100%;
+      max-width: 450px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: #151a23;
+      border-radius: 14px;
+      border: 1px solid #242c3b;
+    }
+    .app-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffb800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .streak-badge {
+      font-size: 11px;
+      background: #ff5722;
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+    .coin-badge {
+      background: #252e3d;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffd700;
+      border: 1px solid #3c485c;
+      transition: transform 0.2s ease;
+    }
+    .coin-bounce {
+      transform: scale(1.2);
+    }
+    .card {
+      width: 100%;
+      max-width: 450px;
+      background: #151a23;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid #242c3b;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .badge-sponsored {
+      color: #00e676;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .timer-badge {
+      background: #ff5722;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .daily-limit-info {
+      font-size: 12px;
+      color: #ffd700;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid #2d3748;
+    }
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: cover;
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: #242c3b;
+      border-radius: 3px;
+      margin-top: 14px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff9800, #00e676);
+      transition: width 1s linear;
+    }
+    .status-text {
+      font-size: 13px;
+      color: #8c9ba5;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .action-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #ffd700, #ff9800);
+      color: #000;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      padding: 13px;
+      border-radius: 12px;
+      margin-top: 14px;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 4px 15px rgba(255, 152, 0, 0.35);
+    }
+    .tab-container {
+      display: flex;
+      width: 100%;
+      max-width: 450px;
+      gap: 6px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 10px 8px;
+      background: #151a23;
+      border: 1px solid #242c3b;
+      color: #a0aec0;
+      font-weight: bold;
+      font-size: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .tab-btn.active {
+      background: #252e3d;
+      color: #00d2ff;
+      border-color: #00d2ff;
+    }
+    .input-field, .select-field {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #242c3b;
+      background: #0b0e14;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      margin-top: 8px;
+    }
+    .redeem-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #00d2ff, #0072ff);
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      padding: 13px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    .ref-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0b0e14;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px dashed #ffb800;
+      margin: 10px 0;
+    }
+    .share-btn {
+      width: 100%;
+      background: #25d366;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .game-box {
+      background: #0b0e14;
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid #242c3b;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .game-btn {
+      background: #252e3d;
+      border: 1px solid #3c485c;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .ttt-board {
+      display: grid;
+      grid-template-columns: repeat(3, 45px);
+      gap: 6px;
+      justify-content: center;
+      margin: 10px auto;
+    }
+    .ttt-cell {
+      width: 45px;
+      height: 45px;
+      background: #1c222c;
+      border: 1px solid #3c485c;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="app-title">
+      VIP Rewards 
+      <span class="streak-badge" id="userStreakText">🔥 Day 1 Streak</span>
+    </div>
+    <div class="coin-badge" id="coinBadge">💰 <span id="coinCount">100</span></div>
+  </div>
+
+  <!-- Video Task Card -->
+  <div class="card" id="taskCard">
+    <div class="daily-limit-info">
+      <span>📺 आज के वीडियो: <b id="dailyVideosWatched">0</b>/<b id="maxDailyLimitText">10</b></span>
+      <span>💰 आज की कमाई: <b id="todayCoinsEarned">0</b> Coins</span>
+    </div>
+
+    <div class="card-top">
+      <span class="badge-sponsored" id="videoTitle">SPONSORED VIDEO</span>
+      <div class="timer-badge">⏳ <span id="timerText">--</span></div>
+    </div>
+
+    <div class="video-container" id="videoWrapper">
+      <video id="adVideo" playsinline muted autoplay></video>
+    </div>
+
+    <div class="progress-bar-bg" id="progressBg">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <p class="status-text" id="statusMsg">वीडियो विज्ञापन लोड हो रहा है...</p>
+
+    <button class="action-btn" id="claimBtn" onclick="claimReward()">🎁 Claim Coins</button>
+    <button class="action-btn" id="nextBtn" style="background:#252e3d; color:#fff;" onclick="loadNextTask()">⏭ अगला वीडियो टास्क</button>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="tab-container">
+    <button class="tab-btn active" onclick="switchSection('games')">🎮 गेम्स</button>
+    <button class="tab-btn" onclick="switchSection('voucher')">🎁 ₹10 कोड</button>
+    <button class="tab-btn" onclick="switchSection('recharge')">⚡ 1GB डेटा</button>
+    <button class="tab-btn" onclick="switchSection('refer')">👥 रेफरल</button>
+  </div>
+
+  <!-- Section: Mini Games -->
+  <div class="card" id="sec-games">
+    <h3 style="color:#00e676; font-size:15px; margin-bottom:4px;">🎮 Play & Win Extra Coins</h3>
+    <p style="color:#8c9ba5; font-size:12px;">अतिरिक्त कॉइन्स कमाने के लिए गेम्स खेलें:</p>
+
+    <div class="game-box">
+      <div style="font-size:13px; font-weight:bold; color:#ffb800;">🎲 लकी डाइस रोल</div>
+      <p style="font-size:11px; color:#a0aec0; margin:4px 0;">4, 5 या 6 आने पर जीतें +5 Coins!</p>
+      <div style="font-size:28px; margin:4px 0;" id="diceResult">🎲</div>
+      <button class="game-btn" onclick="playDiceGame()">डाइस घुमाएँ</button>
+    </div>
+
+    <div class="game-box">
+      <div style="font-size:13px; font-weight:bold; color:#00d2ff;">❌⭕ शून्य-काटा (Tic-Tac-Toe)</div>
+      <p style="font-size:11px; color:#a0aec0; margin:4px 0;">कंप्यूटर को हराने पर +10 Coins!</p>
+      <div class="ttt-board" id="tttBoard">
+        <div class="ttt-cell" onclick="makeMove(0)"></div>
+        <div class="ttt-cell" onclick="makeMove(1)"></div>
+        <div class="ttt-cell" onclick="makeMove(2)"></div>
+        <div class="ttt-cell" onclick="makeMove(3)"></div>
+        <div class="ttt-cell" onclick="makeMove(4)"></div>
+        <div class="ttt-cell" onclick="makeMove(5)"></div>
+        <div class="ttt-cell" onclick="makeMove(6)"></div>
+        <div class="ttt-cell" onclick="makeMove(7)"></div>
+        <div class="ttt-cell" onclick="makeMove(8)"></div>
+      </div>
+      <div id="tttStatus" style="font-size:11px; color:#ffd700;">आपकी बारी (X)</div>
+      <button class="game-btn" onclick="resetTicTacToe()">नया गेम</button>
+    </div>
+
+    <div class="game-box">
+      <div style="font-size:13px; font-weight:bold; color:#ff5722;">🔢 लकी नंबर (1 से 10)</div>
+      <p style="font-size:11px; color:#a0aec0; margin:4px 0;">सही अनुमान पर +15 Coins!</p>
+      <input type="number" id="guessInput" class="input-field" placeholder="1 से 10 के बीच चुनें" min="1" max="10" style="text-align:center;">
+      <button class="game-btn" onclick="checkLuckyNumber()">अनुमान लगाएँ</button>
+    </div>
+  </div>
+
+  <!-- Section: Gift Voucher -->
+  <div class="card" id="sec-voucher" style="display:none;">
+    <h3 style="color:#ffd700; font-size:15px; margin-bottom:6px;">🎁 Play Store & Amazon ₹10 रिडीम कोड</h3>
+    <p style="color:#8c9ba5; font-size:12px;">500 कॉइन जमा करें और तुरंत ₹10 का डिजिटल कोड पाएँ:</p>
+
+    <div style="background:#0b0e14; padding:10px; border-radius:8px; margin:10px 0; border:1px solid #ffd700; display:flex; justify-content:space-between;">
+      <span>₹10 Instant Voucher</span>
+      <b style="color:#00e676;">लागत: 500 Coins</b>
+    </div>
+
+    <select id="voucherType" class="select-field">
+      <option value="Google Play">Google Play Store Gift Code (₹10)</option>
+      <option value="Amazon Pay">Amazon Pay Gift Voucher (₹10)</option>
+    </select>
+    <input type="email" id="voucherEmail" class="input-field" placeholder="ईमेल या फ़ोन नंबर दर्ज करें">
+    <button class="redeem-btn" style="background:linear-gradient(135deg, #ffd700, #ff9800); color:#000;" onclick="redeemGiftVoucher()">
+      🎟 ₹10 कोड रिडीम करें (500 Coins)
+    </button>
+  </div>
+
+  <!-- Section: Data Recharge -->
+  <div class="card" id="sec-recharge" style="display:none;">
+    <h3 style="color:#00d2ff; font-size:15px; margin-bottom:6px;">⚡ ₹22 High-Speed 1GB Data</h3>
+    <p style="color:#8c9ba5; font-size:12px;">250 कॉइन्स में अपने सिम पर 1GB इंटरनेट पैक प्राप्त करें:</p>
+    
+    <input type="tel" id="mobileNumber" class="input-field" placeholder="10 अंकों का मोबाइल नंबर" maxlength="10">
+    <select id="simOperator" class="select-field">
+      <option value="Jio">Jio (1GB Data - ₹22)</option>
+      <option value="Airtel">Airtel (1GB Data - ₹22)</option>
+      <option value="Vi">Vi (1GB Data - ₹22)</option>
+    </select>
+    <button class="redeem-btn" onclick="submitRecharge()">⚡ 1GB डेटा रिचार्ज करें (250 Coins)</button>
+  </div>
+
+  <!-- Section: Referral -->
+  <div class="card" id="sec-refer" style="display:none;">
+    <h3 style="color:#00e676; font-size:15px; margin-bottom:6px;">👥 Refer & Earn</h3>
+    <p style="color:#8c9ba5; font-size:12px;">दोस्त को जोड़ें। पाएँ 20, 50 कॉइन या रेयर <b>🐼 Panda Coin (100 Coins)</b>!</p>
+
+    <div class="ref-box">
+      <span>रेफरल कोड:</span>
+      <b style="color:#ffd700;">VIP998</b>
+    </div>
+    <button class="share-btn" onclick="shareWhatsApp()">📲 WhatsApp पर शेयर करें</button>
+    <button style="width:100%; background:#252e3d; color:#ffb800; border:1px solid #3c485c; padding:8px; border-radius:8px; margin-top:8px;" onclick="testReferralReward()">
+      🎁 टेस्ट रेफरल बोनस
+    </button>
+  </div>
+
+  <script>
+    function playCoinSound() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+        
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
+        osc1.frequency.setValueAtTime(987.77, ctx.currentTime);
+        gain1.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc1.start(ctx.currentTime);
+        osc1.stop(ctx.currentTime + 0.3);
+
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.frequency.setValueAtTime(1318.51, ctx.currentTime + 0.08);
+        gain2.gain.setValueAtTime(0.35, ctx.currentTime + 0.08);
+        gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.start(ctx.currentTime + 0.08);
+        osc2.stop(ctx.currentTime + 0.45);
+
+        const badge = document.getElementById("coinBadge");
+        badge.classList.add("coin-bounce");
+        setTimeout(() => badge.classList.remove("coin-bounce"), 250);
+      } catch(e) {}
+    }
+
+    const today = new Date();
+    const todayStr = today.toISOString().slice(0, 10);
+    
+    let lastLoginDate = localStorage.getItem("vip_last_login_date");
+    let streakCount = parseInt(localStorage.getItem("vip_user_streak") || "1");
+    let dailyVideos = parseInt(localStorage.getItem("vip_daily_videos") || "0");
+    let todayCoins = parseInt(localStorage.getItem("vip_today_coins") || "0");
+    let coins = parseInt(localStorage.getItem("vip_user_coins") || "100");
+
+    if (lastLoginDate !== todayStr) {
+      if (lastLoginDate) {
+        const lastDateObj = new Date(lastLoginDate);
+        const diffDays = Math.floor((today - lastDateObj) / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 1) {
+          streakCount++;
+        } else {
+          streakCount = 1;
+        }
+      } else {
+        streakCount = 1;
+      }
+
+      localStorage.setItem("vip_last_login_date", todayStr);
+      localStorage.setItem("vip_user_streak", streakCount);
+      dailyVideos = 0;
+      todayCoins = 0;
+      localStorage.setItem("vip_daily_videos", "0");
+      localStorage.setItem("vip_today_coins", "0");
+    }
+
+    let maxDailyVideos = Math.min(10 + (streakCount - 1), 20);
+
+    document.getElementById("userStreakText").innerText = `🔥 Day ${streakCount} Streak`;
+    document.getElementById("maxDailyLimitText").innerText = maxDailyVideos;
+    document.getElementById("dailyVideosWatched").innerText = dailyVideos;
+    document.getElementById("todayCoinsEarned").innerText = todayCoins;
+    document.getElementById("coinCount").innerText = coins;
+
+    let isTripleTask = false;
+    let currentStep = 0; 
+    let timeLeft = 0;
+    let totalTime = 0;
+    let expectedReward = 0;
+    let isPandaReward = false;
+    let timerInterval = null;
+    let isTabActive = true;
+
+    const adPool = [
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+    ];
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        isTabActive = false;
+        document.getElementById("statusMsg").innerText = "⚠️ वीडियो रुक गया! ऐप पर वापस आएँ।";
+        document.getElementById("adVideo").pause();
+      } else {
+        isTabActive = true;
+        document.getElementById("adVideo").play();
+      }
+    });
+
+    function setupTaskParameters() {
+      isPandaReward = false;
+
+      if (streakCount < 3) {
+        isTripleTask = false;
+        const durations = [25, 30, 35];
+        totalTime = durations[Math.floor(Math.random() * durations.length)];
+        expectedReward = Math.floor(Math.random() * (13 - 10 + 1)) + 10;
+        document.getElementById("videoTitle").innerText = `DAY ${streakCount} REWARD AD`;
+      } else {
+        if (currentStep === 0) {
+          isTripleTask = Math.random() < 0.70; 
+        }
+        totalTime = 30;
+
+        const luck = Math.random();
+        if (luck > 0.85) {
+          isPandaReward = true;
+          expectedReward = 50; 
+        } else if (luck > 0.6) {
+          expectedReward = 20;
+        } else {
+          expectedReward = Math.floor(Math.random() * (18 - 17 + 1)) + 17;
+        }
+
+        if (isTripleTask) {
+          document.getElementById("videoTitle").innerText = `VIP MULTI-TASK (${currentStep + 1}/3)`;
+        } else {
+          document.getElementById("videoTitle").innerText = `VIP QUICK TASK`;
+        }
+      }
+      timeLeft = totalTime;
+    }
+
+    function startAdTask() {
+      if (dailyVideos >= maxDailyVideos) {
+        document.getElementById("videoWrapper").style.display = "none";
+        document.getElementById("progressBg").style.display = "none";
+        document.getElementById("timerText").innerText = "Completed";
+        document.getElementById("statusMsg").innerHTML = `<b style='color:#00e676;'>🎉 आज के सभी ${maxDailyVideos} वीडियो पूरे हुए!</b><br>कल लॉग इन करने पर आपकी लिमिट बढ़कर <b>${Math.min(maxDailyVideos + 1, 20)} वीडियो</b> हो जाएगी!`;
+        return;
+      }
+
+      setupTaskParameters();
+
+      const video = document.getElementById("adVideo");
+      video.src = adPool[Math.floor(Math.random() * adPool.length)];
+      video.load();
+      video.play().catch(() => {});
+
+      document.getElementById("timerText").innerText = timeLeft + "s";
+      document.getElementById("progressFill").style.width = "0%";
+      document.getElementById("statusMsg").innerText = `पूरा वीडियो देखें (${timeLeft}s) रिवॉर्ड के लिए...`;
+      document.getElementById("claimBtn").style.display = "none";
+      document.getElementById("nextBtn").style.display = "none";
+
+      if (timerInterval) clearInterval(timerInterval);
+
+      timerInterval = setInterval(() => {
+        if (!isTabActive) return;
+
+        timeLeft--;
+        document.getElementById("timerText").innerText = timeLeft + "s";
+        const pct = ((totalTime - timeLeft) / totalTime) * 100;
+        document.getElementById("progressFill").style.width = pct + "%";
+
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          document.getElementById("timerText").innerText = "Ready!";
+          document.getElementById("statusMsg").innerText = "टास्क पूरा हुआ! नीचे से कॉइन्स क्लेम करें।";
+          
+          if (isPandaReward) {
+            document.getElementById("claimBtn").innerText = `🐼 Claim PANDA COIN (+${expectedReward} Coins)`;
+          } else {
+            document.getElementById("claimBtn").innerText = `🎁 Claim ${expectedReward} Coins`;
+          }
+          document.getElementById("claimBtn").style.display = "block";
+        }
+      }, 1000);
+    }
+
+    function claimReward() {
+      coins += expectedReward;
+      todayCoins += expectedReward;
+      dailyVideos += 1;
+
+      localStorage.setItem("vip_user_coins", coins);
+      localStorage.setItem("vip_today_coins", todayCoins);
+      localStorage.setItem("vip_daily_videos", dailyVideos);
+
+      document.getElementById("coinCount").innerText = coins;
+      document.getElementById("todayCoinsEarned").innerText = todayCoins;
+      document.getElementById("dailyVideosWatched").innerText = dailyVideos;
+      document.getElementById("claimBtn").style.display = "none";
+      playCoinSound();
+
+      if (dailyVideos >= maxDailyVideos) {
+        startAdTask();
+        return;
+      }
+
+      if (isTripleTask && currentStep < 2) {
+        currentStep++;
+        document.getElementById("nextBtn").innerText = `⏭ अगला वीडियो (${currentStep + 1}/3)`;
+        document.getElementById("nextBtn").style.display = "block";
+        document.getElementById("statusMsg").innerText = `कॉइन्स जुड़े! अब अगला वीडियो देखें।`;
+      } else {
+        currentStep = 0;
+        document.getElementById("nextBtn").innerText = `⏭ अगला वीडियो टास्क`;
+        document.getElementById("nextBtn").style.display = "block";
+        document.getElementById("statusMsg").innerText = `टास्क समाप्त! कॉइन्स खाते में सुरक्षित हैं।`;
+      }
+    }
+
+    function loadNextTask() {
+      startAdTask();
+    }
+
+    function switchSection(sec) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.getElementById("sec-games").style.display = "none";
+      document.getElementById("sec-voucher").style.display = "none";
+      document.getElementById("sec-recharge").style.display = "none";
+      document.getElementById("sec-refer").style.display = "none";
+
+      if (sec === 'games') {
+        document.getElementById("sec-games").style.display = "block";
+        event.target.classList.add("active");
+      } else if (sec === 'voucher') {
+        document.getElementById("sec-voucher").style.display = "block";
+        event.target.classList.add("active");
+      } else if (sec === 'recharge') {
+        document.getElementById("sec-recharge").style.display = "block";
+        event.target.classList.add("active");
+      } else {
+        document.getElementById("sec-refer").style.display = "block";
+        event.target.classList.add("active");
+      }
+    }
+
+    function playDiceGame() {
+      const dice = [1, 2, 3, 4, 5, 6];
+      const roll = dice[Math.floor(Math.random() * dice.length)];
+      const icons = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+      document.getElementById("diceResult").innerText = icons[roll - 1];
+
+      if (roll >= 4) {
+        coins += 5;
+        localStorage.setItem("vip_user_coins", coins);
+        document.getElementById("coinCount").innerText = coins;
+        playCoinSound();
+        alert(`🎉 नंबर आया: ${roll}! आपको मिले +5 Coins!`);
+      } else {
+        alert(`नंबर आया: ${roll}! अगली बार फिर कोशिश करें!`);
+      }
+    }
+
+    let tttState = ["", "", "", "", "", "", "", "", ""];
+    let tttActive = true;
+
+    function makeMove(index) {
+      if (!tttActive || tttState[index] !== "") return;
+      tttState[index] = "X";
+      const cells = document.querySelectorAll(".ttt-cell");
+      cells[index].innerText = "X";
+      cells[index].style.color = "#00e676";
+
+      if (checkWinner("X")) {
+        coins += 10;
+        localStorage.setItem("vip_user_coins", coins);
+        document.getElementById("coinCount").innerText = coins;
+        playCoinSound();
+        document.getElementById("tttStatus").innerText = "🎉 आप जीत गए! (+10 Coins)";
+        tttActive = false;
+        return;
+      }
+      if (!tttState.includes("")) {
+        document.getElementById("tttStatus").innerText = "🤝 मैच ड्रॉ!";
+        tttActive = false;
+        return;
+      }
+
+      tttActive = false;
+      document.getElementById("tttStatus").innerText = "कंप्यूटर...";
+      setTimeout(() => {
+        let empty = [];
+        tttState.forEach((val, i) => { if (val === "") empty.push(i); });
+        let ai = empty[Math.floor(Math.random() * empty.length)];
+        tttState[ai] = "O";
+        cells[ai].innerText = "O";
+        cells[ai].style.color = "#ff5722";
+
+        if (checkWinner("O")) {
+          document.getElementById("tttStatus").innerText = "😢 कंप्यूटर जीता!";
+          tttActive = false;
+          return;
+        }
+        document.getElementById("tttStatus").innerText = "आपकी बारी (X)";
+        tttActive = true;
+      }, 500);
+    }
+
+    function checkWinner(p) {
+      const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+      return wins.some(c => c.every(i => tttState[i] === p));
+    }
+
+    function resetTicTacToe() {
+      tttState = ["", "", "", "", "", "", "", "", ""];
+      tttActive = true;
+      document.querySelectorAll(".ttt-cell").forEach(c => c.innerText = "");
+      document.getElementById("tttStatus").innerText = "आपकी बारी (X)";
+    }
+
+    function checkLuckyNumber() {
+      const input = parseInt(document.getElementById("guessInput").value);
+      if (isNaN(input) || input < 1 || input > 10) {
+        alert("1 से 10 के बीच नंबर चुनें!");
+        return;
+      }
+      const lucky = Math.floor(Math.random() * 10) + 1;
+      if (input === lucky) {
+        coins += 15;
+        localStorage.setItem("vip_user_coins", coins);
+        document.getElementById("coinCount").innerText = coins;
+        playCoinSound();
+        alert(`🎉 सही अनुमान! नंबर ${lucky} था! मिले +15 Coins!`);
+      } else {
+        alert(`लकी नंबर ${lucky} था। फिर कोशिश करें!`);
+      }
+      document.getElementById("guessInput").value = "";
+    }
+
+    function redeemGiftVoucher() {
+      const email = document.getElementById("voucherEmail").value.trim();
+      const type = document.getElementById("voucherType").value;
+      if (!email) return alert("ईमेल या नंबर दर्ज करें!");
+      if (coins < 500) return alert(`500 कॉइन्स चाहिए! आपके पास ${coins} कॉइन हैं।`);
+
+      coins -= 500;
+      localStorage.setItem("vip_user_coins", coins);
+      document.getElementById("coinCount").innerText = coins;
+      playCoinSound();
+
+      const dummyCode = "VIP" + Math.random().toString(36).substring(2, 8).toUpperCase() + "R10";
+      alert(`🎉 बधाई हो!\n\nवाउचर: ${type} (₹10)\nरिडीम कोड: ${dummyCode}\n\nसफलतापूर्वक जनरेट हो गया है!`);
+    }
+
+    function submitRecharge() {
+      const mobile = document.getElementById("mobileNumber").value.trim();
+      const sim = document.getElementById("simOperator").value;
+      if (!mobile || mobile.length !== 10 || isNaN(mobile)) return alert("सही 10 डिजिट मोबाइल नंबर दर्ज करें!");
+      if (coins < 250) return alert(`250 कॉइन्स चाहिए! आपके पास ${coins} कॉइन हैं।`);
+
+      coins -= 250;
+      localStorage.setItem("vip_user_coins", coins);
+      document.getElementById("coinCount").innerText = coins;
+      playCoinSound();
+
+      alert(`⚡ 1GB डेटा रिचार्ज रिक्वेस्ट सफल!\nनंबर: ${mobile} (${sim})\nडेटा पैक 15 मिनट में सक्रिय हो जाएगा।`);
+    }
+
+    function testReferralReward() {
+      const rand = Math.random();
+      let refCoins = 20;
+      let msg = "🎉 रेफरल बोनस: +20 कॉइन्स मिले!";
+      if (rand > 0.8) {
+        refCoins = 100;
+        msg = "🐼 MEGA JACKPOT! रेयर PANDA COIN (+100 Coins) मिला!";
+      } else if (rand > 0.4) {
+        refCoins = 50;
+        msg = "🎉 सुपर रेफरल बोनस: +50 कॉइन्स मिले!";
+      }
+      coins += refCoins;
+      localStorage.setItem("vip_user_coins", coins);
+      document.getElementById("coinCount").innerText = coins;
+      playCoinSound();
+      alert(msg);
+    }
+
+    function shareWhatsApp() {
+      const text = encodeURIComponent("VIP Rewards Hub डाउनलोड करें और ₹10 रिडीम कोड तथा 1GB डेटा फ्री रिचार्ज पाएँ! मेरा कोड है: VIP998");
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    }
+
+    window.onload = startAdTask;
+  </script>
+</body>
+</html>
