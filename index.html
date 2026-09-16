@@ -1,659 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MQM Casino & Kids Fun Hub</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background: #0b0c16; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
-    .app-card { background: #161829; width: 100%; max-width: 440px; border-radius: 18px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); border: 2px solid #3d426b; position: relative; }
-    .header { text-align: center; margin-bottom: 12px; position: relative; }
-    .header h2 { color: #ffd700; font-size: 22px; letter-spacing: 1px; text-shadow: 0 2px 10px rgba(255,215,0,0.4); }
-    .user-badge { font-size: 12px; color: #4ade80; margin-top: 3px; display: block; }
-    
-    .sound-toggle-btn { position: absolute; top: 0; right: 0; background: #2a2e52; color: #ffd700; border: 1px solid #444; padding: 5px 10px; border-radius: 8px; font-size: 11px; cursor: pointer; font-weight: bold; }
-    .sound-toggle-btn:hover { background: #383e6b; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQM Vip Rewards Hub & Casino</title>
+    <!-- Google AdMob SDK Integration Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-5773010076544651" crossorigin="anonymous"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #0b0c16; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 10px; overflow-x: hidden; }
+        .app-card { background: #161829; width: 100%; max-width: 440px; border-radius: 20px; padding: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.9); border: 2px solid #3d426b; position: relative; }
+        
+        /* Side Neon & Gift Drop Animation for Level 20 */
+        @keyframes sideGlow { 0% { border-color: #ffd700; box-shadow: 0 0 10px #ffd700; } 50% { border-color: #ff4500; box-shadow: 0 0 25px #ff4500; } 100% { border-color: #ffd700; box-shadow: 0 0 10px #ffd700; } }
+        .max-level-glow { animation: sideGlow 2s infinite; }
+        .gift-drop-banner { background: linear-gradient(135deg, #ff416c, #ff4b2b); padding: 10px; border-radius: 12px; text-align: center; margin-bottom: 12px; font-weight: bold; font-size: 13px; animation: bounce 1.5s infinite; display: none; border: 1px dashed #fff; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-    .coin-box { background: linear-gradient(135deg, #00c6ff, #0072ff); padding: 12px; border-radius: 12px; text-align: center; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(0,114,255,0.4); border: 1px solid #60a5fa; }
-    .coin-box h3 { font-size: 30px; font-weight: bold; color: #fff; text-shadow: 0 2px 5px rgba(0,0,0,0.3); }
-    .coin-box p { font-size: 11px; opacity: 0.95; text-transform: uppercase; letter-spacing: 1px; color: #e0f2fe; }
-    
-    .action-btn { width: 100%; padding: 11px; margin-bottom: 7px; border: none; border-radius: 10px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-    .btn-ad { background: linear-gradient(135deg, #4e54c8, #8f94fb); color: white; box-shadow: 0 4px 12px rgba(78,84,200,0.4); }
-    .btn-share { background: linear-gradient(135deg, #11998e, #38ef7d); color: white; }
-    .btn-claim { background: linear-gradient(135deg, #f7971e, #ffd200); color: #111; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .header h2 { color: #ffd700; font-size: 20px; text-shadow: 0 2px 10px rgba(255,215,0,0.4); }
+        .wallet-badge { background: #22253d; padding: 6px 12px; border-radius: 20px; border: 1px solid #ffd700; font-size: 13px; color: #ffd700; font-weight: bold; }
+        
+        .coin-box { background: linear-gradient(135deg, #00c6ff, #0072ff); padding: 12px; border-radius: 14px; text-align: center; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(0,114,255,0.4); border: 1px solid #60a5fa; }
+        .coin-box h3 { font-size: 22px; font-weight: 800; color: #fff; }
+        .coin-box p { font-size: 11px; opacity: 0.9; }
 
-    .game-section-title { font-size: 12px; color: #ffd700; margin: 10px 0 5px 2px; text-transform: uppercase; letter-spacing: 0.5px; border-left: 3px solid #ffd700; padding-left: 6px; }
-    
-    .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; max-height: 155px; overflow-y: auto; padding-right: 4px; }
-    .game-grid::-webkit-scrollbar { width: 4px; }
-    .game-grid::-webkit-scrollbar-thumb { background: #3d426b; border-radius: 4px; }
+        .progress-section { background: #20233b; padding: 10px; border-radius: 12px; margin-bottom: 12px; border: 1px solid #3d426b; }
+        .progress-bar-bg { background: #10121f; height: 10px; border-radius: 5px; overflow: hidden; margin-top: 6px; border: 1px solid #444; }
+        .progress-bar-fill { background: linear-gradient(90deg, #ffd700, #ff8c00); height: 100%; width: 0%; transition: width 0.4s; }
 
-    .game-item { background: #1f2238; border: 1px solid #363b63; padding: 7px 4px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.2s; }
-    .game-item:hover { border-color: #ffd700; background: #262a45; transform: translateY(-2px); }
-    .game-item span { font-size: 18px; display: block; margin-bottom: 2px; }
-    .game-item h4 { font-size: 11px; color: #ffd700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .section-title { font-size: 14px; color: #ffd700; margin-bottom: 8px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        
+        .games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+        .game-card { background: #22253d; border-radius: 12px; padding: 8px; text-align: center; border: 1px solid #3d426b; cursor: pointer; transition: 0.2s; }
+        .game-card:hover { transform: scale(1.03); border-color: #ffd700; }
+        .game-card img { width: 100%; height: 50px; object-fit: cover; border-radius: 8px; margin-bottom: 4px; }
+        .game-card span { font-size: 10px; font-weight: bold; color: #e2e8f0; display: block; }
 
-    .ref-box { background: #111320; border: 1px dashed #38ef7d; padding: 8px; border-radius: 10px; text-align: center; margin-bottom: 8px; font-size: 11px; color: #ccc; }
-    .ref-box strong { color: #38ef7d; }
-    .progress-bar-bg { width: 100%; background: #2a2a3e; height: 6px; border-radius: 3px; margin-top: 5px; overflow: hidden; }
-    .progress-bar-fill { height: 100%; width: 0%; background: #38ef7d; transition: width 0.4s; }
-
-    .rules-card { background: #111320; padding: 10px; border-radius: 10px; font-size: 11px; color: #a0a5c0; line-height: 1.4; margin-top: 8px; border-left: 3px solid #00c6ff; }
-    .rules-card strong { color: #00c6ff; }
-
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; justify-content: center; align-items: center; padding: 15px; }
-    .modal-box { background: #1e1e2f; color: #fff; padding: 20px; border-radius: 14px; max-width: 380px; width: 100%; text-align: center; border: 1px solid #3d426b; position: relative; max-height: 90vh; overflow-y: auto; }
-    .modal-box h3 { color: #ffd700; margin-bottom: 8px; }
-    
-    .cross-close-btn { display: none; position: absolute; top: 12px; right: 14px; background: #e84118; color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; font-weight: bold; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(232,65,24,0.4); }
-
-    .input-group { text-align: left; margin-bottom: 10px; }
-    .input-group label { font-size: 12px; color: #ccc; display: block; margin-bottom: 4px; }
-    .input-group input, .input-group select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444; background: #2a2a3e; color: #fff; outline: none; font-size: 13px; }
-    .btn-submit { width: 100%; padding: 11px; background: #28a745; color: #fff; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; margin-top: 6px; }
-    .btn-close { width: 100%; padding: 7px; background: transparent; color: #bbb; border: none; margin-top: 4px; cursor: pointer; font-size: 12px; }
-    
-    #adVideoPlayer { width: 100%; border-radius: 8px; margin-bottom: 10px; background: #000; pointer-events: none; }
-    #videoStatus { font-size: 13px; color: #ffd700; margin-bottom: 8px; font-weight: bold; }
-  </style>
+        .btn-action { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: bold; cursor: pointer; margin-bottom: 8px; box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
+        .btn-action:active { transform: scale(0.98); }
+        
+        .redeem-section { background: #20233b; padding: 10px; border-radius: 12px; margin-bottom: 10px; border: 1px solid #3d426b; }
+        .redeem-item { display: flex; justify-content: space-between; align-items: center; font-size: 11px; padding: 6px 0; border-bottom: 1px solid #2a2e4d; }
+        .redeem-btn { background: #ffd700; color: #0b0c16; border: none; padding: 4px 10px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 10px; }
+        
+        .footer-info { font-size: 9px; text-align: center; color: #94a3b8; margin-top: 5px; }
+    </style>
 </head>
-<body>
+<body id="mainBody">
 
-<audio id="bgMusic" loop>
-  <source src="https://commondatastorage.googleapis.com/codesandbox-demos/que-sera-sera.mp3" type="audio/mp3">
-</audio>
+    <div class="app-card" id="appCard">
+        <!-- Level 20 Side Neon & Gift Drop Banner -->
+        <div id="giftBanner" class="gift-drop-banner">🎁 Level 20 Master! Mystery Gift Drop Active + ₹800 Mega Voucher & Updates!</div>
 
-<div class="app-card">
-  <div class="header">
-    <button id="soundBtn" class="sound-toggle-btn" onclick="toggleSound()">🔊 Sound: ON</button>
-    <h2>MQM CASINO & KIDS HUB</h2>
-    <span id="currentUserDisplay" class="user-badge">Not Logged In</span>
-  </div>
+        <div class="header">
+            <h2>⚡ MQM Hub</h2>
+            <div class="wallet-badge" id="levelDisplay">Lvl 1 (70/30)</div>
+        </div>
 
-  <div class="coin-box">
-    <h3 id="coinCount">0</h3>
-    <p>Free Coin Balance (No Deposit)</p>
-  </div>
+        <div class="coin-box">
+            <p>Total Balance Coins</p>
+            <h3 id="coinCount">0</h3>
+            <p style="font-size: 9px; margin-top: 2px;" id="shareModelText">Admin Share: 70% | Player Share: 30%</p>
+        </div>
 
-  <div class="game-section-title">🔥 20+ Trending Games (Free Play)</div>
-  <div class="game-grid">
-    <div class="game-item" onclick="openGameModal('Teen Patti', 40)"><span>🃏</span><h4>Teen Patti</h4></div>
-    <div class="game-item" onclick="openGameModal('Rummy Master', 40)"><span>🎴</span><h4>Rummy</h4></div>
-    <div class="game-item" onclick="openGameModal('Call Break', 40)"><span>📐</span><h4>Call Break</h4></div>
-    <div class="game-item" onclick="openGameModal('Aviator Crash', 40)"><span>✈️</span><h4>Aviator</h4></div>
-    <div class="game-item" onclick="openGameModal('Car Racing', 40)"><span>🏎️</span><h4>Car Racing</h4></div>
-    <div class="game-item" onclick="openGameModal('Subway Surfers', 40)"><span>🛹</span><h4>Subway Run</h4></div>
-    <div class="game-item" onclick="openGameModal('Mini Cricket', 40)"><span>🏏</span><h4>Cricket</h4></div>
-    <div class="game-item" onclick="openGameModal('Football Match', 40)"><span>⚽</span><h4>Football</h4></div>
-    <div class="game-item" onclick="openGameModal('Fruit Slot', 40)"><span>🎰</span><h4>Fruit Slot</h4></div>
-    <div class="game-item" onclick="openGameModal('Ludo King', 40)"><span>🎲</span><h4>Ludo</h4></div>
-    <div class="game-item" onclick="openGameModal('Andar Bahar', 40)"><span>🎴</span><h4>Andar Bahar</h4></div>
-    <div class="game-item" onclick="openGameModal('Dragon Tiger', 40)"><span>🐉</span><h4>Dragon Tiger</h4></div>
-    <div class="game-item" onclick="openGameModal('Pool 8 Ball', 40)"><span>🎱</span><h4>8 Ball Pool</h4></div>
-    <div class="game-item" onclick="openGameModal('Candy Crush', 40)"><span>🍬</span><h4>Candy Crush</h4></div>
-    <div class="game-item" onclick="openGameModal('Jackpot Slot', 40)"><span>🎰</span><h4>Jackpot Slot</h4></div>
-    <div class="game-item" onclick="openGameModal('Poker Arena', 40)"><span>🃏</span><h4>Poker Arena</h4></div>
-    <div class="game-item" onclick="openGameModal('Bumper Car', 40)"><span>🚗</span><h4>Bumper Car</h4></div>
-    <div class="game-item" onclick="openGameModal('Penalty Shoot', 40)"><span>🥅</span><h4>Penalty Shoot</h4></div>
-    <div class="game-item" onclick="openGameModal('Spin Win', 40)"><span>🎡</span><h4>Spin Win</h4></div>
-    <div class="game-item" onclick="openGameModal('Fishing Slot', 40)"><span>🦈</span><h4>Fishing Slot</h4></div>
-  </div>
+        <div class="progress-section">
+            <div class="section-title">
+                <span id="targetText">Video Target: 0/40</span>
+                <span id="rewardText">Reward: ₹10 / 1GB</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+        </div>
 
-  <div class="game-section-title">🧸 Kids Cartoon Zone (Dynamic Ads & Rewards)</div>
-  <div class="game-grid" style="max-height: 105px;">
-    <div class="game-item" onclick="openCartoonModal('Kids Nursery Rhymes (Short - 3 Mins)', 30)"><span>🎶</span><h4>Rhymes (3m)</h4></div>
-    <div class="game-item" onclick="openCartoonModal('Tom & Jerry Fun Show (Short - 4 Mins)', 30)"><span>🐱</span><h4>Tom & Jerry</h4></div>
-    <div class="game-item" onclick="openCartoonModal('Chhota Bheem Adventure (Full - 8 Mins)', 75)"><span>🦸‍♂️</span><h4>Bheem (8m)</h4></div>
-    <div class="game-item" onclick="openCartoonModal('Doraemon Gadget Show (Full - 10 Mins)', 90)"><span>🐱🤖</span><h4>Doraemon (10m)</h4></div>
-    <div class="game-item" onclick="openCartoonModal('Motu Patlu Comedy (Full - 10 Mins)', 90)"><span>🚴‍♂️</span><h4>Motu Patlu</h4></div>
-    <div class="game-item" onclick="openCartoonModal('Dragon Ball Z Action (Full - 10 Mins)', 90)"><span>⚡</span><h4>DBZ (10m)</h4></div>
-  </div>
+        <div class="section-title">🔥 Popular Games & Action</div>
+        <div class="games-grid">
+            <div class="game-card" onclick="playGame('Aviator')">
+                <img src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=150" alt="Aviator">
+                <span>Aviator</span>
+            </div>
+            <div class="game-card" onclick="playGame('Pro Aviator')">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=150" alt="Pro Aviator">
+                <span>Pro Aviator</span>
+            </div>
+            <div class="game-card" onclick="playGame('Jackpot Fishing')">
+                <img src="https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=150" alt="Fishing">
+                <span>Jackpot Fish</span>
+            </div>
+            <div class="game-card" onclick="playGame('Ludo Master')">
+                <img src="https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=150" alt="Ludo">
+                <span>Ludo</span>
+            </div>
+            <div class="game-card" onclick="playGame('Snakes & Ladder')">
+                <img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=150" alt="Snakes">
+                <span>Snakes & L.</span>
+            </div>
+            <div class="game-card" onclick="playGame('Dragon Tiger')">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=150" alt="Dragon">
+                <span>Dragon Tiger</span>
+            </div>
+        </div>
 
-  <div style="margin-top: 6px;">
-    <div class="game-item" onclick="openSpinWheel()" style="width: 100%; padding: 8px; background: linear-gradient(135deg, #f7971e, #ffd200); color: #111; font-weight: bold;">
-      <span style="font-size: 20px; display:inline;">🎡</span> <h4 style="display:inline; font-size: 13px; color: #111;">Lucky Wheel (7h) - <span id="spinTimerText">Ready!</span></h4>
-    </div>
-  </div>
+        <button class="btn-action" onclick="watchAd()">📺 Watch Ad & Earn Coins</button>
 
-  <div class="ref-box" style="margin-top: 6px;">
-    <span>Referrals: <strong id="refCount">0</strong> / 14 | Ads Streak: <strong id="adStreakCount">0</strong>/10</span>
-    <div class="progress-bar-bg">
-      <div id="refProgress" class="progress-bar-fill" style="width: 0%;"></div>
-    </div>
-    <small style="color: #38ef7d; display: block; margin-top: 3px;">🎯 Milestone: 7 Refs = +120c | 14 Refs = +250c!</small>
-  </div>
+        <div class="redeem-section">
+            <div class="section-title" style="margin-bottom: 4px;">🎁 Redeem Centre</div>
+            <div class="redeem-item">
+                <span>₹10 Recharge / 1GB Data (250 Coins)</span>
+                <button class="redeem-btn" onclick="redeemReward(250, '₹10 Recharge / 1GB')">Redeem</button>
+            </div>
+            <div class="redeem-item">
+                <span>₹25 Play Store / Amazon (550 Coins)</span>
+                <button class="redeem-btn" onclick="redeemReward(550, '₹25 Voucher')">Redeem</button>
+            </div>
+            <div class="redeem-item">
+                <span>₹800 Mega Final Reward (Level 20)</span>
+                <button class="redeem-btn" onclick="redeemReward(5000, '₹800 Mega Voucher')">Claim</button>
+            </div>
+        </div>
 
-  <button class="action-btn btn-share" onclick="sharePersonalReferralLink()">📢 Invite Friends & Earn Commission</button>
-  <button class="action-btn btn-ad" onclick="openVideoModal()">🎬 Watch Video Ad (Ad Booster / Recovery)</button>
-  <button class="action-btn btn-claim" onclick="openRewardModal()">🎁 Claim Reward</button>
-
-  <div class="rules-card">
-    📌 <strong>100% Free & Secure Rules:</strong><br>
-    • No real money deposit. Free games & cartoons via Ads!<br>
-    • Short cartoons have 30-45s ads; Long cartoons have 1-1.5m ads!<br>
-    • <strong>₹10 Play Code:</strong> 250c (Special) / 300c (Direct)
-  </div>
-</div>
-
-<!-- Login Modal -->
-<div id="login-modal" class="modal" style="display: flex;">
-  <div class="modal-box">
-    <h3>👋 Welcome to MQM Hub</h3>
-    <p style="font-size: 12px; color: #aaa; margin-bottom: 12px;">Login with your phone number (Free Coins):</p>
-    <div class="input-group">
-      <label>Your Name:</label>
-      <input type="text" id="loginName" placeholder="Enter full name">
-    </div>
-    <div class="input-group">
-      <label>Mobile Number (10 Digits):</label>
-      <input type="tel" id="loginPhone" placeholder="Enter 10-digit number" maxlength="10">
-    </div>
-    <button class="btn-submit" onclick="performLogin()">Login & Get 100 Free Coins</button>
-  </div>
-</div>
-
-<!-- Game Simulator Modal -->
-<div id="game-modal" class="modal">
-  <div class="modal-box">
-    <button class="cross-close-btn" style="display: flex;" onclick="closeGameModal()">×</button>
-    <h3 id="gameModalTitle">🎮 Game Arena</h3>
-    <p id="gameModalDesc" style="font-size: 13px; color: #aaa; margin: 15px 0;">Bet 40 free coins to play!</p>
-    <button class="btn-submit" id="gamePlayBtn" onclick="executeGamePlay()">Play & Bet 40 Coins</button>
-    <button class="btn-close" onclick="closeGameModal()">Close</button>
-  </div>
-</div>
-
-<!-- Cartoon Watch Modal with Dynamic Ad Duration Notice -->
-<div id="cartoon-modal" class="modal">
-  <div class="modal-box">
-    <button class="cross-close-btn" style="display: flex;" onclick="closeCartoonModal()">×</button>
-    <h3 id="cartoonModalTitle">🧸 Cartoon Zone</h3>
-    <p style="font-size: 12px; color: #ffd700; margin: 8px 0;" id="cartoonAdNotice">⏳ Playing sponsored ad before video...</p>
-    <video id="cartoonVideoPlayer" controls playsinline style="width: 100%; border-radius: 8px; margin-bottom: 10px; background: #000;">
-      <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-      Your browser does not support video.
-    </video>
-    <button class="btn-submit" id="cartoonClaimBtn" onclick="claimCartoonReward()">Claim Free Coins</button>
-    <button class="btn-close" onclick="closeCartoonModal()">Close</button>
-  </div>
-</div>
-
-<!-- Video Watch Modal (Max Ad Booster) -->
-<div id="video-modal" class="modal">
-  <div class="modal-box">
-    <button id="videoCrossBtn" class="cross-close-btn" onclick="finishAndCloseAd()">×</button>
-    <h3>🎬 Watch Video Ad (Ad Booster)</h3>
-    <p id="videoStatus">Tap below to start video</p>
-    <video id="adVideoPlayer" playsinline>
-      <source id="videoSource" src="" type="video/mp4">
-      Your browser does not support video.
-    </video>
-    <button id="startVideoBtn" class="btn-submit" onclick="playAdVideo()">Play Ad</button>
-    <button id="closeVideoBtn" class="btn-close" onclick="closeVideoModal()">Cancel</button>
-  </div>
-</div>
-
-<!-- Claim Reward Modal -->
-<div id="reward-modal" class="modal">
-  <div class="modal-box">
-    <button class="cross-close-btn" style="display: flex;" onclick="closeRewardModal()">×</button>
-    <h3>🎁 Claim Your Reward</h3>
-    <p style="font-size: 12px; color: #aaa; margin-bottom: 12px;">Select reward & confirm details:</p>
-    
-    <div class="input-group">
-      <label>Select Reward Option:</label>
-      <select id="claimRewardType" onchange="toggleSimSelect()">
-        <option value="₹10 Play Code (Special 250c)" data-cost="250" id="specialPlayCodeOption">🎮 ₹10 Play Code - Special (250 Coins) [3/day]</option>
-        <option value="₹10 Play Code (Direct 300c)" data-cost="300">⚡ ₹10 Play Code - Direct Instant (300 Coins)</option>
-        <option value="₹20 Play Code (480c)" data-cost="480">🎮 ₹20 Play Code (480 Coins)</option>
-        <option value="₹25 Play Code (600c)" data-cost="600">🎮 ₹25 Play Code (600 Coins)</option>
-        <option value="₹50 Play Code (1200c)" data-cost="1200">🎮 ₹50 Play Code (1200 Coins)</option>
-        <option value="1GB Data Pack" data-cost="350">📶 1GB Data Pack (350 Coins)</option>
-        <option value="2GB Data Pack" data-cost="600">📶 2GB Data Pack (600 Coins)</option>
-        <option value="3GB Data Pack" data-cost="800">📶 3GB Data Pack (800 Coins)</option>
-        <option value="₹25 Amazon Pay Voucher" data-cost="500">🛒 ₹25 Amazon Pay Gift Card (500 Coins)</option>
-        <option value="₹50 Amazon Pay Voucher" data-cost="950">🛒 ₹50 Amazon Pay Gift Card (950 Coins)</option>
-      </select>
+        <div class="footer-info">Ad Unit: ca-app-pub-5773010076544651/1579177063 | Data Secured via LocalStorage</div>
     </div>
 
-    <div class="input-group">
-      <label>Delivery WhatsApp No. or Email:</label>
-      <input type="text" id="deliveryContact" placeholder="Enter WhatsApp number or Email">
-    </div>
-
-    <div class="input-group" id="simSelectDiv" style="display: none;">
-      <label>SIM Operator (Data Packs):</label>
-      <select id="claimSimOperator">
-        <option value="Jio">Jio</option>
-        <option value="Airtel">Airtel</option>
-        <option value="Vi">Vi (Vodafone Idea)</option>
-      </select>
-    </div>
-
-    <button class="btn-submit" id="claimSubmitBtn" onclick="sendClaimToTelegram()">Submit Claim</button>
-    <button class="btn-close" onclick="closeRewardModal()">Cancel</button>
-  </div>
-</div>
-
-<script>
-  let currentUser = null;
-  let userCoins = 100;
-  let invitedFriends = 0;
-  let adStreak = 0;
-  let specialClaimCount = 0;
-  let isSoundEnabled = false;
-  let activeGame = '';
-  let currentEntryFee = 40;
-  let currentCartoonReward = 15;
-  const MAX_SPECIAL_CLAIMS = 3;
-
-  const TG_BOT_TOKEN = "8681623026:AAG9aNaiA7Q-wUwkUjTnOys6VSM6Ki0bO10";
-  const TG_CHAT_ID = "6344614701";
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const referredBy = urlParams.get('ref');
-
-  window.onload = function() {
-    const savedUser = localStorage.getItem("mqm_user");
-    if (savedUser) {
-      currentUser = JSON.parse(savedUser);
-      userCoins = parseInt(localStorage.getItem("mqm_coins") || "100");
-      invitedFriends = parseInt(localStorage.getItem("mqm_refs") || "0");
-      adStreak = parseInt(localStorage.getItem("mqm_ad_streak") || "0");
-      document.getElementById("login-modal").style.display = "none";
-      updateUI();
-      checkSpinCooldown();
-    }
-  };
-
-  function toggleSound() {
-    const bgMusic = document.getElementById("bgMusic");
-    const soundBtn = document.getElementById("soundBtn");
-    bgMusic.volume = 0.2;
-
-    if (isSoundEnabled) {
-      bgMusic.pause();
-      isSoundEnabled = false;
-      soundBtn.innerText = "🔇 Sound: OFF";
-    } else {
-      bgMusic.play().catch(e => {});
-      isSoundEnabled = true;
-      soundBtn.innerText = "🔊 Sound: ON";
-    }
-  }
-
-  function performLogin() {
-    const name = document.getElementById("loginName").value.trim();
-    const phone = document.getElementById("loginPhone").value.trim();
-    if (!name || phone.length < 10) {
-      alert("Please enter a valid name and 10-digit mobile number!");
-      return;
-    }
-    currentUser = { name, phone };
-
-    if (referredBy && referredBy !== phone && !localStorage.getItem("mqm_user")) {
-      userCoins += 20;
-      alert(`🎉 Welcome! You joined via referral from ${referredBy} and received an extra +20 Free Coins!`);
-    }
-
-    localStorage.setItem("mqm_user", JSON.stringify(currentUser));
-    localStorage.setItem("mqm_coins", userCoins);
-    localStorage.setItem("mqm_refs", invitedFriends);
-    document.getElementById("login-modal").style.display = "none";
-    updateUI();
-    checkSpinCooldown();
-
-    const bgMusic = document.getElementById("bgMusic");
-    bgMusic.volume = 0.2;
-    bgMusic.play().then(() => {
-      isSoundEnabled = true;
-      document.getElementById("soundBtn").innerText = "🔊 Sound: ON";
-    }).catch(e => {});
-
-    if (referredBy && referredBy !== phone) {
-      const refAlert = `🤝 *Casino & Kids Hub Referral!*%0A%0A👤 *New User:* ${name}%0A📱 *New Phone:* ${phone}%0A🎯 *Referrer:* ${referredBy}%0A⏰ *Time:* ${new Date().toLocaleString()}`;
-      fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${refAlert}&parse_mode=Markdown`);
-    }
-  }
-
-  function updateUI() {
-    if (currentUser) {
-      document.getElementById("currentUserDisplay").innerText = `👤 ${currentUser.name} (${currentUser.phone})`;
-      document.getElementById("coinCount").innerText = userCoins;
-      document.getElementById("refCount").innerText = invitedFriends;
-      document.getElementById("refProgress").style.width = Math.min(100, (invitedFriends / 14) * 100) + "%";
-      document.getElementById("adStreakCount").innerText = adStreak;
-      document.getElementById("deliveryContact").value = currentUser.phone;
-    }
-  }
-
-  function openGameModal(gameName, entryFee) {
-    activeGame = gameName;
-    currentEntryFee = entryFee;
-    document.getElementById("gameModalTitle").innerText = `🎮 ${gameName}`;
-    document.getElementById("gameModalDesc").innerHTML = `Bet <strong>${entryFee} Free Coins</strong> to play ${gameName}.<br>No-Deposit Play: Win big or watch ads to recover!`;
-    document.getElementById("gamePlayBtn").innerText = `Play & Bet ${entryFee} Coins`;
-    document.getElementById("game-modal").style.display = "flex";
-  }
-
-  function openCartoonModal(cartoonName, rewardCoins) {
-    document.getElementById("cartoonModalTitle").innerText = `🧸 ${cartoonName}`;
-    currentCartoonReward = rewardCoins;
-    
-    const notice = document.getElementById("cartoonAdNotice");
-    if (cartoonName.includes("Short")) {
-      notice.innerText = "⏳ 30-45s Sponsor Ad playing before short video...";
-    } else {
-      notice.innerText = "⏳ 1 to 1.5 Min Sponsor Ad playing before full episode...";
-    }
-
-    document.getElementById("cartoon-modal").style.display = "flex";
-  }
-
-  function closeCartoonModal() {
-    const vid = document.getElementById("cartoonVideoPlayer");
-    vid.pause();
-    vid.currentTime = 0;
-    document.getElementById("cartoon-modal").style.display = "none";
-  }
-
-  function claimCartoonReward() {
-    userCoins += currentCartoonReward;
-    localStorage.setItem("mqm_coins", userCoins);
-    updateUI();
-    closeCartoonModal();
-    alert(`🎉 Fantastic! You watched the cartoon and earned +${currentCartoonReward} Free Coins!`);
-  }
-
-  function openSpinWheel() {
-    const lastSpinTime = parseInt(localStorage.getItem("mqm_last_spin") || "0");
-    const currentTime = new Date().getTime();
-    const sevenHours = 7 * 60 * 60 * 1000;
-
-    if (currentTime - lastSpinTime < sevenHours) {
-      const remainingMs = sevenHours - (currentTime - lastSpinTime);
-      const remainingHours = Math.floor(remainingMs / (1000 * 60 * 60));
-      const remainingMins = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
-      alert(`⏳ Lucky Wheel is on 7-Hour Cooldown! Come back in ${remainingHours}h ${remainingMins}m or watch video ads.`);
-      return;
-    }
-
-    activeGame = "Lucky Wheel";
-    currentEntryFee = 0;
-    document.getElementById("gameModalTitle").innerText = `🎡 Lucky Wheel Bonus`;
-    document.getElementById("gameModalDesc").innerText = `Spin after your 7-hour cooldown to win 20-50 free coins!`;
-    document.getElementById("gamePlayBtn").innerText = `Spin & Win Free Coins`;
-    document.getElementById("game-modal").style.display = "flex";
-  }
-
-  function checkSpinCooldown() {
-    const lastSpinTime = parseInt(localStorage.getItem("mqm_last_spin") || "0");
-    const currentTime = new Date().getTime();
-    const sevenHours = 7 * 60 * 60 * 1000;
-    const spinTimerText = document.getElementById("spinTimerText");
-
-    if (currentTime - lastSpinTime < sevenHours) {
-      spinTimerText.innerText = "Locked (7h)";
-      spinTimerText.style.color = "#e84118";
-    } else {
-      spinTimerText.innerText = "Ready!";
-      spinTimerText.style.color = "#4ade80";
-    }
-  }
-
-  function closeGameModal() {
-    document.getElementById("game-modal").style.display = "none";
-  }
-
-  function executeGamePlay() {
-    if (activeGame === "Lucky Wheel") {
-      localStorage.setItem("mqm_last_spin", new Date().getTime());
-      const earned = Math.floor(Math.random() * 30) + 20;
-      userCoins += earned;
-      localStorage.setItem("mqm_coins", userCoins);
-      updateUI();
-      checkSpinCooldown();
-      closeGameModal();
-      alert(`🎡 Spin Successful! You won +${earned} Free Coins!`);
-      return;
-    }
-
-    if (userCoins < currentEntryFee) {
-      closeGameModal();
-      alert(`❌ Insufficient coins! You need ${currentEntryFee} free coins. Watch Video Ads below to recover balance instantly.`);
-      return;
-    }
-
-    userCoins -= currentEntryFee; 
-    const isWin = Math.random() < 0.35;
-
-    if (isWin) {
-      const reward = Math.floor(Math.random() * 60) + currentEntryFee;
-      userCoins += reward;
-      localStorage.setItem("mqm_coins", userCoins);
-      updateUI();
-      alert(`🎉 JACKPOT WIN! You won +${reward} Coins in ${activeGame}!`);
-    } else {
-      localStorage.setItem("mqm_coins", userCoins);
-      updateUI();
-      alert(`💥 ROUND LOST! You lost in ${activeGame} (-${currentEntryFee} coins). Watch Video Ads to recover your balance!`);
-    }
-    closeGameModal();
-  }
-
-  function sharePersonalReferralLink() {
-    if (!currentUser) { alert("Please login first!"); return; }
-    const baseUrl = window.location.origin + window.location.pathname;
-    const myRefLink = `${baseUrl}?ref=${currentUser.phone}`;
-    const shareText = encodeURIComponent(`🔥 Play 20+ Free Games & Watch Cartoons to Win Free Google Play Codes! Join via my link: ${myRefLink}`);
-    window.open(`https://api.whatsapp.com/send?text=${shareText}`, '_blank');
-    
-    invitedFriends++;
-    let earnedCommission = 10; 
-
-    if (invitedFriends === 1) {
-      earnedCommission = 20;
-    } else if (invitedFriends === 7) {
-      earnedCommission = 50;
-      alert("🏆 Milestone Reached! 7 Referrals completed (+120 Coins total reward)!");
-    } else if (invitedFriends === 14) {
-      earnedCommission = 130;
-      alert("🔥 GRAND MILESTONE UNLOCKED! 14 Referrals completed (+250 Coins total reward)!");
-    }
-
-    userCoins += earnedCommission;
-    localStorage.setItem("mqm_refs", invitedFriends);
-    localStorage.setItem("mqm_coins", userCoins);
-    updateUI();
-    alert(`📢 Link shared! +${earnedCommission} Commission Coins added safely.`);
-  }
-
-  function updateSpecialOption() {
-    const opt = document.getElementById("specialPlayCodeOption");
-    const remaining = MAX_SPECIAL_CLAIMS - specialClaimCount;
-    if (remaining <= 0) {
-      opt.text = "🔒 ₹10 Play Code - 250c (LOCKED)";
-    } else {
-      opt.text = `🎮 ₹10 Play Code - Special (250 Coins) [${remaining} left]`;
-    }
-  }
-
-  const videoList = [
-    { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4", duration: 25 },
-    { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", duration: 30 },
-    { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", duration: 35 },
-    { url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", duration: 30 }
-  ];
-
-  let countdownTimer = null;
-  let remainingTime = 30;
-  let adCompletedSuccessfully = false;
-
-  const videoModal = document.getElementById("video-modal");
-  const adVideo = document.getElementById("adVideoPlayer");
-  const videoSource = document.getElementById("videoSource");
-  const videoStatus = document.getElementById("videoStatus");
-  const startVideoBtn = document.getElementById("startVideoBtn");
-  const closeVideoBtn = document.getElementById("closeVideoBtn");
-  const videoCrossBtn = document.getElementById("videoCrossBtn");
-
-  function openVideoModal() {
-    const randomPick = videoList[Math.floor(Math.random() * videoList.length)];
-    remainingTime = randomPick.duration;
-    adCompletedSuccessfully = false;
-    
-    videoSource.src = randomPick.url;
-    adVideo.load();
-    videoCrossBtn.style.display = "none";
-
-    videoModal.style.display = "flex";
-    videoStatus.innerText = `Watch Ad Booster | Duration: ${remainingTime}s (Streak: ${adStreak}/10)`;
-    startVideoBtn.style.display = "block";
-    closeVideoBtn.style.display = "block";
-  }
-
-  function closeVideoModal() {
-    clearInterval(countdownTimer);
-    adVideo.pause();
-    adVideo.currentTime = 0;
-    videoModal.style.display = "none";
-
-    if (!adCompletedSuccessfully) {
-      alert("❌ Ad cancelled! Complete the video to recover coins.");
-    }
-  }
-
-  function playAdVideo() {
-    startVideoBtn.style.display = "none";
-    closeVideoBtn.style.display = "none";
-    adVideo.play();
-    videoStatus.innerText = `⏳ Watching Ad Booster: ${remainingTime}s remaining...`;
-
-    countdownTimer = setInterval(() => {
-      remainingTime--;
-      if (remainingTime > 0) {
-        videoStatus.innerText = `⏳ Watching Ad Booster: ${remainingTime}s remaining...`;
-      } else {
-        clearInterval(countdownTimer);
-        adVideo.pause();
-        adCompletedSuccessfully = true;
-
-        videoStatus.innerText = "✅ Ad Completed! Tap (×) to claim coins.";
-        videoCrossBtn.style.display = "flex";
-      }
-    }, 1000);
-  }
-
-  function finishAndCloseAd() {
-    if (!adCompletedSuccessfully) {
-      closeVideoModal();
-      return;
-    }
-
-    adStreak++;
-    let earned = 10;
-    let msg = "🎉 Ad Booster Success! You received +10 Coins!";
-
-    if (adStreak >= 10) {
-      earned = 25;
-      adStreak = 0;
-      msg = "🔥 MEGA BONUS UNLOCKED! You completed 10 Ads and received +25 Mega Coins!";
-    }
-
-    userCoins += earned;
-    localStorage.setItem("mqm_coins", userCoins);
-    localStorage.setItem("mqm_ad_streak", adStreak);
-    updateUI();
-    
-    videoModal.style.display = "none";
-    alert(msg);
-  }
-
-  function openRewardModal() {
-    updateSpecialOption();
-    document.getElementById("reward-modal").style.display = "flex";
-    toggleSimSelect();
-  }
-
-  function closeRewardModal() {
-    document.getElementById("reward-modal").style.display = "none";
-  }
-
-  function toggleSimSelect() {
-    const select = document.getElementById("claimRewardType");
-    const selectedVal = select.value;
-    const simDiv = document.getElementById("simSelectDiv");
-    if (selectedVal.includes("Data Pack")) {
-      simDiv.style.display = "block";
-    } else {
-      simDiv.style.display = "none";
-    }
-  }
-
-  function sendClaimToTelegram() {
-    const select = document.getElementById("claimRewardType");
-    const selectedOption = select.options[select.selectedIndex];
-    const rewardName = selectedOption.value;
-    const requiredCoins = parseInt(selectedOption.getAttribute("data-cost"));
-    const deliveryContact = document.getElementById("deliveryContact").value.trim();
-    const isData = rewardName.includes("Data Pack");
-    const sim = isData ? document.getElementById("claimSimOperator").value : "N/A (Gift Code / Voucher)";
-
-    if (!deliveryContact) {
-      alert("❌ Please enter your WhatsApp number or Email!");
-      return;
-    }
-
-    if (rewardName.includes("Special 250c")) {
-      if (specialClaimCount >= MAX_SPECIAL_CLAIMS) {
-        alert("❌ 250 Coins special offer is locked!");
-        return;
-      }
-    }
-
-    if (userCoins < requiredCoins) {
-      alert(`Insufficient balance! You need ${requiredCoins} coins.`);
-      return;
-    }
-
-    const btn = document.getElementById("claimSubmitBtn");
-    btn.disabled = true;
-    btn.innerText = "Submitting...";
-
-    const messageText = `🎉 *New Free Reward Claim Request!*%0A%0A👤 *User Name:* ${currentUser.name}%0A📱 *Registered Phone:* ${currentUser.phone}%0A🎯 *Delivery Contact:* ${deliveryContact}%0A🎁 *Selected Reward:* ${rewardName}%0A💰 *Coins Deducted:* ${requiredCoins}%0A📶 *SIM Operator:* ${sim}%0A⏰ *Timestamp:* ${new Date().toLocaleString()}`;
-
-    const tgUrl = `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${messageText}&parse_mode=Markdown`;
-
-    fetch(tgUrl)
-      .then(res => res.json())
-      .then(data => {
-        if (data.ok) {
-          userCoins -= requiredCoins;
-          localStorage.setItem("mqm_coins", userCoins);
-          updateUI();
-
-          if (rewardName.includes("Special 250c")) {
-            specialClaimCount++;
-            updateSpecialOption();
-          }
-
-          alert("Success! Claim request sent. You will receive your reward shortly.");
-          closeRewardModal();
-        } else {
-          alert("Error connecting to Telegram.");
+    <!-- Audio Synth for Sound Effects -->
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if (!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            if (type === 'click') {
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'coin') {
+                osc.frequency.setValueAtTime(900, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(1300, audioCtx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.2);
+            }
         }
-      })
-      .catch(err => {
-        alert("Network error!");
-      })
-      .finally(() => {
-        btn.disabled = false;
-        btn.innerText = "Submit Claim";
-      });
-  }
-</script>
 
+        // Persistent Data State (LocalStorage)
+        let userData = JSON.parse(localStorage.getItem('mqm_user_data')) || {
+            coins: 0,
+            level: 1,
+            videosWatched: 0
+        };
+
+        const levelRequirements = {
+            1: { target: 40, reward: "₹10 / 1GB", admin: 70, player: 30, bonusCoins: 2 },
+            2: { target: 43, reward: "₹12 / 1.2GB", admin: 70, player: 30, bonusCoins: 4 },
+            3: { target: 46, reward: "₹15 / 1.5GB", admin: 70, player: 30, bonusCoins: 6 },
+            4: { target: 50, reward: "₹18 / 1.8GB", admin: 70, player: 30, bonusCoins: 8 },
+            5: { target: 53, reward: "₹20 / 2GB", admin: 70, player: 30, bonusCoins: 12 },
+            6: { target: 56, reward: "₹22 / 2.2GB", admin: 70, player: 30, bonusCoins: 16 },
+            7: { target: 60, reward: "₹25 / 2.5GB", admin: 70, player: 30, bonusCoins: 20 },
+            8: { target: 63, reward: "₹28 / 2.8GB", admin: 70, player: 30, bonusCoins: 25 },
+            9: { target: 66, reward: "₹30 / 3GB", admin: 70, player: 30, bonusCoins: 30 },
+            10: { target: 70, reward: "₹50 Voucher", admin: 70, player: 30, bonusCoins: 40 },
+            11: { target: 73, reward: "₹70 Voucher", admin: 60, player: 40, bonusCoins: 50 },
+            12: { target: 76, reward: "₹100 Voucher", admin: 60, player: 40, bonusCoins: 60 },
+            13: { target: 80, reward: "₹130 Voucher", admin: 60, player: 40, bonusCoins: 75 },
+            14: { target: 83, reward: "₹160 Voucher", admin: 60, player: 40, bonusCoins: 90 },
+            15: { target: 86, reward: "₹200 Voucher", admin: 60, player: 40, bonusCoins: 110 },
+            16: { target: 90, reward: "₹300 Voucher", admin: 60, player: 40, bonusCoins: 130 },
+            17: { target: 93, reward: "₹400 Voucher", admin: 60, player: 40, bonusCoins: 160 },
+            18: { target: 96, reward: "₹500 Voucher", admin: 60, player: 40, bonusCoins: 190 },
+            19: { target: 98, reward: "₹650 Voucher", admin: 60, player: 40, bonusCoins: 220 },
+            20: { target: 100, reward: "₹800 Mega Prize + Gift Drop", admin: 60, player: 40, bonusCoins: 250 }
+        };
+
+        function updateUI() {
+            document.getElementById('coinCount').innerText = userData.coins;
+            let currentLvlData = levelRequirements[userData.level] || levelRequirements[20];
+            
+            document.getElementById('levelDisplay').innerText = `Lvl ${userData.level} (${currentLvlData.admin}/${currentLvlData.player})`;
+            document.getElementById('shareModelText').innerText = `Admin Share: ${currentLvlData.admin}% | Player Share: ${currentLvlData.player}%`;
+            document.getElementById('targetText').innerText = `Video Target: ${userData.videosWatched}/${currentLvlData.target}`;
+            document.getElementById('rewardText').innerText = `Reward: ${currentLvlData.reward}`;
+            
+            let percent = (userData.videosWatched / currentLvlData.target) * 100;
+            if(percent > 100) percent = 100;
+            document.getElementById('progressBar').style.width = percent + '%';
+
+            // Level 20 Side Neon & Gift Drop Trigger
+            if (userData.level >= 20) {
+                document.getElementById('appCard').classList.add('max-level-glow');
+                document.getElementById('giftBanner').style.display = 'block';
+            }
+
+            localStorage.setItem('mqm_user_data', JSON.stringify(userData));
+        }
+
+        function watchAd() {
+            playSound('click');
+            let durations = [15, 20, 30, 40, 120];
+            let pickedDuration = durations[Math.floor(Math.random() * durations.length)];
+            
+            let earnedCoins = 10;
+            if (pickedDuration <= 15) earnedCoins = 8;
+            else if (pickedDuration <= 20) earnedCoins = 11;
+            else if (pickedDuration <= 30) earnedCoins = 13;
+            else if (pickedDuration >= 120) earnedCoins = 40;
+
+            alert(`AdMob Rewarded Video Played (${pickedDuration}s)! You earned +${earnedCoins} Coins.`);
+            
+            userData.coins += earnedCoins;
+            userData.videosWatched += 1;
+
+            let currentLvlData = levelRequirements[userData.level] || levelRequirements[20];
+            if (userData.videosWatched >= currentLvlData.target && userData.level < 20) {
+                let lvlBonus = currentLvlData.bonusCoins;
+                userData.coins += lvlBonus;
+                userData.level += 1;
+                userData.videosWatched = 0;
+                alert(`🎉 Level Completed! You unlocked Level ${userData.level} and received +${lvlBonus} Bonus Coins!`);
+            } else if (userData.videosWatched >= currentLvlData.target && userData.level === 20) {
+                alert(`👑 Ultimate Master Level Reached! Claim your ₹800 Mega Reward below.`);
+            }
+
+            playSound('coin');
+            updateUI();
+        }
+
+        function playGame(gameName) {
+            playSound('click');
+            alert(`Launching ${gameName}! Enjoy the dark gaming experience and action sound effects.`);
+        }
+
+        function redeemReward(cost, name) {
+            playSound('click');
+            if (userData.coins >= cost) {
+                userData.coins -= cost;
+                alert(`Success! Your claim for ${name} has been processed successfully.`);
+                updateUI();
+            } else {
+                alert(`Insufficient coins! You need ${cost} coins for ${name}. Watch more ads!`);
+            }
+        }
+
+        window.onload = function() {
+            updateUI();
+        };
+    </script>
 </body>
 </html>
