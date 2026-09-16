@@ -3,57 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MQM Casino & Gaming Hub</title>
+    <title>MQM Kids Cartoons & Casino Hub</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-5773010076544651" crossorigin="anonymous"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
-        body { background: #0b0c16; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 0; overflow-x: hidden; }
-        .app-container { background: #0f111a; width: 100%; max-width: 440px; min-height: 100vh; padding-bottom: 70px; position: relative; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+        body { background: #07080f; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 0; overflow-x: hidden; }
+        .app-container { background: #0f111a; width: 100%; max-width: 440px; min-height: 100vh; padding-bottom: 75px; position: relative; box-shadow: 0 0 35px rgba(0,0,0,0.9); }
 
         /* Top Header */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background: #131622; border-bottom: 1px solid #222742; }
-        .logo { font-size: 20px; font-weight: 900; color: #fff; font-style: italic; letter-spacing: 1px; }
+        .logo { font-size: 16px; font-weight: 900; color: #ffd700; font-style: italic; letter-spacing: 1px; }
         .header-right { display: flex; align-items: center; gap: 8px; }
-        .balance-badge { background: #1b1f33; padding: 5px 10px; border-radius: 20px; border: 1px solid #ffd700; font-size: 12px; color: #ffd700; font-weight: bold; }
-        .wallet-btn { background: linear-gradient(135deg, #f5af19, #f27121); border: none; padding: 6px 12px; border-radius: 15px; font-weight: bold; color: #fff; font-size: 12px; cursor: pointer; }
+        .balance-badge { background: #1b1f33; padding: 5px 10px; border-radius: 20px; border: 1px solid #ffd700; font-size: 11px; color: #ffd700; font-weight: bold; }
+        .profit-model { background: #222b45; padding: 4px 8px; border-radius: 10px; font-size: 9px; color: #ffd700; font-weight: bold; border: 1px solid #323b6b; }
 
         /* Navigation Sub-Tabs */
-        .sub-nav { display: flex; gap: 15px; padding: 10px 15px; background: #131622; overflow-x: auto; white-space: nowrap; border-bottom: 1px solid #222742; }
+        .sub-nav { display: flex; gap: 10px; padding: 10px 15px; background: #131622; overflow-x: auto; white-space: nowrap; border-bottom: 1px solid #222742; }
         .sub-nav::-webkit-scrollbar { display: none; }
-        .nav-item { font-size: 13px; color: #8c93b4; font-weight: 600; cursor: pointer; transition: 0.2s; }
-        .nav-item.active { color: #ffd700; border-bottom: 2px solid #ffd700; padding-bottom: 2px; }
+        .nav-item { font-size: 12px; color: #8c93b4; font-weight: 600; cursor: pointer; transition: 0.2s; padding: 4px 10px; border-radius: 8px; background: #181c2e; }
+        .nav-item.active { color: #ffd700; background: #252b48; border: 1px solid #ffd700; }
 
-        /* Big Promo Banner */
-        .promo-banner { margin: 12px 15px; background: linear-gradient(135deg, #1e2238, #131622); border-radius: 16px; padding: 15px; border: 1px solid #323b6b; display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; }
-        .promo-text h2 { font-size: 18px; color: #ffd700; font-weight: 900; line-height: 1.2; text-shadow: 0 2px 8px rgba(255,215,0,0.3); }
-        .promo-text p { font-size: 11px; color: #4ade80; margin-top: 4px; font-weight: bold; }
-        .promo-img { font-size: 40px; }
+        /* Big Promo Banner & 7-Hour Lucky Gullak Timer */
+        .promo-banner { margin: 12px 15px; background: linear-gradient(135deg, #2a2010, #131622); border-radius: 16px; padding: 12px 15px; border: 1px solid #d4af37; display: flex; justify-content: space-between; align-items: center; position: relative; overflow: hidden; }
+        .promo-text h2 { font-size: 15px; color: #ffd700; font-weight: 900; line-height: 1.2; text-shadow: 0 2px 8px rgba(255,215,0,0.4); }
+        .promo-text p { font-size: 10px; color: #4ade80; margin-top: 3px; font-weight: bold; }
+        .gullak-box { text-align: center; cursor: pointer; background: #1a1e30; padding: 8px 12px; border-radius: 12px; border: 1px dashed #ffd700; }
+        .gullak-icon { font-size: 24px; display: block; }
+        .gullak-timer { font-size: 10px; color: #ffd700; font-weight: bold; margin-top: 2px; }
 
         /* Section Titles */
         .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 15px; margin: 15px 0 8px 0; }
-        .section-title { font-size: 14px; color: #ffd700; font-weight: bold; display: flex; align-items: center; gap: 6px; }
-        .view-all { font-size: 11px; color: #8c93b4; cursor: pointer; }
-
-        /* Horizontal Scrolling Live Wins / Games */
-        .horizontal-scroll { display: flex; gap: 10px; padding: 0 15px; overflow-x: auto; }
-        .horizontal-scroll::-webkit-scrollbar { display: none; }
-        .game-thumb { min-width: 95px; background: #181c2e; border-radius: 12px; padding: 8px; text-align: center; border: 1px solid #2a3158; cursor: pointer; transition: 0.2s; }
-        .game-thumb:hover { transform: scale(1.03); border-color: #ffd700; }
-        .thumb-icon { font-size: 28px; margin-bottom: 4px; display: block; }
-        .thumb-name { font-size: 10px; font-weight: bold; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .thumb-win { font-size: 9px; color: #4ade80; margin-top: 2px; font-weight: bold; }
+        .section-title { font-size: 13px; color: #ffd700; font-weight: bold; display: flex; align-items: center; gap: 6px; }
 
         /* Game Grid */
-        .game-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 15px; }
-        .grid-card { background: #181c2e; border-radius: 14px; padding: 12px; text-align: center; border: 1px solid #2a3158; cursor: pointer; position: relative; transition: 0.2s; }
+        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 0 15px; }
+        .grid-card { background: #181c2e; border-radius: 12px; padding: 10px 6px; text-align: center; border: 1px solid #2a3158; cursor: pointer; transition: 0.2s; position: relative; }
         .grid-card:hover { border-color: #ffd700; transform: translateY(-2px); }
-        .grid-icon { font-size: 36px; margin-bottom: 6px; display: block; }
-        .grid-name { font-size: 12px; font-weight: bold; color: #fff; }
-        .grid-sub { font-size: 9px; color: #8c93b4; margin-top: 2px; }
+        .grid-icon { font-size: 28px; margin-bottom: 4px; display: block; }
+        .grid-name { font-size: 10px; font-weight: bold; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .grid-bet { font-size: 8px; color: #f59e0b; margin-top: 2px; font-weight: bold; }
+        .kids-badge { position: absolute; top: 4px; right: 4px; background: #ec4899; color: #fff; font-size: 7px; padding: 1px 4px; border-radius: 4px; font-weight: bold; }
 
         /* Watch Ad Action Button Area */
         .action-box { padding: 15px; }
-        .btn-watch { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
+        .btn-watch { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
         .btn-watch:active { transform: scale(0.98); }
         .btn-watch:disabled { background: #4b5563; cursor: not-allowed; box-shadow: none; }
 
@@ -69,89 +62,138 @@
     <div class="app-container">
         <!-- Top Header -->
         <div class="header">
-            <div class="logo">MQM.bet</div>
+            <div class="logo">⚡ MQM Kids & Casino</div>
             <div class="header-right">
                 <div class="balance-badge" id="coinBalance">🪙 0</div>
-                <button class="wallet-btn" onclick="alert('Wallet & Secure Redeem System Active!')">Wallet</button>
+                <div class="profit-model">Player Share Active</div>
             </div>
         </div>
 
         <!-- Sub Categories -->
         <div class="sub-nav">
-            <div class="nav-item active">Explore</div>
-            <div class="nav-item" onclick="alert('Casino Games Section')">Casino</div>
-            <div class="nav-item" onclick="alert('Fantasy Sports')">Fantasy</div>
-            <div class="nav-item" onclick="alert('Rummy Cards')">Rummy</div>
-            <div class="nav-item" onclick="alert('Sports Betting')">Sports</div>
+            <div class="nav-item active" onclick="filterCategory('all', this)">All</div>
+            <div class="nav-item" onclick="filterCategory('cartoons', this)">📺 New Cartoons</div>
+            <div class="nav-item" onclick="filterCategory('kids', this)">🧸 Kids Games</div>
+            <div class="nav-item" onclick="filterCategory('slots', this)">🎰 Slots</div>
+            <div class="nav-item" onclick="filterCategory('racing', this)">🏎️ Racing</div>
         </div>
 
-        <!-- Promo Banner -->
+        <!-- Promo Banner & 7-Hour Lucky Gullak Timer -->
         <div class="promo-banner">
             <div class="promo-text">
-                <h2>99% RTP<br>ORIGINALS</h2>
-                <p>✔ Fair Play & Anti-Cheat Active</p>
+                <h2>LUCKY GULLAK<br>FREE REWARD</h2>
+                <p>✔ 7 Hours Timer Box</p>
             </div>
-            <div class="promo-img">🎁</div>
+            <div class="gullak-box" onclick="claimGullak()">
+                <span class="gullak-icon">🏺</span>
+                <div class="gullak-timer" id="gullakTimer">07:00:00</div>
+            </div>
         </div>
 
-        <!-- Live Wins / Hot Games -->
+        <!-- Games & New Cartoons Grid -->
         <div class="section-header">
-            <div class="section-title">🔥 Live Wins</div>
-            <div class="view-all" onclick="alert('All Bets History')">All bets</div>
+            <div class="section-title">🔥 New Cartoons & Featured Games</div>
         </div>
-        <div class="horizontal-scroll">
-            <div class="game-thumb" onclick="playGame('Aviator Pro')">
-                <span class="thumb-icon">✈️</span>
-                <span class="thumb-name">Aviator PRO</span>
-                <span class="thumb-win">₹5,680</span>
+        
+        <div class="game-grid" id="gameGrid">
+            <!-- New Kids Cartoons (10-20 Mins Watch & Earn) -->
+            <div class="game-card" data-cat="cartoons" onclick="playCartoon('New Magic Unicorn Story (15 Mins)', 15)">
+                <span class="kids-badge">NEW</span>
+                <span class="grid-icon">🦄</span>
+                <span class="grid-name">Magic Unicorn</span>
+                <span class="grid-bet">Earn 15 Coins</span>
             </div>
-            <div class="game-thumb" onclick="playGame('Chicken Road')">
-                <span class="thumb-icon">🐔</span>
-                <span class="thumb-name">Chicken 2</span>
-                <span class="thumb-win">₹6,475</span>
+            <div class="game-card" data-cat="cartoons" onclick="playCartoon('Funny Jungle Chase Cartoon (20 Mins)', 20)">
+                <span class="kids-badge">NEW</span>
+                <span class="grid-icon">🐒</span>
+                <span class="grid-name">Jungle Chase</span>
+                <span class="grid-bet">Earn 20 Coins</span>
             </div>
-            <div class="game-thumb" onclick="playGame('Super Ace')">
-                <span class="thumb-icon">🃏</span>
-                <span class="thumb-name">Super Ace</span>
-                <span class="thumb-win">₹6,882</span>
+            <div class="game-card" data-cat="cartoons" onclick="playCartoon('Space Kids Adventures (15 Mins)', 15)">
+                <span class="kids-badge">NEW</span>
+                <span class="grid-icon">🚀</span>
+                <span class="grid-name">Space Kids</span>
+                <span class="grid-bet">Earn 15 Coins</span>
             </div>
-            <div class="game-thumb" onclick="playGame('Joker Coins')">
-                <span class="thumb-icon">🪙</span>
-                <span class="thumb-name">Joker Coins</span>
-                <span class="thumb-win">₹7,500</span>
+
+            <!-- Kids Games -->
+            <div class="game-card" data-cat="kids" onclick="playGame('Uono Ludo (Kids)', 5)">
+                <span class="kids-badge">KIDS</span>
+                <span class="grid-icon">🎲</span>
+                <span class="grid-name">Uono Ludo</span>
+                <span class="grid-bet">Bet: 5 Coins</span>
+            </div>
+            <div class="game-card" data-cat="kids" onclick="playGame('Snakes & Ladders', 5)">
+                <span class="kids-badge">KIDS</span>
+                <span class="grid-icon">🐍</span>
+                <span class="grid-name">Snakes & L.</span>
+                <span class="grid-bet">Bet: 5 Coins</span>
+            </div>
+            <div class="game-card" data-cat="kids" onclick="playGame('Fruit Dart', 8)">
+                <span class="kids-badge">KIDS</span>
+                <span class="grid-icon">🍉</span>
+                <span class="grid-name">Fruit Dart</span>
+                <span class="grid-bet">Bet: 8 Coins</span>
+            </div>
+            
+            <!-- Racing Games -->
+            <div class="game-card" data-cat="racing" onclick="playGame('Car Stunt Racing', 15)">
+                <span class="grid-icon">🏎️</span>
+                <span class="grid-name">Car Racing</span>
+                <span class="grid-bet">Bet: 15 Coins</span>
+            </div>
+            <div class="game-card" data-cat="racing" onclick="playGame('Bike Highway Rush', 15)">
+                <span class="grid-icon">🏍️</span>
+                <span class="grid-name">Bike Stunt</span>
+                <span class="grid-bet">Bet: 15 Coins</span>
+            </div>
+
+            <!-- Slots & Casino Games -->
+            <div class="game-card" data-cat="slots" onclick="playGame('Port of the Kraken', 20)">
+                <span class="grid-icon">🐙</span>
+                <span class="grid-name">Kraken Slot</span>
+                <span class="grid-bet">Bet: 20 Coins</span>
+            </div>
+            <div class="game-card" data-cat="slots" onclick="playGame('500 Lucky Gems', 20)">
+                <span class="grid-icon">💎</span>
+                <span class="grid-name">Lucky Gems</span>
+                <span class="grid-bet">Bet: 20 Coins</span>
+            </div>
+            <div class="game-card" data-cat="slots" onclick="playGame('Mahjong Ways II', 25)">
+                <span class="grid-icon">🀄</span>
+                <span class="grid-name">Mahjong Ways</span>
+                <span class="grid-bet">Bet: 25 Coins</span>
+            </div>
+            <div class="game-card" data-cat="slots" onclick="playGame('The Chronosphere', 25)">
+                <span class="grid-icon">⏳</span>
+                <span class="grid-name">Chronosphere</span>
+                <span class="grid-bet">Bet: 25 Coins</span>
+            </div>
+            <div class="game-card" data-cat="slots" onclick="playGame('Gems Fortune', 20)">
+                <span class="grid-icon">⛩️</span>
+                <span class="grid-name">Gems Fortune</span>
+                <span class="grid-bet">Bet: 20 Coins</span>
+            </div>
+            <div class="game-card" data-cat="slots" onclick="playGame('Fortune Jungle', 20)">
+                <span class="grid-icon">🗿</span>
+                <span class="grid-name">Fortune Jungle</span>
+                <span class="grid-bet">Bet: 20 Coins</span>
+            </div>
+            <div class="game-card" data-cat="slots" onclick="playGame('T-Rex Dinosaur Slot', 30)">
+                <span class="grid-icon">🦖</span>
+                <span class="grid-name">T-Rex Slot</span>
+                <span class="grid-bet">Bet: 30 Coins</span>
+            </div>
+            <div class="game-card" data-cat="slots" onclick="playGame('Ocean Fishing Hunter', 15)">
+                <span class="grid-icon">🐟</span>
+                <span class="grid-name">Ocean Fishing</span>
+                <span class="grid-bet">Bet: 15 Coins</span>
             </div>
         </div>
 
-        <!-- Recently Played / Originals -->
-        <div class="section-header">
-            <div class="section-title">⚡ Recently Played</div>
-        </div>
-        <div class="game-grid">
-            <div class="grid-card" onclick="playGame('Fortune Roulette')">
-                <span class="grid-icon">🎡</span>
-                <div class="grid-name">Roulette</div>
-                <div class="grid-sub">124 playing</div>
-            </div>
-            <div class="grid-card" onclick="playGame('Fantasy Sports')">
-                <span class="grid-icon">🏆</span>
-                <div class="grid-name">Fantasy</div>
-                <div class="grid-sub">10.6k playing</div>
-            </div>
-            <div class="grid-card" onclick="playGame('Coin Tree')">
-                <span class="grid-icon">🌳</span>
-                <div class="grid-name">Coin Tree</div>
-                <div class="grid-sub">8 playing</div>
-            </div>
-            <div class="grid-card" onclick="playGame('Money Pot')">
-                <span class="grid-icon">💰</span>
-                <div class="grid-name">Money Pot</div>
-                <div class="grid-sub">118 playing</div>
-            </div>
-        </div>
-
-        <!-- Earn / Video Ad Button with Anti-Cheat Timer -->
+        <!-- Earn / Video Ad Button -->
         <div class="action-box">
-            <button class="btn-watch" id="watchBtn" onclick="watchVideoAd()">📺 Watch Ad & Earn Coins</button>
+            <button class="btn-watch" id="watchBtn" onclick="watchVideoAd()">📺 Watch Ad & Earn Free Coins</button>
         </div>
 
         <!-- Bottom Navigation Bar -->
@@ -159,14 +201,14 @@
             <div class="bottom-tab active" onclick="switchTab('home')">
                 <span>🏠</span>Explore
             </div>
-            <div class="bottom-tab" onclick="switchTab('vip')">
-                <span>👑</span>VIP
+            <div class="bottom-tab" onclick="switchTab('cartoons')">
+                <span>📺</span>Cartoons
             </div>
             <div class="bottom-tab" onclick="switchTab('earn')">
-                <span>🎁</span>Earn
+                <span>🎁</span>Free Coins
             </div>
             <div class="bottom-tab" onclick="switchTab('race')">
-                <span>🏆</span>Race
+                <span>🏆</span>Leaderboard
             </div>
             <div class="bottom-tab" onclick="switchTab('promos')">
                 <span>📢</span>Promos
@@ -174,82 +216,172 @@
         </div>
     </div>
 
-    <!-- Secure Anti-Cheat Logic Script -->
+    <!-- Script Logic -->
     <script>
-        // Secure Encrypted/Validated State Management
-        let secureData = JSON.parse(localStorage.getItem('mqm_secure_user')) || {
-            coins: 0,
-            level: 1,
-            videosWatched: 0,
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if (!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            if (type === 'click') {
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+            } else if (type === 'win') {
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(1000, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.25);
+            }
+        }
+
+        let userData = JSON.parse(localStorage.getItem('mqm_free_user')) || {
+            coins: 50,
+            lastGullakTime: 0,
             lastAdTime: 0
         };
 
-        // Validate data integrity against manipulation
-        if (typeof secureData.coins !== 'number' || isNaN(secureData.coins) || secureData.coins < 0) {
-            secureData.coins = 0;
-            secureData.level = 1;
-            secureData.videosWatched = 0;
-        }
+        if (typeof userData.coins !== 'number' || isNaN(userData.coins)) userData.coins = 50;
 
-        function saveSecureData() {
-            localStorage.setItem('mqm_secure_user', JSON.stringify(secureData));
+        function saveUserData() {
+            localStorage.setItem('mqm_free_user', JSON.stringify(userData));
         }
 
         function updateDisplay() {
-            document.getElementById('coinBalance').innerText = `🪙 ${secureData.coins}`;
-            saveSecureData();
+            document.getElementById('coinBalance').innerText = `🪙 ${userData.coins}`;
+            saveUserData();
         }
 
-        // Anti-Cheat Video Ad Logic with Cooldown Timer
-        function watchVideoAd() {
-            let currentTime = Date.now();
-            let timeDiff = (currentTime - secureData.lastAdTime) / 1000; // in seconds
+        // 7-Hour Lucky Gullak Timer (20-25 Coins)
+        let gullakSecondsLeft = 7 * 3600;
+        function updateGullakTimer() {
+            let now = Date.now();
+            let elapsed = Math.floor((now - userData.lastGullakTime) / 1000);
+            let remaining = gullakSecondsLeft - elapsed;
 
-            // Prevent rapid bot clicking or instant script execution (Minimum 10 seconds gap required per ad)
-            if (timeDiff < 10 && secureData.lastAdTime !== 0) {
-                let waitTime = Math.ceil(10 - timeDiff);
-                alert(`⚠️ Anti-Cheat Protection: Please wait ${waitTime} seconds before watching the next ad.`);
+            if (remaining <= 0) {
+                document.getElementById('gullakTimer').innerText = "🎁 CLAIM NOW!";
+            } else {
+                let hrs = Math.floor(remaining / 3600);
+                let mins = Math.floor((remaining % 3600) / 60);
+                let secs = remaining % 60;
+                document.getElementById('gullakTimer').innerText = `${hrs.toString().padStart(2,'0')}:${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+            }
+        }
+        setInterval(updateGullakTimer, 1000);
+
+        function claimGullak() {
+            playSound('click');
+            let now = Date.now();
+            let elapsed = Math.floor((now - userData.lastGullakTime) / 1000);
+
+            if (userData.lastGullakTime !== 0 && elapsed < gullakSecondsLeft) {
+                let rem = gullakSecondsLeft - elapsed;
+                let h = Math.floor(rem / 3600);
+                let m = Math.floor((rem % 3600) / 60);
+                alert(`⏳ Lucky Gullak locked! Wait ${h}h ${m}m to open again.`);
+                return;
+            }
+
+            let freeCoins = Math.floor(Math.random() * 6) + 20;
+            userData.coins += freeCoins;
+            userData.lastGullakTime = Date.now();
+            playSound('win');
+            alert(`🎉 Success! Opened 7-Hour Lucky Gullak and won +${freeCoins} Free Coins!`);
+            updateDisplay();
+        }
+
+        // Play New Cartoon
+        function playCartoon(cartoonName, rewardCoins) {
+            playSound('click');
+            alert(`📺 Playing ${cartoonName}...\n\nEnjoy the new cartoon! After watching, +${rewardCoins} Free Coins added to your wallet.`);
+            userData.coins += rewardCoins;
+            playSound('win');
+            updateDisplay();
+        }
+
+        // Play Game
+        function playGame(gameName, cost) {
+            playSound('click');
+            if (userData.coins < cost) {
+                alert(`❌ Insufficient Coins! You need ${cost} coins to play ${gameName}.\n\nClick 'Watch Ad & Earn Free Coins' below!`);
+                return;
+            }
+
+            userData.coins -= cost;
+            let winAmount = Math.random() > 0.4 ? cost * 2 : 0;
+            
+            if (winAmount > 0) {
+                userData.coins += winAmount;
+                playSound('win');
+                alert(`🎰 Playing ${gameName}...\n🎊 JACKPOT! You won +${winAmount} Coins!`);
+            } else {
+                alert(`🎮 Playing ${gameName}...\n😢 Hard luck! Try again or watch an ad.`);
+            }
+            updateDisplay();
+        }
+
+        // Watch Ad for Free Coins
+        function watchVideoAd() {
+            playSound('click');
+            let now = Date.now();
+            let diff = (now - userData.lastAdTime) / 1000;
+
+            if (diff < 10 && userData.lastAdTime !== 0) {
+                alert(`⚠️ Anti-Cheat: Please wait a few seconds before watching the next ad.`);
                 return;
             }
 
             let btn = document.getElementById('watchBtn');
             btn.disabled = true;
-            btn.innerText = "⏳ Loading Ad & Verifying...";
+            btn.innerText = "⏳ Loading Free Ad...";
 
             setTimeout(() => {
-                let earned = 12; // Standard reward
-                secureData.coins += earned;
-                secureData.videosWatched += 1;
-                secureData.lastAdTime = Date.now();
-
-                alert(`✅ AdMob Rewarded Verified! You earned +${earned} Coins safely.`);
+                let earned = 15;
+                userData.coins += earned;
+                userData.lastAdTime = Date.now();
+                playSound('win');
+                alert(`✅ Ad Verified! +${earned} Free Coins added.`);
                 updateDisplay();
 
                 btn.disabled = false;
-                btn.innerText = "📺 Watch Ad & Earn Coins";
-            }, 1500); // Simulated secure ad verification delay
+                btn.innerText = "📺 Watch Ad & Earn Free Coins";
+            }, 1500);
         }
 
-        function playGame(gameName) {
-            alert(`Launching ${gameName} securely with Sound & Action Effects!`);
+        function filterCategory(cat, element) {
+            playSound('click');
+            document.querySelectorAll('.sub-nav .nav-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+
+            let cards = document.querySelectorAll('.game-grid .game-card');
+            cards.forEach(card => {
+                if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
-        function switchTab(tabName) {
-            alert(`Switched to ${tabName.toUpperCase()} section!`);
-        }
-
-        // Basic Console Tamper Detection Warning
-        setInterval(() => {
-            let before = Date.now();
-            debugger; // detects debugger/inspection attempts
-            let after = Date.now();
-            if (after - before > 100) {
-                // Potential inspection detected
+        function switchTab(tab) {
+            playSound('click');
+            if (tab === 'cartoons') {
+                filterCategory('cartoons', document.querySelectorAll('.sub-nav .nav-item')[1]);
+            } else {
+                alert(`Switched to ${tab.toUpperCase()} section!`);
             }
-        }, 1000);
+        }
 
         window.onload = function() {
             updateDisplay();
+            updateGullakTimer();
         };
     </script>
 </body>
