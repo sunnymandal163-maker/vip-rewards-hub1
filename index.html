@@ -3,65 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Come Casino & Kids 3D Hub</title>
+    <title>Come 3D Casino & Kids Hub - 40+ Games</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-5773010076544651" crossorigin="anonymous"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
         body { background: #05060a; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 0; overflow-x: hidden; }
-        .app-container { background: linear-gradient(180deg, #0e111a 0%, #05060a 100%); width: 100%; max-width: 440px; min-height: 100vh; padding-bottom: 80px; position: relative; box-shadow: 0 0 40px rgba(0,0,0,0.9); }
+        .app-container { background: linear-gradient(180deg, #121829 0%, #07090f 100%); width: 100%; max-width: 440px; min-height: 100vh; padding-bottom: 80px; position: relative; box-shadow: 0 0 40px rgba(0,0,0,0.9); }
 
         /* Top Header */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #101420; border-bottom: 2px solid #1f253d; }
-        .logo { font-size: 20px; font-weight: 900; color: #fff; font-style: italic; letter-spacing: 1px; }
-        .logo span { color: #f59e0b; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #131b2e; border-bottom: 2px solid #232d4a; }
+        .logo { font-size: 18px; font-weight: 900; color: #fff; font-style: italic; letter-spacing: 1px; }
+        .logo span { color: #f59e0b; text-shadow: 0 0 10px rgba(245,158,11,0.5); }
         .header-right { display: flex; align-items: center; gap: 8px; }
-        .balance-badge { background: #181d30; padding: 5px 12px; border-radius: 20px; border: 1px solid #f59e0b; font-size: 12px; color: #f59e0b; font-weight: bold; }
-        .wallet-btn { background: linear-gradient(135deg, #f59e0b, #d97706); border: none; padding: 6px 12px; border-radius: 14px; font-weight: bold; color: #fff; font-size: 11px; cursor: pointer; box-shadow: 0 2px 10px rgba(245,158,11,0.4); }
+        .balance-badge { background: #1c263f; padding: 5px 12px; border-radius: 20px; border: 1px solid #f59e0b; font-size: 12px; color: #f59e0b; font-weight: bold; }
+        .wallet-btn { background: linear-gradient(135deg, #f59e0b, #d97706); border: none; padding: 6px 14px; border-radius: 14px; font-weight: bold; color: #fff; font-size: 11px; cursor: pointer; box-shadow: 0 3px 10px rgba(245,158,11,0.5); }
 
-        /* Top Category Navigation Icons */
-        .top-cats { display: flex; justify-content: space-between; padding: 10px 16px; background: #101420; border-bottom: 1px solid #1f253d; overflow-x: auto; }
-        .top-cat-item { text-align: center; font-size: 11px; color: #8c93b4; font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: 8px; transition: 0.2s; }
-        .top-cat-item.active { color: #f59e0b; background: #1f253d; border: 1px solid #f59e0b; }
+        /* Top Category Navigation Tabs */
+        .top-cats { display: flex; justify-content: space-between; padding: 10px 16px; background: #131b2e; border-bottom: 1px solid #232d4a; overflow-x: auto; }
+        .top-cat-item { text-align: center; font-size: 11px; color: #8c93b4; font-weight: 600; cursor: pointer; padding: 5px 10px; border-radius: 10px; transition: 0.2s; white-space: nowrap; }
+        .top-cat-item.active { color: #f59e0b; background: #232d4a; border: 1px solid #f59e0b; }
 
-        /* Recently Played Horizontal Scroll */
+        /* Section Titles */
         .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; margin: 15px 0 8px 0; }
         .section-title { font-size: 13px; color: #fff; font-weight: bold; display: flex; align-items: center; gap: 6px; }
-        .view-all { font-size: 11px; color: #f59e0b; cursor: pointer; font-weight: bold; }
 
-        .recent-scroll { display: flex; gap: 10px; padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
-        .recent-scroll::-webkit-scrollbar { display: none; }
-        .recent-card { min-width: 90px; background: #161b2c; border-radius: 14px; padding: 8px; text-align: center; border: 1px solid #252e4a; cursor: pointer; }
-        .recent-card img, .recent-icon { font-size: 30px; display: block; margin: 0 auto 4px auto; }
-        .recent-name { font-size: 9px; font-weight: bold; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .recent-playing { font-size: 8px; color: #4ade80; margin-top: 2px; }
-
-        /* 3D Hot Picks Game Grid (Matching User Screenshot Layout) */
+        /* 3D Colored Game Grid (40+ Fast Loading Games) */
         .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 16px; }
-        .grid-card { background: linear-gradient(145deg, #161b2c, #0f1322); border-radius: 16px; padding: 10px 6px; text-align: center; border: 1px solid #252e4a; cursor: pointer; transition: 0.2s; position: relative; box-shadow: 0 6px 15px rgba(0,0,0,0.6); }
-        .grid-card:hover { border-color: #f59e0b; transform: translateY(-3px); }
-        .grid-icon { font-size: 34px; margin-bottom: 6px; display: block; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7)); }
-        .grid-name { font-size: 10px; font-weight: bold; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .grid-card { background: linear-gradient(145deg, #1c263f, #101626); border-radius: 16px; padding: 12px 6px; text-align: center; border: 1px solid #2d3b5e; cursor: pointer; transition: 0.15s; position: relative; box-shadow: 0 6px 15px rgba(0,0,0,0.6); }
+        .grid-card:active { transform: scale(0.96); }
+        
+        .card-cartoon { background: linear-gradient(145deg, #382810, #1c1407); border: 1px solid #fbbf24; }
+        .card-racing { background: linear-gradient(145deg, #3b1414, #1a0808); border: 1px solid #ef4444; }
+        .card-kids { background: linear-gradient(145deg, #103822, #071c10); border: 1px solid #22c55e; }
+        .card-casino { background: linear-gradient(145deg, #301038, #18071c); border: 1px solid #ec4899; }
+        .card-arcade { background: linear-gradient(145deg, #102638, #07131c); border: 1px solid #38bdf8; }
+
+        .grid-icon { font-size: 32px; margin-bottom: 5px; display: block; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.8)); }
+        .grid-name { font-size: 9px; font-weight: bold; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .grid-playing { font-size: 8px; color: #4ade80; margin-top: 3px; font-weight: bold; }
-        .hot-badge { position: absolute; top: 6px; right: 6px; background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; font-size: 7px; padding: 2px 5px; border-radius: 4px; font-weight: bold; box-shadow: 0 2px 5px rgba(239,68,68,0.4); }
+        .hot-badge { position: absolute; top: 4px; right: 4px; background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; font-size: 6px; padding: 2px 5px; border-radius: 4px; font-weight: bold; }
 
-        /* Video Player Popup Modal for Cartoons */
+        /* Instant Video Player Modal */
         .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; padding: 20px; }
-        .video-box { width: 100%; max-width: 400px; background: #101420; border-radius: 16px; border: 2px solid #f59e0b; overflow: hidden; box-shadow: 0 0 35px rgba(245,158,11,0.4); text-align: center; }
+        .video-box { width: 100%; max-width: 400px; background: #131b2e; border-radius: 18px; border: 2px solid #f59e0b; overflow: hidden; box-shadow: 0 0 40px rgba(245,158,11,0.5); text-align: center; }
         .video-frame { width: 100%; height: 220px; background: #000; display: flex; justify-content: center; align-items: center; }
-        .close-video { background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; margin: 15px; cursor: pointer; }
+        .close-video { background: #ef4444; color: white; border: none; padding: 9px 18px; border-radius: 10px; font-weight: bold; margin: 15px; cursor: pointer; }
 
-        /* Secure Wallet / Redeem Section */
-        .wallet-card { margin: 12px 16px; background: #161b2c; border: 1px solid #323b6b; border-radius: 16px; padding: 15px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
+        /* Wallet / Redeem Section */
+        .wallet-card { margin: 12px 16px; background: #1c263f; border: 1px solid #3d4f7c; border-radius: 18px; padding: 16px; }
         .wallet-title { font-size: 13px; color: #f59e0b; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between; }
         .wallet-info { font-size: 11px; color: #8c93b4; margin-bottom: 10px; line-height: 1.4; }
-        .redeem-btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; width: 100%; padding: 10px; border-radius: 12px; font-size: 12px; font-weight: bold; cursor: pointer; box-shadow: 0 3px 10px rgba(16,185,129,0.3); }
+        .redeem-btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; width: 100%; padding: 11px; border-radius: 12px; font-size: 12px; font-weight: bold; cursor: pointer; }
 
-        /* Watch Ad Action Button Area */
+        /* Watch Ad Action Button */
         .action-box { padding: 16px; }
-        .btn-watch { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; border: none; width: 100%; padding: 12px; border-radius: 14px; font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(59,130,246,0.4); }
+        .btn-watch { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; border: none; width: 100%; padding: 13px; border-radius: 14px; font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 18px rgba(59,130,246,0.5); }
 
-        /* Bottom Fixed Navigation Bar (Matching Screenshot) */
-        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 440px; background: #101420; display: flex; justify-content: space-around; padding: 8px 0; border-top: 2px solid #1f253d; z-index: 100; }
+        /* Bottom Fixed Navigation Bar */
+        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 440px; background: #131b2e; display: flex; justify-content: space-around; padding: 8px 0; border-top: 2px solid #232d4a; z-index: 100; }
         .bottom-tab { text-align: center; color: #8c93b4; font-size: 10px; cursor: pointer; font-weight: 600; }
         .bottom-tab.active { color: #f59e0b; }
         .bottom-tab span { font-size: 18px; display: block; margin-bottom: 2px; }
@@ -72,7 +71,7 @@
     <div class="app-container">
         <!-- Top Header -->
         <div class="header">
-            <div class="logo">Come <span>3D</span></div>
+            <div class="logo">Come <span>3D Hub</span></div>
             <div class="header-right">
                 <div class="balance-badge" id="coinBalance">🪙 0</div>
                 <button class="wallet-btn" onclick="openWallet()">Wallet</button>
@@ -81,17 +80,17 @@
 
         <!-- Top Category Icons -->
         <div class="top-cats">
-            <div class="top-cat-item active" onclick="filterCategory('all', this)">🪐 Explore</div>
-            <div class="top-cat-item" onclick="filterCategory('slots', this)">🎰 Casino 3D</div>
+            <div class="top-cat-item active" onclick="filterCategory('all', this)">🪐 All (40+)</div>
             <div class="top-cat-item" onclick="filterCategory('cartoons', this)">📺 Cartoons</div>
-            <div class="top-cat-item" onclick="filterCategory('rummy', this)">🎴 Rummy</div>
-            <div class="top-cat-item" onclick="filterCategory('sports', this)">⚽ Sports</div>
+            <div class="top-cat-item" onclick="filterCategory('racing', this)">🏎️ Racing</div>
+            <div class="top-cat-item" onclick="filterCategory('kids', this)">🧸 Kids Zone</div>
+            <div class="top-cat-item" onclick="filterCategory('slots', this)">🎰 Casino 3D</div>
         </div>
 
         <!-- Video Player Modal for Cartoons -->
         <div class="video-modal" id="videoModal">
             <div class="video-box">
-                <div style="padding: 12px; background: #181d30; font-weight: bold; color: #f59e0b; font-size: 13px;" id="videoTitle">Kids Cartoon Zone</div>
+                <div style="padding: 12px; background: #1c263f; font-weight: bold; color: #f59e0b; font-size: 13px;" id="videoTitle">Kids Cartoon Zone</div>
                 <div class="video-frame">
                     <iframe id="cartoonIframe" width="100%" height="100%" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
@@ -114,114 +113,245 @@
             <button class="redeem-btn" onclick="requestRedeem()">💎 Redeem ₹10 Code (Req 30k Coins)</button>
         </div>
 
-        <!-- Recently Played Section -->
+        <!-- 40+ Super Fast Games & Cartoons Grid -->
         <div class="section-header">
-            <div class="section-title">⏱️ Recently Played</div>
-            <div class="view-all" onclick="openWallet()">View All</div>
-        </div>
-        <div class="recent-scroll">
-            <div class="recent-card" onclick="playGame('Fortune Roulette', 20)">
-                <span class="recent-icon">🎡</span>
-                <span class="recent-name">Roulette</span>
-                <span class="recent-playing">🟢 75 playing</span>
-            </div>
-            <div class="recent-card" onclick="playGame('Coin Tree JILI', 15)">
-                <span class="recent-icon">🌳</span>
-                <span class="recent-name">Coin Tree</span>
-                <span class="recent-playing">🟢 13 playing</span>
-            </div>
-            <div class="recent-card" onclick="playGame('Money Pot', 25)">
-                <span class="recent-icon">🏺</span>
-                <span class="recent-name">Money Pot</span>
-                <span class="recent-playing">🟢 113 playing</span>
-            </div>
-            <div class="recent-card" onclick="playGame('3 Coin Treasures 2', 20)">
-                <span class="recent-icon">🪙</span>
-                <span class="recent-name">3 Coin T.</span>
-                <span class="recent-playing">🟢 11 playing</span>
-            </div>
-        </div>
-
-        <!-- Hot Picks 3D Game Grid -->
-        <div class="section-header">
-            <div class="section-title">🔥 Hot Picks 3D & Cartoons</div>
+            <div class="section-title">🔥 40+ Instant Games & Cartoons</div>
         </div>
         
         <div class="game-grid" id="gameGrid">
-            <!-- Kids Cartoons (Real Video Player) -->
-            <div class="grid-card" data-cat="cartoons" onclick="playCartoon('Tom & Jerry 3D Adventure', 'https://www.youtube.com/embed/k5k_Hhs6o1o?autoplay=1', 15)">
+            <!-- Kids Cartoons (Instant Video Play) -->
+            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Tom & Jerry 3D Adventure', 'https://www.youtube.com/embed/k5k_Hhs6o1o?autoplay=1', 15)">
                 <span class="hot-badge">NEW</span>
                 <span class="grid-icon">🐱</span>
                 <span class="grid-name">Tom & Jerry</span>
                 <span class="grid-playing">+15 Coins</span>
             </div>
-            <div class="grid-card" data-cat="cartoons" onclick="playCartoon('Kids Rhymes 3D Songs', 'https://www.youtube.com/embed/YQHsXMglC9A?autoplay=1', 20)">
+            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Kids Rhymes & Songs', 'https://www.youtube.com/embed/YQHsXMglC9A?autoplay=1', 20)">
                 <span class="hot-badge">NEW</span>
                 <span class="grid-icon">👶</span>
                 <span class="grid-name">Kids Rhymes</span>
                 <span class="grid-playing">+20 Coins</span>
             </div>
-            <div class="grid-card" data-cat="cartoons" onclick="playCartoon('Jungle Adventure 3D Story', 'https://www.youtube.com/embed/7779_1VvYo4?autoplay=1', 12)">
+            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Jungle Adventure Story', 'https://www.youtube.com/embed/7779_1VvYo4?autoplay=1', 12)">
                 <span class="hot-badge">NEW</span>
                 <span class="grid-icon">🦁</span>
                 <span class="grid-name">Jungle Story</span>
                 <span class="grid-playing">+12 Coins</span>
             </div>
+            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Super Mario Kids Cartoon', 'https://www.youtube.com/embed/k5k_Hhs6o1o?autoplay=1', 15)">
+                <span class="hot-badge">NEW</span>
+                <span class="grid-icon">🍄</span>
+                <span class="grid-name">Super Mario</span>
+                <span class="grid-playing">+15 Coins</span>
+            </div>
+            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Doraemon Fun Cartoons', 'https://www.youtube.com/embed/YQHsXMglC9A?autoplay=1', 20)">
+                <span class="hot-badge">NEW</span>
+                <span class="grid-icon">🤖</span>
+                <span class="grid-name">Doraemon</span>
+                <span class="grid-playing">+20 Coins</span>
+            </div>
+            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Chhota Bheem Adventures', 'https://www.youtube.com/embed/7779_1VvYo4?autoplay=1', 18)">
+                <span class="hot-badge">NEW</span>
+                <span class="grid-icon">⚡</span>
+                <span class="grid-name">Chhota Bheem</span>
+                <span class="grid-playing">+18 Coins</span>
+            </div>
 
-            <!-- 3D Hot Casino & Arcade Games (From User Screenshots) -->
-            <div class="grid-card" data-cat="slots" onclick="playGame('Jono Aviator Pro', 20)">
+            <!-- Racing Games (Car, Bike, Horse Racing) -->
+            <div class="grid-card card-racing" data-cat="racing" onclick="playGame('Car Stunt Racing 3D', 15)">
+                <span class="hot-badge">HOT</span>
+                <span class="grid-icon">🏎️</span>
+                <span class="grid-name">Car Racing</span>
+                <span class="grid-playing">🟢 2,140 playing</span>
+            </div>
+            <div class="grid-card card-racing" data-cat="racing" onclick="playGame('Bike Highway Rush', 15)">
+                <span class="hot-badge">HOT</span>
+                <span class="grid-icon">🏍️</span>
+                <span class="grid-name">Bike Stunt</span>
+                <span class="grid-playing">🟢 1,890 playing</span>
+            </div>
+            <div class="grid-card card-racing" data-cat="racing" onclick="playGame('Derby Horse Racing 3D', 20)">
+                <span class="hot-badge">HOT</span>
+                <span class="grid-icon">🐎</span>
+                <span class="grid-name">Horse Racing</span>
+                <span class="grid-playing">🟢 1,530 playing</span>
+            </div>
+            <div class="grid-card card-racing" data-cat="racing" onclick="playGame('Formula Speed Racer', 20)">
+                <span class="grid-icon">🏁</span>
+                <span class="grid-name">Speed Racer</span>
+                <span class="grid-playing">🟢 980 playing</span>
+            </div>
+
+            <!-- Kids Special Games -->
+            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Uono Ludo Master', 5)">
+                <span class="hot-badge">KIDS</span>
+                <span class="grid-icon">🎲</span>
+                <span class="grid-name">Uono Ludo</span>
+                <span class="grid-playing">🟢 4,423 playing</span>
+            </div>
+            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Snakes & Ladders 3D', 5)">
+                <span class="hot-badge">KIDS</span>
+                <span class="grid-icon">🐍</span>
+                <span class="grid-name">Snakes & L.</span>
+                <span class="grid-playing">🟢 3,120 playing</span>
+            </div>
+            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Fruit Dart Master', 8)">
+                <span class="hot-badge">KIDS</span>
+                <span class="grid-icon">🍉</span>
+                <span class="grid-name">Fruit Dart</span>
+                <span class="grid-playing">🟢 1,650 playing</span>
+            </div>
+            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Subway Runner Dash', 10)">
+                <span class="hot-badge">KIDS</span>
+                <span class="grid-icon">🏃</span>
+                <span class="grid-name">Subway Runner</span>
+                <span class="grid-playing">🟢 2,940 playing</span>
+            </div>
+            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Bubble Shooter Kids', 5)">
+                <span class="hot-badge">KIDS</span>
+                <span class="grid-icon">🫧</span>
+                <span class="grid-name">Bubble Shoot</span>
+                <span class="grid-playing">🟢 1,720 playing</span>
+            </div>
+            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Color Puzzle Kids', 5)">
+                <span class="hot-badge">KIDS</span>
+                <span class="grid-icon">🎨</span>
+                <span class="grid-name">Color Puzzle</span>
+                <span class="grid-playing">🟢 1,150 playing</span>
+            </div>
+
+            <!-- Casino 3D & Hot Arcade Games -->
+            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Jono Aviator Pro', 20)">
                 <span class="hot-badge">HOT</span>
                 <span class="grid-icon">✈️</span>
                 <span class="grid-name">Aviator</span>
                 <span class="grid-playing">🟢 1,928 playing</span>
             </div>
-            <div class="grid-card" data-cat="slots" onclick="playGame('Chicken Road 2', 15)">
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Chicken Road 2', 15)">
                 <span class="hot-badge">HOT</span>
                 <span class="grid-icon">🐔</span>
                 <span class="grid-name">Chicken Road 2</span>
                 <span class="grid-playing">🟢 1,622 playing</span>
             </div>
-            <div class="grid-card" data-cat="slots" onclick="playGame('Fortune Gems 500', 25)">
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Fortune Gems 500', 25)">
                 <span class="hot-badge">HOT</span>
                 <span class="grid-icon">💎</span>
                 <span class="grid-name">Fortune Gems</span>
                 <span class="grid-playing">🟢 667 playing</span>
             </div>
-            <div class="grid-card" data-cat="slots" onclick="playGame('Fortune Garuda 500', 25)">
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Fortune Garuda 500', 25)">
                 <span class="hot-badge">HOT</span>
                 <span class="grid-icon">🦅</span>
                 <span class="grid-name">Garuda 500</span>
                 <span class="grid-playing">🟢 1,714 playing</span>
             </div>
-            <div class="grid-card" data-cat="rummy" onclick="playGame('Uono Ludo Master', 10)">
-                <span class="hot-badge">HOT</span>
-                <span class="grid-icon">🎲</span>
-                <span class="grid-name">Ludo</span>
-                <span class="grid-playing">🟢 4,423 playing</span>
-            </div>
-            <div class="grid-card" data-cat="rummy" onclick="playGame('Pappu Card Game', 10)">
-                <span class="hot-badge">HOT</span>
-                <span class="grid-icon">🎴</span>
-                <span class="grid-name">Pappu</span>
-                <span class="grid-playing">🟢 550 playing</span>
-            </div>
-            <div class="grid-card" data-cat="slots" onclick="playGame('Power of the Kraken 3D', 30)">
+            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Power of the Kraken 3D', 30)">
                 <span class="hot-badge">3D</span>
                 <span class="grid-icon">🐙</span>
                 <span class="grid-name">Kraken Power</span>
                 <span class="grid-playing">🟢 812 playing</span>
             </div>
-            <div class="grid-card" data-cat="slots" onclick="playGame('Sugar Rush 1000', 30)">
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Sugar Rush 1000', 30)">
                 <span class="hot-badge">3D</span>
                 <span class="grid-icon">🍬</span>
                 <span class="grid-name">Sugar Rush</span>
                 <span class="grid-playing">🟢 1,450 playing</span>
             </div>
-            <div class="grid-card" data-cat="slots" onclick="playGame('Mines Gold Game', 20)">
+            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Mines Gold Game', 20)">
                 <span class="hot-badge">3D</span>
                 <span class="grid-icon">💣</span>
                 <span class="grid-name">Mines Gold</span>
                 <span class="grid-playing">🟢 930 playing</span>
+            </div>
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Fishing Master 3D', 20)">
+                <span class="hot-badge">3D</span>
+                <span class="grid-icon">🎣</span>
+                <span class="grid-name">Fishing Master</span>
+                <span class="grid-playing">🟢 780 playing</span>
+            </div>
+            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Roar of Flames 3D', 25)">
+                <span class="hot-badge">3D</span>
+                <span class="grid-icon">🔥</span>
+                <span class="grid-name">Roar of Flames</span>
+                <span class="grid-playing">🟢 640 playing</span>
+            </div>
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Serpent Crush 3D', 20)">
+                <span class="hot-badge">3D</span>
+                <span class="grid-icon">🐍</span>
+                <span class="grid-name">Serpent Crush</span>
+                <span class="grid-playing">🟢 590 playing</span>
+            </div>
+            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Wild Ape Ways', 25)">
+                <span class="hot-badge">3D</span>
+                <span class="grid-icon">🐵</span>
+                <span class="grid-name">Wild Ape</span>
+                <span class="grid-playing">🟢 710 playing</span>
+            </div>
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Shark Hunt 3D', 20)">
+                <span class="hot-badge">3D</span>
+                <span class="grid-icon">🦈</span>
+                <span class="grid-name">Shark Hunt</span>
+                <span class="grid-playing">🟢 830 playing</span>
+            </div>
+            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Fortune Roulette', 20)">
+                <span class="hot-badge">LIVE</span>
+                <span class="grid-icon">🎡</span>
+                <span class="grid-name">Roulette</span>
+                <span class="grid-playing">🟢 920 playing</span>
+            </div>
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Live Keno Jackpot', 25)">
+                <span class="hot-badge">LIVE</span>
+                <span class="grid-icon">🎱</span>
+                <span class="grid-name">Live Keno</span>
+                <span class="grid-playing">🟢 450 playing</span>
+            </div>
+            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Fortune Wheel Spin', 10)">
+                <span class="hot-badge">WIN</span>
+                <span class="grid-icon">🎯</span>
+                <span class="grid-name">Fortune Wheel</span>
+                <span class="grid-playing">🟢 1,340 playing</span>
+            </div>
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Coin Tree JILI', 15)">
+                <span class="hot-badge">WIN</span>
+                <span class="grid-icon">🌳</span>
+                <span class="grid-name">Coin Tree</span>
+                <span class="grid-playing">🟢 890 playing</span>
+            </div>
+            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Money Pot Jackpot', 25)">
+                <span class="hot-badge">WIN</span>
+                <span class="grid-icon">🏺</span>
+                <span class="grid-name">Money Pot</span>
+                <span class="grid-playing">🟢 760 playing</span>
+            </div>
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Plinko Ball Drop', 15)">
+                <span class="hot-badge">WIN</span>
+                <span class="grid-icon">🔺</span>
+                <span class="grid-name">Plinko Master</span>
+                <span class="grid-playing">🟢 1,210 playing</span>
+            </div>
+            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Pappu Card Master', 10)">
+                <span class="hot-badge">CARD</span>
+                <span class="grid-icon">🎴</span>
+                <span class="grid-name">Pappu Cards</span>
+                <span class="grid-playing">🟢 550 playing</span>
+            </div>
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Andar Bahar 3D', 20)">
+                <span class="hot-badge">CARD</span>
+                <span class="grid-icon">🃏</span>
+                <span class="grid-name">Andar Bahar</span>
+                <span class="grid-playing">🟢 1,480 playing</span>
+            </div>
+            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Teen Patti Pro', 25)">
+                <span class="hot-badge">CARD</span>
+                <span class="grid-icon">👑</span>
+                <span class="grid-name">Teen Patti</span>
+                <span class="grid-playing">🟢 2,300 playing</span>
+            </div>
+            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Dragon Tiger 3D', 20)">
+                <span class="hot-badge">CARD</span>
+                <span class="grid-icon">🐉</span>
+                <span class="grid-name">Dragon Tiger</span>
+                <span class="grid-playing">🟢 1,120 playing</span>
             </div>
         </div>
 
@@ -230,7 +360,7 @@
             <button class="btn-watch" id="watchBtn" onclick="watchVideoAd()">📺 Watch Ad & Earn Free Coins</button>
         </div>
 
-        <!-- Bottom Fixed Navigation Bar (Matching Screenshot) -->
+        <!-- Bottom Fixed Navigation Bar -->
         <div class="bottom-nav">
             <div class="bottom-tab active" onclick="switchTab('home')">
                 <span>🪐</span>Explore
@@ -250,7 +380,7 @@
         </div>
     </div>
 
-    <!-- Script Logic with Sound & State Protection -->
+    <!-- Script Logic with Instant Execution -->
     <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSound(type) {
@@ -263,30 +393,30 @@
             if (type === 'click') {
                 osc.frequency.setValueAtTime(440, audioCtx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.08);
             } else if (type === 'win') {
                 osc.frequency.setValueAtTime(600, audioCtx.currentTime);
                 osc.frequency.setValueAtTime(1000, audioCtx.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.25);
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.2);
             }
         }
 
-        let userData = JSON.parse(localStorage.getItem('come_3d_user_v5')) || {
-            coins: 200,
+        let userData = JSON.parse(localStorage.getItem('come_3d_user_v7')) || {
+            coins: 250,
             level: 1,
             lastAdTime: 0,
             lastRedeemTime: 0,
             redeemCountToday: 0
         };
 
-        if (typeof userData.coins !== 'number' || isNaN(userData.coins)) userData.coins = 200;
+        if (typeof userData.coins !== 'number' || isNaN(userData.coins)) userData.coins = 250;
 
         function saveUserData() {
-            localStorage.setItem('come_3d_user_v5', JSON.stringify(userData));
+            localStorage.setItem('come_3d_user_v7', JSON.stringify(userData));
         }
 
         function updateDisplay() {
@@ -303,11 +433,9 @@
 
         function openCartoonZone() {
             playSound('click');
-            alert(`📺 Welcome to Kids Cartoon Zone!\n\nSelect any cartoon below to watch real videos and earn free coins.`);
-            filterCategory('cartoons', document.querySelectorAll('.top-cats .top-cat-item')[2]);
+            filterCategory('cartoons', document.querySelectorAll('.top-cats .top-cat-item')[1]);
         }
 
-        // Real Video Player Functions
         let currentReward = 0;
         function playCartoon(title, videoUrl, rewardCoins) {
             playSound('click');
@@ -326,7 +454,6 @@
             updateDisplay();
         }
 
-        // Level-Based Redeem Request System (Min 30,000 Coins)
         function requestRedeem() {
             playSound('click');
             let minCoinsNeeded = 30000;
@@ -360,7 +487,6 @@
             }
         }
 
-        // Play 3D Game with Cost & Win Logic
         function playGame(gameName, cost) {
             playSound('click');
             if (userData.coins < cost) {
@@ -374,14 +500,13 @@
             if (winAmount > 0) {
                 userData.coins += winAmount;
                 playSound('win');
-                alert(`🎮 Playing 3D ${gameName}...\n🎊 JACKPOT WIN! You won +${winAmount} Coins!`);
+                alert(`🎮 Playing ${gameName}...\n🎊 JACKPOT WIN! You won +${winAmount} Coins!`);
             } else {
-                alert(`🎮 Playing 3D ${gameName}...\n😢 Hard luck! Try again or watch an ad for coins.`);
+                alert(`🎮 Playing ${gameName}...\n😢 Hard luck! Try again or watch an ad for coins.`);
             }
             updateDisplay();
         }
 
-        // Watch Ad for Free Coins
         function watchVideoAd() {
             playSound('click');
             let now = Date.now();
@@ -406,7 +531,7 @@
 
                 btn.disabled = false;
                 btn.innerText = "📺 Watch Ad & Earn Free Coins";
-            }, 1500);
+            }, 1000);
         }
 
         function filterCategory(cat, element) {
