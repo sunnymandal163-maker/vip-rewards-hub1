@@ -1,279 +1,144 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate 3D Gaming Hub - Battle Royale Edition</title>
+    <title>3D Battle & Gaming Hub</title>
     <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: #161b22;
-            --accent-gold: #f7931a;
-            --accent-green: #238636;
-            --accent-red: #da3633;
-            --text-main: #c9d1d9;
-            --border-color: #30363d;
-        }
-        * {
-            box-sizing: border-box;
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        body {
-            background: radial-gradient(circle at center, #1b222d 0%, var(--bg-color) 100%);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
-        }
-        header {
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 12px 20px;
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 15px;
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
         }
-        .user-stats {
-            display: flex;
-            gap: 12px;
-            font-size: 13px;
-        }
-        .stat-badge {
+        .balance {
             background: #21262d;
-            padding: 5px 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-        }
-        .main-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 15px;
-            overflow-y: auto;
-            gap: 15px;
-        }
-        .dashboard-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        }
-        .mystery-box-container {
-            margin-top: 12px;
-            background: linear-gradient(135deg, #21262d, #30363d);
-            border: 2px dashed var(--accent-gold);
-            border-radius: 10px;
-            padding: 12px;
-            cursor: pointer;
-        }
-        .mystery-box-container:active {
-            transform: scale(0.98);
-        }
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
-        }
-        .game-item {
-            background: linear-gradient(145deg, #161b22, #0d1117);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.001s;
-        }
-        .game-item:active {
-            border-color: var(--accent-gold);
-            transform: scale(0.97);
-        }
-        .btn-primary {
-            background: var(--accent-green);
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: #ffd700;
             font-weight: bold;
-            margin-top: 8px;
         }
-        .btn-audio {
+        .section-title {
+            padding: 15px 15px 5px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 15px;
+        }
+        .game-card {
             background: #21262d;
-            color: var(--accent-gold);
-            border: 1px solid var(--border-color);
-            padding: 6px 12px;
-            border-radius: 6px;
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            border: 1px solid #30363d;
             cursor: pointer;
-            font-size: 12px;
+            transition: transform 0.2s;
         }
-        .footer-nav {
-            background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
+        .game-card:active {
+            transform: scale(0.95);
+        }
+        .game-card img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+        }
+        .game-name {
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #161b22;
             display: flex;
             justify-content: space-around;
-            padding: 12px;
+            padding: 10px 0;
+            border-top: 1px solid #30363d;
         }
         .nav-item {
-            cursor: pointer;
-            font-size: 14px;
+            text-align: center;
+            font-size: 11px;
             color: #8b949e;
+            cursor: pointer;
         }
         .nav-item.active {
-            color: var(--accent-gold);
-            font-weight: bold;
+            color: #ffcc00;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Stats & Soft Audio Control -->
-    <header>
-        <h2>🔥 3D Battle Hub</h2>
-        <div class="user-stats">
-            <button class="btn-audio" id="audioToggleBtn" onclick="toggleAudio()">🔊 Sound: Soft ON</button>
-            <div class="stat-badge">🪙 Coins: <span id="userCoins">100</span></div>
-            <div class="stat-badge">⭐ Level: <span id="userLevel">1</span></div>
-            <div class="stat-badge">📺 Ads: <span id="adsLeft">85</span></div>
-        </div>
-    </header>
-
-    <!-- Main Workspace -->
-    <div class="main-container">
-        
-        <!-- Level & Progression Card -->
-        <div class="dashboard-card">
-            <h3>प्रोग्रेस और मिस्ट्री बॉक्स (Level <span id="displayLevel">1</span>)</h3>
-            <p style="margin: 6px 0; color: #8b949e; font-size: 12px;">अगला लेवल टारगेट: <span id="targetAds">225</span> एड्स</p>
-            <progress id="levelProgress" value="0" max="225" style="width: 100%; height: 10px; border-radius: 5px;"></progress>
-            
-            <div class="mystery-box-container" onclick="openMysteryBox()">
-                <h4>🎁 3D मिस्ट्री बॉक्स जैकपॉट</h4>
-                <p style="font-size: 11px; color: var(--accent-gold); margin-top: 3px;">मार्क रिवॉर्ड: <span id="boxRewardMark">50 - 300</span> Coins</p>
-            </div>
-
-            <button class="btn-primary" onclick="watchAd()">📺 एड देखें (+1 प्रोग्रेस)</button>
-        </div>
-
-        <!-- 3D Games Grid (PUBG / Free Fire Theme) -->
-        <h3>⚡ 3D ओरिजिनल गेम्स (1ms स्पीड)</h3>
-        <div class="games-grid">
-            <div class="game-item" onclick="playGame('Battle Royale 3D')">🪂 Battle Royale</div>
-            <div class="game-item" onclick="playGame('Airdrop Clash')">📦 Airdrop Clash</div>
-            <div class="game-item" onclick="playGame('Sniper Arena 3D')">🎯 Sniper Arena</div>
-            <div class="game-item" onclick="playGame('Speed Racing Pro')">🏎️ Speed Racing</div>
-        </div>
-
+    <!-- Header Section -->
+    <div class="header">
+        <div style="font-weight: bold; font-size: 20px; color: #ff4500;">GameHub</div>
+        <div class="balance">🪙 100.53</div>
     </div>
 
-    <!-- Footer Navigation -->
-    <div class="footer-nav">
-        <div class="nav-item active">🏠 लॉबी</div>
-        <div class="nav-item" onclick="alert('👥 रेफरल: 7 दोस्तों को जोड़ने पर 3 दिन का बूस्ट कोटा सक्रिय!')">👥 फ्रेंड्स</div>
-        <div class="nav-item" onclick="alert('💳 रिडीम: गेम जीतकर और लेवल/डेली कोटे (2-3 लिमिट) के अनुसार मान्य!')">💳 वॉलेट</div>
+    <!-- Originals Section -->
+    <div class="section-title">Originals - 99% RTP</div>
+    <div class="game-grid">
+        <div class="game-card" onclick="playGame('Mines')">
+            <img src="https://via.placeholder.com/100x90/ff4500/fff?text=Mines" alt="Mines">
+            <div class="game-name">Mines</div>
+        </div>
+        <div class="game-card" onclick="playGame('Chicken')">
+            <img src="https://via.placeholder.com/100x90/ffcc00/fff?text=Chicken" alt="Chicken">
+            <div class="game-name">Chicken</div>
+        </div>
+        <div class="game-card" onclick="playGame('Aviator')">
+            <img src="https://via.placeholder.com/100x90/e63946/fff?text=Aviator" alt="Aviator">
+            <div class="game-name">Aviator</div>
+        </div>
+    </div>
+
+    <!-- Casino / Slots Section -->
+    <div class="section-title">Slots & Casino</div>
+    <div class="game-grid">
+        <div class="game-card" onclick="playGame('Fortune Gems')">
+            <img src="https://via.placeholder.com/100x90/1d3557/fff?text=Fortune" alt="Fortune">
+            <div class="game-name">Fortune Gems</div>
+        </div>
+        <div class="game-card" onclick="playGame('Ludo')">
+            <img src="https://via.placeholder.com/100x90/457b9d/fff?text=Ludo" alt="Ludo">
+            <div class="game-name">Ludo King</div>
+        </div>
+        <div class="nav-card game-card" onclick="playGame('Boxing King')">
+            <img src="https://via.placeholder.com/100x90/2a9d8f/fff?text=Boxing" alt="Boxing">
+            <div class="game-name">Boxing King</div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('Home')">🏠<br>Home</div>
+        <div class="nav-item" onclick="switchTab('VIP')">👑<br>VIP</div>
+        <div class="nav-item" onclick="switchTab('Earn')">💰<br>Earn</div>
+        <div class="nav-item" onclick="switchTab('Promos')">🎁<br>Promos</div>
     </div>
 
     <script>
-        // System State
-        let state = {
-            coins: 100,
-            level: 1,
-            adsWatchedToday: 0,
-            maxDailyAds: 85,
-            currentLevelAds: 0,
-            targetAds: 225,
-            soundEnabled: true
-        };
-
-        // Soft Audio Toggle System
-        function toggleAudio() {
-            state.soundEnabled = !state.soundEnabled;
-            let btn = document.getElementById('audioToggleBtn');
-            if (state.soundEnabled) {
-                btn.innerText = "🔊 Sound: Soft ON";
-                playSound("enable");
-            } else {
-                btn.innerText = "🔇 Sound: OFF";
-            }
-        }
-
-        // Soft & Balanced Sound FX Player
-        function playSound(type) {
-            if (!state.soundEnabled) return;
-            console.log(`Playing Soft 3D Sound Effect: ${type}`);
-        }
-
-        // Instant 1ms 3D Game Launcher
         function playGame(gameName) {
-            playSound("click");
-            alert(`🎮 ${gameName} 3D मॉडल और PUBG/Free Fire ग्राफिक्स के साथ लोड हो गया! (स्पीड: <1ms)`);
+            alert(gameName + " गेम लोड हो रहा है! यहाँ असली गेम या कार्टून वीडियो प्ले होगा।");
         }
-
-        // Ad Watching Logic (Daily Cap 80-85, 250 Step Gap Progression)
-        function watchAd() {
-            if (state.adsWatchedToday >= state.maxDailyAds) {
-                alert("⚠️ आज का आपका दैनिक एड्स कोटा (85 Ads) पूरा हो चुका है!");
-                return;
-            }
-
-            state.adsWatchedToday++;
-            state.currentLevelAds++;
-            state.coins += 12; 
-            playSound("coin");
-
-            document.getElementById('userCoins').innerText = state.coins;
-            document.getElementById('adsLeft').innerText = state.maxDailyAds - state.adsWatchedToday;
-            document.getElementById('levelProgress').value = state.currentLevelAds;
-
-            if (state.currentLevelAds >= state.targetAds) {
-                levelUp();
-            }
-        }
-
-        // Level Up Logic up to Level 40 (Final 5,500 Game-Only Coins)
-        function levelUp() {
-            playSound("levelup");
-            if (state.level < 40) {
-                state.level++;
-                state.currentLevelAds = 0;
-                
-                // Strict 250-step progressive gap calculation
-                if (state.level === 2) state.targetAds = 525;
-                else if (state.level === 3) state.targetAds = 725;
-                else {
-                    state.targetAds = 725 + ((state.level - 3) * 250);
-                }
-
-                document.getElementById('userLevel').innerText = state.level;
-                document.getElementById('displayLevel').innerText = state.level;
-                document.getElementById('levelProgress').max = state.targetAds;
-                document.getElementById('levelProgress').value = 0;
-
-                if (state.level === 40) {
-                    document.getElementById('boxRewardMark').innerText = "5,500 Game-Only Coins (Endgame Jackpot!)";
-                    alert("🔥 बधाई हो! आपने Level 40 पार कर लिया है! 5,500 कॉइन्स का फाइनल गेमिंग जैकपॉट अनलॉक हो गया है! (ध्यान दें: यह कॉइन केवल गेम खेलने और बड़ी बेट लगाने के लिए है, इससे सीधा रिडीम या रिचार्ज नहीं मिलेगा। गेम जीतकर ही आप रिचार्ज ले सकेंगे।)");
-                } else {
-                    document.getElementById('boxRewardMark').innerText = `${state.level * 50} - ${state.level * 200} Coins`;
-                    alert(`🎉 शानदार! आप Level ${state.level} पर पहुँच गए हैं!`);
-                }
-            }
-        }
-
-        // Mystery Box Logic (Strictly Game-Only Coins, Win to Redeem Rule)
-        function openMysteryBox() {
-            playSound("box");
-            if (state.currentLevelAds < state.targetAds / 2) {
-                alert("🔒 यह मिस्ट्री बॉक्स आधा टार्गेट पूरा होने के बाद खुलेगा!");
-                return;
-            }
-            let reward = state.level === 40 ? 5500 : Math.floor(Math.random() * 300) + 50;
-            state.coins += reward;
-            document.getElementById('userCoins').innerText = state.coins;
-            alert(`🎁 आपने मिस्ट्री बॉक्स से ${reward} कॉइन्स जीते! (नोट: यह कॉइन सिर्फ गेम में बड़ी बेट लगाकर खेलने के लिए है। गेम जीतकर ही आप रिचार्ज या कोड पा सकेंगे।)`);
+        function switchTab(tabName) {
+            alert(tabName + " सेक्शन ओपन हो रहा है।");
         }
     </script>
 </body>
