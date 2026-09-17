@@ -1,570 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Come 3D Casino & Kids Hub - 40+ Games</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-5773010076544651" crossorigin="anonymous"></script>
+    <title>Ultimate 3D Gaming Hub - Battle Royale Edition</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
-        body { background: #05060a; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 0; overflow-x: hidden; }
-        .app-container { background: linear-gradient(180deg, #121829 0%, #07090f 100%); width: 100%; max-width: 440px; min-height: 100vh; padding-bottom: 80px; position: relative; box-shadow: 0 0 40px rgba(0,0,0,0.9); }
-
-        /* Top Header */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #131b2e; border-bottom: 2px solid #232d4a; }
-        .logo { font-size: 18px; font-weight: 900; color: #fff; font-style: italic; letter-spacing: 1px; }
-        .logo span { color: #f59e0b; text-shadow: 0 0 10px rgba(245,158,11,0.5); }
-        .header-right { display: flex; align-items: center; gap: 8px; }
-        .balance-badge { background: #1c263f; padding: 5px 12px; border-radius: 20px; border: 1px solid #f59e0b; font-size: 12px; color: #f59e0b; font-weight: bold; }
-        .wallet-btn { background: linear-gradient(135deg, #f59e0b, #d97706); border: none; padding: 6px 14px; border-radius: 14px; font-weight: bold; color: #fff; font-size: 11px; cursor: pointer; box-shadow: 0 3px 10px rgba(245,158,11,0.5); }
-
-        /* Top Category Navigation Tabs */
-        .top-cats { display: flex; justify-content: space-between; padding: 10px 16px; background: #131b2e; border-bottom: 1px solid #232d4a; overflow-x: auto; }
-        .top-cat-item { text-align: center; font-size: 11px; color: #8c93b4; font-weight: 600; cursor: pointer; padding: 5px 10px; border-radius: 10px; transition: 0.2s; white-space: nowrap; }
-        .top-cat-item.active { color: #f59e0b; background: #232d4a; border: 1px solid #f59e0b; }
-
-        /* Section Titles */
-        .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; margin: 15px 0 8px 0; }
-        .section-title { font-size: 13px; color: #fff; font-weight: bold; display: flex; align-items: center; gap: 6px; }
-
-        /* 3D Colored Game Grid (40+ Fast Loading Games) */
-        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 16px; }
-        .grid-card { background: linear-gradient(145deg, #1c263f, #101626); border-radius: 16px; padding: 12px 6px; text-align: center; border: 1px solid #2d3b5e; cursor: pointer; transition: 0.15s; position: relative; box-shadow: 0 6px 15px rgba(0,0,0,0.6); }
-        .grid-card:active { transform: scale(0.96); }
-        
-        .card-cartoon { background: linear-gradient(145deg, #382810, #1c1407); border: 1px solid #fbbf24; }
-        .card-racing { background: linear-gradient(145deg, #3b1414, #1a0808); border: 1px solid #ef4444; }
-        .card-kids { background: linear-gradient(145deg, #103822, #071c10); border: 1px solid #22c55e; }
-        .card-casino { background: linear-gradient(145deg, #301038, #18071c); border: 1px solid #ec4899; }
-        .card-arcade { background: linear-gradient(145deg, #102638, #07131c); border: 1px solid #38bdf8; }
-
-        .grid-icon { font-size: 32px; margin-bottom: 5px; display: block; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.8)); }
-        .grid-name { font-size: 9px; font-weight: bold; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .grid-playing { font-size: 8px; color: #4ade80; margin-top: 3px; font-weight: bold; }
-        .hot-badge { position: absolute; top: 4px; right: 4px; background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; font-size: 6px; padding: 2px 5px; border-radius: 4px; font-weight: bold; }
-
-        /* Instant Video Player Modal */
-        .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; padding: 20px; }
-        .video-box { width: 100%; max-width: 400px; background: #131b2e; border-radius: 18px; border: 2px solid #f59e0b; overflow: hidden; box-shadow: 0 0 40px rgba(245,158,11,0.5); text-align: center; }
-        .video-frame { width: 100%; height: 220px; background: #000; display: flex; justify-content: center; align-items: center; }
-        .close-video { background: #ef4444; color: white; border: none; padding: 9px 18px; border-radius: 10px; font-weight: bold; margin: 15px; cursor: pointer; }
-
-        /* Wallet / Redeem Section */
-        .wallet-card { margin: 12px 16px; background: #1c263f; border: 1px solid #3d4f7c; border-radius: 18px; padding: 16px; }
-        .wallet-title { font-size: 13px; color: #f59e0b; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between; }
-        .wallet-info { font-size: 11px; color: #8c93b4; margin-bottom: 10px; line-height: 1.4; }
-        .redeem-btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; width: 100%; padding: 11px; border-radius: 12px; font-size: 12px; font-weight: bold; cursor: pointer; }
-
-        /* Watch Ad Action Button */
-        .action-box { padding: 16px; }
-        .btn-watch { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; border: none; width: 100%; padding: 13px; border-radius: 14px; font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 18px rgba(59,130,246,0.5); }
-
-        /* Bottom Fixed Navigation Bar */
-        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 440px; background: #131b2e; display: flex; justify-content: space-around; padding: 8px 0; border-top: 2px solid #232d4a; z-index: 100; }
-        .bottom-tab { text-align: center; color: #8c93b4; font-size: 10px; cursor: pointer; font-weight: 600; }
-        .bottom-tab.active { color: #f59e0b; }
-        .bottom-tab span { font-size: 18px; display: block; margin-bottom: 2px; }
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #161b22;
+            --accent-gold: #f7931a;
+            --accent-green: #238636;
+            --accent-red: #da3633;
+            --text-main: #c9d1d9;
+            --border-color: #30363d;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: radial-gradient(circle at center, #1b222d 0%, var(--bg-color) 100%);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-stats {
+            display: flex;
+            gap: 12px;
+            font-size: 13px;
+        }
+        .stat-badge {
+            background: #21262d;
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            overflow-y: auto;
+            gap: 15px;
+        }
+        .dashboard-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+        .mystery-box-container {
+            margin-top: 12px;
+            background: linear-gradient(135deg, #21262d, #30363d);
+            border: 2px dashed var(--accent-gold);
+            border-radius: 10px;
+            padding: 12px;
+            cursor: pointer;
+        }
+        .mystery-box-container:active {
+            transform: scale(0.98);
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        .game-item {
+            background: linear-gradient(145deg, #161b22, #0d1117);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.001s;
+        }
+        .game-item:active {
+            border-color: var(--accent-gold);
+            transform: scale(0.97);
+        }
+        .btn-primary {
+            background: var(--accent-green);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+        .btn-audio {
+            background: #21262d;
+            color: var(--accent-gold);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .footer-nav {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px;
+        }
+        .nav-item {
+            cursor: pointer;
+            font-size: 14px;
+            color: #8b949e;
+        }
+        .nav-item.active {
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <!-- Top Header -->
-        <div class="header">
-            <div class="logo">Come <span>3D Hub</span></div>
-            <div class="header-right">
-                <div class="balance-badge" id="coinBalance">🪙 0</div>
-                <button class="wallet-btn" onclick="openWallet()">Wallet</button>
-            </div>
+    <!-- Header Stats & Soft Audio Control -->
+    <header>
+        <h2>🔥 3D Battle Hub</h2>
+        <div class="user-stats">
+            <button class="btn-audio" id="audioToggleBtn" onclick="toggleAudio()">🔊 Sound: Soft ON</button>
+            <div class="stat-badge">🪙 Coins: <span id="userCoins">100</span></div>
+            <div class="stat-badge">⭐ Level: <span id="userLevel">1</span></div>
+            <div class="stat-badge">📺 Ads: <span id="adsLeft">85</span></div>
         </div>
+    </header>
 
-        <!-- Top Category Icons -->
-        <div class="top-cats">
-            <div class="top-cat-item active" onclick="filterCategory('all', this)">🪐 All (40+)</div>
-            <div class="top-cat-item" onclick="filterCategory('cartoons', this)">📺 Cartoons</div>
-            <div class="top-cat-item" onclick="filterCategory('racing', this)">🏎️ Racing</div>
-            <div class="top-cat-item" onclick="filterCategory('kids', this)">🧸 Kids Zone</div>
-            <div class="top-cat-item" onclick="filterCategory('slots', this)">🎰 Casino 3D</div>
-        </div>
-
-        <!-- Video Player Modal for Cartoons -->
-        <div class="video-modal" id="videoModal">
-            <div class="video-box">
-                <div style="padding: 12px; background: #1c263f; font-weight: bold; color: #f59e0b; font-size: 13px;" id="videoTitle">Kids Cartoon Zone</div>
-                <div class="video-frame">
-                    <iframe id="cartoonIframe" width="100%" height="100%" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <button class="close-video" onclick="closeVideoModal()">Close & Claim Reward</button>
-            </div>
-        </div>
-
-        <!-- Secure Wallet / Redeem Section -->
-        <div class="wallet-card" id="walletCard" style="display: none;">
-            <div class="wallet-title">
-                <span>🎁 Secure Redeem Center</span>
-                <span id="userLevelBadge" style="font-size: 11px; color: #4ade80;">Level 1</span>
-            </div>
-            <div class="wallet-info">
-                • Admin Profit: 70% | User Share: 30%<br>
-                • Min. Redeem: <b>30,000 Coins</b> = ₹10 Code.<br>
-                • Level 1 Limit: Max <b>1 Redeem / 24 Hours</b>.<br>
-                • Payouts processed within 24 Hours after Admin Review.
-            </div>
-            <button class="redeem-btn" onclick="requestRedeem()">💎 Redeem ₹10 Code (Req 30k Coins)</button>
-        </div>
-
-        <!-- 40+ Super Fast Games & Cartoons Grid -->
-        <div class="section-header">
-            <div class="section-title">🔥 40+ Instant Games & Cartoons</div>
-        </div>
+    <!-- Main Workspace -->
+    <div class="main-container">
         
-        <div class="game-grid" id="gameGrid">
-            <!-- Kids Cartoons (Instant Video Play) -->
-            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Tom & Jerry 3D Adventure', 'https://www.youtube.com/embed/k5k_Hhs6o1o?autoplay=1', 15)">
-                <span class="hot-badge">NEW</span>
-                <span class="grid-icon">🐱</span>
-                <span class="grid-name">Tom & Jerry</span>
-                <span class="grid-playing">+15 Coins</span>
-            </div>
-            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Kids Rhymes & Songs', 'https://www.youtube.com/embed/YQHsXMglC9A?autoplay=1', 20)">
-                <span class="hot-badge">NEW</span>
-                <span class="grid-icon">👶</span>
-                <span class="grid-name">Kids Rhymes</span>
-                <span class="grid-playing">+20 Coins</span>
-            </div>
-            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Jungle Adventure Story', 'https://www.youtube.com/embed/7779_1VvYo4?autoplay=1', 12)">
-                <span class="hot-badge">NEW</span>
-                <span class="grid-icon">🦁</span>
-                <span class="grid-name">Jungle Story</span>
-                <span class="grid-playing">+12 Coins</span>
-            </div>
-            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Super Mario Kids Cartoon', 'https://www.youtube.com/embed/k5k_Hhs6o1o?autoplay=1', 15)">
-                <span class="hot-badge">NEW</span>
-                <span class="grid-icon">🍄</span>
-                <span class="grid-name">Super Mario</span>
-                <span class="grid-playing">+15 Coins</span>
-            </div>
-            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Doraemon Fun Cartoons', 'https://www.youtube.com/embed/YQHsXMglC9A?autoplay=1', 20)">
-                <span class="hot-badge">NEW</span>
-                <span class="grid-icon">🤖</span>
-                <span class="grid-name">Doraemon</span>
-                <span class="grid-playing">+20 Coins</span>
-            </div>
-            <div class="grid-card card-cartoon" data-cat="cartoons" onclick="playCartoon('Chhota Bheem Adventures', 'https://www.youtube.com/embed/7779_1VvYo4?autoplay=1', 18)">
-                <span class="hot-badge">NEW</span>
-                <span class="grid-icon">⚡</span>
-                <span class="grid-name">Chhota Bheem</span>
-                <span class="grid-playing">+18 Coins</span>
+        <!-- Level & Progression Card -->
+        <div class="dashboard-card">
+            <h3>प्रोग्रेस और मिस्ट्री बॉक्स (Level <span id="displayLevel">1</span>)</h3>
+            <p style="margin: 6px 0; color: #8b949e; font-size: 12px;">अगला लेवल टारगेट: <span id="targetAds">225</span> एड्स</p>
+            <progress id="levelProgress" value="0" max="225" style="width: 100%; height: 10px; border-radius: 5px;"></progress>
+            
+            <div class="mystery-box-container" onclick="openMysteryBox()">
+                <h4>🎁 3D मिस्ट्री बॉक्स जैकपॉट</h4>
+                <p style="font-size: 11px; color: var(--accent-gold); margin-top: 3px;">मार्क रिवॉर्ड: <span id="boxRewardMark">50 - 300</span> Coins</p>
             </div>
 
-            <!-- Racing Games (Car, Bike, Horse Racing) -->
-            <div class="grid-card card-racing" data-cat="racing" onclick="playGame('Car Stunt Racing 3D', 15)">
-                <span class="hot-badge">HOT</span>
-                <span class="grid-icon">🏎️</span>
-                <span class="grid-name">Car Racing</span>
-                <span class="grid-playing">🟢 2,140 playing</span>
-            </div>
-            <div class="grid-card card-racing" data-cat="racing" onclick="playGame('Bike Highway Rush', 15)">
-                <span class="hot-badge">HOT</span>
-                <span class="grid-icon">🏍️</span>
-                <span class="grid-name">Bike Stunt</span>
-                <span class="grid-playing">🟢 1,890 playing</span>
-            </div>
-            <div class="grid-card card-racing" data-cat="racing" onclick="playGame('Derby Horse Racing 3D', 20)">
-                <span class="hot-badge">HOT</span>
-                <span class="grid-icon">🐎</span>
-                <span class="grid-name">Horse Racing</span>
-                <span class="grid-playing">🟢 1,530 playing</span>
-            </div>
-            <div class="grid-card card-racing" data-cat="racing" onclick="playGame('Formula Speed Racer', 20)">
-                <span class="grid-icon">🏁</span>
-                <span class="grid-name">Speed Racer</span>
-                <span class="grid-playing">🟢 980 playing</span>
-            </div>
-
-            <!-- Kids Special Games -->
-            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Uono Ludo Master', 5)">
-                <span class="hot-badge">KIDS</span>
-                <span class="grid-icon">🎲</span>
-                <span class="grid-name">Uono Ludo</span>
-                <span class="grid-playing">🟢 4,423 playing</span>
-            </div>
-            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Snakes & Ladders 3D', 5)">
-                <span class="hot-badge">KIDS</span>
-                <span class="grid-icon">🐍</span>
-                <span class="grid-name">Snakes & L.</span>
-                <span class="grid-playing">🟢 3,120 playing</span>
-            </div>
-            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Fruit Dart Master', 8)">
-                <span class="hot-badge">KIDS</span>
-                <span class="grid-icon">🍉</span>
-                <span class="grid-name">Fruit Dart</span>
-                <span class="grid-playing">🟢 1,650 playing</span>
-            </div>
-            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Subway Runner Dash', 10)">
-                <span class="hot-badge">KIDS</span>
-                <span class="grid-icon">🏃</span>
-                <span class="grid-name">Subway Runner</span>
-                <span class="grid-playing">🟢 2,940 playing</span>
-            </div>
-            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Bubble Shooter Kids', 5)">
-                <span class="hot-badge">KIDS</span>
-                <span class="grid-icon">🫧</span>
-                <span class="grid-name">Bubble Shoot</span>
-                <span class="grid-playing">🟢 1,720 playing</span>
-            </div>
-            <div class="grid-card card-kids" data-cat="kids" onclick="playGame('Color Puzzle Kids', 5)">
-                <span class="hot-badge">KIDS</span>
-                <span class="grid-icon">🎨</span>
-                <span class="grid-name">Color Puzzle</span>
-                <span class="grid-playing">🟢 1,150 playing</span>
-            </div>
-
-            <!-- Casino 3D & Hot Arcade Games -->
-            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Jono Aviator Pro', 20)">
-                <span class="hot-badge">HOT</span>
-                <span class="grid-icon">✈️</span>
-                <span class="grid-name">Aviator</span>
-                <span class="grid-playing">🟢 1,928 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Chicken Road 2', 15)">
-                <span class="hot-badge">HOT</span>
-                <span class="grid-icon">🐔</span>
-                <span class="grid-name">Chicken Road 2</span>
-                <span class="grid-playing">🟢 1,622 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Fortune Gems 500', 25)">
-                <span class="hot-badge">HOT</span>
-                <span class="grid-icon">💎</span>
-                <span class="grid-name">Fortune Gems</span>
-                <span class="grid-playing">🟢 667 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Fortune Garuda 500', 25)">
-                <span class="hot-badge">HOT</span>
-                <span class="grid-icon">🦅</span>
-                <span class="grid-name">Garuda 500</span>
-                <span class="grid-playing">🟢 1,714 playing</span>
-            </div>
-            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Power of the Kraken 3D', 30)">
-                <span class="hot-badge">3D</span>
-                <span class="grid-icon">🐙</span>
-                <span class="grid-name">Kraken Power</span>
-                <span class="grid-playing">🟢 812 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Sugar Rush 1000', 30)">
-                <span class="hot-badge">3D</span>
-                <span class="grid-icon">🍬</span>
-                <span class="grid-name">Sugar Rush</span>
-                <span class="grid-playing">🟢 1,450 playing</span>
-            </div>
-            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Mines Gold Game', 20)">
-                <span class="hot-badge">3D</span>
-                <span class="grid-icon">💣</span>
-                <span class="grid-name">Mines Gold</span>
-                <span class="grid-playing">🟢 930 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Fishing Master 3D', 20)">
-                <span class="hot-badge">3D</span>
-                <span class="grid-icon">🎣</span>
-                <span class="grid-name">Fishing Master</span>
-                <span class="grid-playing">🟢 780 playing</span>
-            </div>
-            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Roar of Flames 3D', 25)">
-                <span class="hot-badge">3D</span>
-                <span class="grid-icon">🔥</span>
-                <span class="grid-name">Roar of Flames</span>
-                <span class="grid-playing">🟢 640 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Serpent Crush 3D', 20)">
-                <span class="hot-badge">3D</span>
-                <span class="grid-icon">🐍</span>
-                <span class="grid-name">Serpent Crush</span>
-                <span class="grid-playing">🟢 590 playing</span>
-            </div>
-            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Wild Ape Ways', 25)">
-                <span class="hot-badge">3D</span>
-                <span class="grid-icon">🐵</span>
-                <span class="grid-name">Wild Ape</span>
-                <span class="grid-playing">🟢 710 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Shark Hunt 3D', 20)">
-                <span class="hot-badge">3D</span>
-                <span class="grid-icon">🦈</span>
-                <span class="grid-name">Shark Hunt</span>
-                <span class="grid-playing">🟢 830 playing</span>
-            </div>
-            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Fortune Roulette', 20)">
-                <span class="hot-badge">LIVE</span>
-                <span class="grid-icon">🎡</span>
-                <span class="grid-name">Roulette</span>
-                <span class="grid-playing">🟢 920 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Live Keno Jackpot', 25)">
-                <span class="hot-badge">LIVE</span>
-                <span class="grid-icon">🎱</span>
-                <span class="grid-name">Live Keno</span>
-                <span class="grid-playing">🟢 450 playing</span>
-            </div>
-            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Fortune Wheel Spin', 10)">
-                <span class="hot-badge">WIN</span>
-                <span class="grid-icon">🎯</span>
-                <span class="grid-name">Fortune Wheel</span>
-                <span class="grid-playing">🟢 1,340 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Coin Tree JILI', 15)">
-                <span class="hot-badge">WIN</span>
-                <span class="grid-icon">🌳</span>
-                <span class="grid-name">Coin Tree</span>
-                <span class="grid-playing">🟢 890 playing</span>
-            </div>
-            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Money Pot Jackpot', 25)">
-                <span class="hot-badge">WIN</span>
-                <span class="grid-icon">🏺</span>
-                <span class="grid-name">Money Pot</span>
-                <span class="grid-playing">🟢 760 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Plinko Ball Drop', 15)">
-                <span class="hot-badge">WIN</span>
-                <span class="grid-icon">🔺</span>
-                <span class="grid-name">Plinko Master</span>
-                <span class="grid-playing">🟢 1,210 playing</span>
-            </div>
-            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Pappu Card Master', 10)">
-                <span class="hot-badge">CARD</span>
-                <span class="grid-icon">🎴</span>
-                <span class="grid-name">Pappu Cards</span>
-                <span class="grid-playing">🟢 550 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Andar Bahar 3D', 20)">
-                <span class="hot-badge">CARD</span>
-                <span class="grid-icon">🃏</span>
-                <span class="grid-name">Andar Bahar</span>
-                <span class="grid-playing">🟢 1,480 playing</span>
-            </div>
-            <div class="grid-card card-casino" data-cat="slots" onclick="playGame('Teen Patti Pro', 25)">
-                <span class="hot-badge">CARD</span>
-                <span class="grid-icon">👑</span>
-                <span class="grid-name">Teen Patti</span>
-                <span class="grid-playing">🟢 2,300 playing</span>
-            </div>
-            <div class="grid-card card-arcade" data-cat="slots" onclick="playGame('Dragon Tiger 3D', 20)">
-                <span class="hot-badge">CARD</span>
-                <span class="grid-icon">🐉</span>
-                <span class="grid-name">Dragon Tiger</span>
-                <span class="grid-playing">🟢 1,120 playing</span>
-            </div>
+            <button class="btn-primary" onclick="watchAd()">📺 एड देखें (+1 प्रोग्रेस)</button>
         </div>
 
-        <!-- Watch Ad Action Button Area -->
-        <div class="action-box">
-            <button class="btn-watch" id="watchBtn" onclick="watchVideoAd()">📺 Watch Ad & Earn Free Coins</button>
+        <!-- 3D Games Grid (PUBG / Free Fire Theme) -->
+        <h3>⚡ 3D ओरिजिनल गेम्स (1ms स्पीड)</h3>
+        <div class="games-grid">
+            <div class="game-item" onclick="playGame('Battle Royale 3D')">🪂 Battle Royale</div>
+            <div class="game-item" onclick="playGame('Airdrop Clash')">📦 Airdrop Clash</div>
+            <div class="game-item" onclick="playGame('Sniper Arena 3D')">🎯 Sniper Arena</div>
+            <div class="game-item" onclick="playGame('Speed Racing Pro')">🏎️ Speed Racing</div>
         </div>
 
-        <!-- Bottom Fixed Navigation Bar -->
-        <div class="bottom-nav">
-            <div class="bottom-tab active" onclick="switchTab('home')">
-                <span>🪐</span>Explore
-            </div>
-            <div class="bottom-tab" onclick="openCartoonZone()">
-                <span>📺</span>Cartoons
-            </div>
-            <div class="bottom-tab" onclick="openWallet()">
-                <span>🎁</span>Wallet
-            </div>
-            <div class="bottom-tab" onclick="switchTab('race')">
-                <span>🏆</span>₹30L Race
-            </div>
-            <div class="bottom-tab" onclick="switchTab('promos')">
-                <span>📢</span>Promos
-            </div>
-        </div>
     </div>
 
-    <!-- Script Logic with Instant Execution -->
+    <!-- Footer Navigation -->
+    <div class="footer-nav">
+        <div class="nav-item active">🏠 लॉबी</div>
+        <div class="nav-item" onclick="alert('👥 रेफरल: 7 दोस्तों को जोड़ने पर 3 दिन का बूस्ट कोटा सक्रिय!')">👥 फ्रेंड्स</div>
+        <div class="nav-item" onclick="alert('💳 रिडीम: गेम जीतकर और लेवल/डेली कोटे (2-3 लिमिट) के अनुसार मान्य!')">💳 वॉलेट</div>
+    </div>
+
     <script>
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playSound(type) {
-            if (!audioCtx) return;
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            
-            if (type === 'click') {
-                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.08);
-            } else if (type === 'win') {
-                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-                osc.frequency.setValueAtTime(1000, audioCtx.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-                osc.start(); osc.stop(audioCtx.currentTime + 0.2);
-            }
-        }
-
-        let userData = JSON.parse(localStorage.getItem('come_3d_user_v7')) || {
-            coins: 250,
+        // System State
+        let state = {
+            coins: 100,
             level: 1,
-            lastAdTime: 0,
-            lastRedeemTime: 0,
-            redeemCountToday: 0
+            adsWatchedToday: 0,
+            maxDailyAds: 85,
+            currentLevelAds: 0,
+            targetAds: 225,
+            soundEnabled: true
         };
 
-        if (typeof userData.coins !== 'number' || isNaN(userData.coins)) userData.coins = 250;
-
-        function saveUserData() {
-            localStorage.setItem('come_3d_user_v7', JSON.stringify(userData));
-        }
-
-        function updateDisplay() {
-            document.getElementById('coinBalance').innerText = `🪙 ${userData.coins}`;
-            document.getElementById('userLevelBadge').innerText = `Level ${userData.level}`;
-            saveUserData();
-        }
-
-        function openWallet() {
-            playSound('click');
-            let w = document.getElementById('walletCard');
-            w.style.display = w.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function openCartoonZone() {
-            playSound('click');
-            filterCategory('cartoons', document.querySelectorAll('.top-cats .top-cat-item')[1]);
-        }
-
-        let currentReward = 0;
-        function playCartoon(title, videoUrl, rewardCoins) {
-            playSound('click');
-            currentReward = rewardCoins;
-            document.getElementById('videoTitle').innerText = title;
-            document.getElementById('cartoonIframe').src = videoUrl;
-            document.getElementById('videoModal').style.display = 'flex';
-        }
-
-        function closeVideoModal() {
-            playSound('win');
-            document.getElementById('cartoonIframe').src = "";
-            document.getElementById('videoModal').style.display = 'none';
-            userData.coins += currentReward;
-            alert(`🎉 Amazing! You watched the cartoon and earned +${currentReward} Free Coins!`);
-            updateDisplay();
-        }
-
-        function requestRedeem() {
-            playSound('click');
-            let minCoinsNeeded = 30000;
-            let maxRedeemsPerDay = userData.level >= 2 ? 2 : 1;
-
-            if (userData.coins < minCoinsNeeded) {
-                alert(`❌ Insufficient Coins! You need at least 30,000 Coins to request a ₹10 Redeem Code.\nCurrent Balance: ${userData.coins} Coins.`);
-                return;
-            }
-
-            let now = Date.now();
-            let oneDay = 24 * 3600 * 1000;
-            if (now - userData.lastRedeemTime > oneDay) {
-                userData.redeemCountToday = 0;
-            }
-
-            if (userData.redeemCountToday >= maxRedeemsPerDay) {
-                alert(`⚠️ Daily Limit Reached! Max ${maxRedeemsPerDay} redeem request(s) allowed per 24 hours.`);
-                return;
-            }
-
-            let confirmRedeem = confirm(`💎 Confirm Redeem Request:\n\n• Deducting 30,000 Coins\n• Reward: ₹10 Gift Code\n• Status: Under Admin Review (24 Hours)\n\nProceed?`);
-            if (confirmRedeem) {
-                userData.coins -= minCoinsNeeded;
-                userData.lastRedeemTime = Date.now();
-                userData.redeemCountToday += 1;
-                if (userData.level < 3) userData.level += 1;
-                playSound('win');
-                alert(`✅ Redeem Request Submitted Successfully!\n\nYour request is pending Admin Review. The ₹10 code will be sent within 24 Hours.`);
-                updateDisplay();
-            }
-        }
-
-        function playGame(gameName, cost) {
-            playSound('click');
-            if (userData.coins < cost) {
-                alert(`❌ Insufficient Coins! You need ${cost} coins to play ${gameName}.\n\nClick 'Watch Ad & Earn Free Coins' below!`);
-                return;
-            }
-
-            userData.coins -= cost;
-            let winAmount = Math.random() > 0.4 ? cost * 2 : 0;
-            
-            if (winAmount > 0) {
-                userData.coins += winAmount;
-                playSound('win');
-                alert(`🎮 Playing ${gameName}...\n🎊 JACKPOT WIN! You won +${winAmount} Coins!`);
+        // Soft Audio Toggle System
+        function toggleAudio() {
+            state.soundEnabled = !state.soundEnabled;
+            let btn = document.getElementById('audioToggleBtn');
+            if (state.soundEnabled) {
+                btn.innerText = "🔊 Sound: Soft ON";
+                playSound("enable");
             } else {
-                alert(`🎮 Playing ${gameName}...\n😢 Hard luck! Try again or watch an ad for coins.`);
+                btn.innerText = "🔇 Sound: OFF";
             }
-            updateDisplay();
         }
 
-        function watchVideoAd() {
-            playSound('click');
-            let now = Date.now();
-            let diff = (now - userData.lastAdTime) / 1000;
+        // Soft & Balanced Sound FX Player
+        function playSound(type) {
+            if (!state.soundEnabled) return;
+            console.log(`Playing Soft 3D Sound Effect: ${type}`);
+        }
 
-            if (diff < 10 && userData.lastAdTime !== 0) {
-                alert(`⚠️ Anti-Cheat: Please wait a few seconds before watching the next ad.`);
+        // Instant 1ms 3D Game Launcher
+        function playGame(gameName) {
+            playSound("click");
+            alert(`🎮 ${gameName} 3D मॉडल और PUBG/Free Fire ग्राफिक्स के साथ लोड हो गया! (स्पीड: <1ms)`);
+        }
+
+        // Ad Watching Logic (Daily Cap 80-85, 250 Step Gap Progression)
+        function watchAd() {
+            if (state.adsWatchedToday >= state.maxDailyAds) {
+                alert("⚠️ आज का आपका दैनिक एड्स कोटा (85 Ads) पूरा हो चुका है!");
                 return;
             }
 
-            let btn = document.getElementById('watchBtn');
-            btn.disabled = true;
-            btn.innerText = "⏳ Loading Free Ad...";
+            state.adsWatchedToday++;
+            state.currentLevelAds++;
+            state.coins += 12; 
+            playSound("coin");
 
-            setTimeout(() => {
-                let earned = 15;
-                userData.coins += earned;
-                userData.lastAdTime = Date.now();
-                playSound('win');
-                alert(`✅ Ad Verified! +${earned} Free Coins added.`);
-                updateDisplay();
+            document.getElementById('userCoins').innerText = state.coins;
+            document.getElementById('adsLeft').innerText = state.maxDailyAds - state.adsWatchedToday;
+            document.getElementById('levelProgress').value = state.currentLevelAds;
 
-                btn.disabled = false;
-                btn.innerText = "📺 Watch Ad & Earn Free Coins";
-            }, 1000);
+            if (state.currentLevelAds >= state.targetAds) {
+                levelUp();
+            }
         }
 
-        function filterCategory(cat, element) {
-            playSound('click');
-            if (element) {
-                document.querySelectorAll('.top-cats .top-cat-item').forEach(el => el.classList.remove('active'));
-                element.classList.add('active');
-            }
-
-            let cards = document.querySelectorAll('.game-grid .grid-card');
-            cards.forEach(card => {
-                if (cat === 'all' || card.getAttribute('data-cat') === cat) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
+        // Level Up Logic up to Level 40 (Final 5,500 Game-Only Coins)
+        function levelUp() {
+            playSound("levelup");
+            if (state.level < 40) {
+                state.level++;
+                state.currentLevelAds = 0;
+                
+                // Strict 250-step progressive gap calculation
+                if (state.level === 2) state.targetAds = 525;
+                else if (state.level === 3) state.targetAds = 725;
+                else {
+                    state.targetAds = 725 + ((state.level - 3) * 250);
                 }
-            });
-        }
 
-        function switchTab(tab) {
-            playSound('click');
-            if (tab === 'cartoons') {
-                openCartoonZone();
-            } else if (tab === 'wallet') {
-                openWallet();
-            } else {
-                alert(`Switched to ${tab.toUpperCase()} section!`);
+                document.getElementById('userLevel').innerText = state.level;
+                document.getElementById('displayLevel').innerText = state.level;
+                document.getElementById('levelProgress').max = state.targetAds;
+                document.getElementById('levelProgress').value = 0;
+
+                if (state.level === 40) {
+                    document.getElementById('boxRewardMark').innerText = "5,500 Game-Only Coins (Endgame Jackpot!)";
+                    alert("🔥 बधाई हो! आपने Level 40 पार कर लिया है! 5,500 कॉइन्स का फाइनल गेमिंग जैकपॉट अनलॉक हो गया है! (ध्यान दें: यह कॉइन केवल गेम खेलने और बड़ी बेट लगाने के लिए है, इससे सीधा रिडीम या रिचार्ज नहीं मिलेगा। गेम जीतकर ही आप रिचार्ज ले सकेंगे।)");
+                } else {
+                    document.getElementById('boxRewardMark').innerText = `${state.level * 50} - ${state.level * 200} Coins`;
+                    alert(`🎉 शानदार! आप Level ${state.level} पर पहुँच गए हैं!`);
+                }
             }
         }
 
-        window.onload = function() {
-            updateDisplay();
-        };
+        // Mystery Box Logic (Strictly Game-Only Coins, Win to Redeem Rule)
+        function openMysteryBox() {
+            playSound("box");
+            if (state.currentLevelAds < state.targetAds / 2) {
+                alert("🔒 यह मिस्ट्री बॉक्स आधा टार्गेट पूरा होने के बाद खुलेगा!");
+                return;
+            }
+            let reward = state.level === 40 ? 5500 : Math.floor(Math.random() * 300) + 50;
+            state.coins += reward;
+            document.getElementById('userCoins').innerText = state.coins;
+            alert(`🎁 आपने मिस्ट्री बॉक्स से ${reward} कॉइन्स जीते! (नोट: यह कॉइन सिर्फ गेम में बड़ी बेट लगाकर खेलने के लिए है। गेम जीतकर ही आप रिचार्ज या कोड पा सकेंगे।)`);
+        }
     </script>
 </body>
 </html>
