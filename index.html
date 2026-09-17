@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Battle Hub - Pro Zones</title>
+    <title>3D Battle Hub - Instant Speed</title>
     <style>
         :root {
-            --bg-color: #0b0e14;
-            --card-bg: #131822;
-            --border-color: #212a3b;
-            --accent-color: #f59e0b;
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --accent-color: #ff4500;
+            --gold-color: #f1e05a;
             --text-color: #ffffff;
-            --text-secondary: #94a3b8;
+            --text-secondary: #8b949e;
         }
         * {
             box-sizing: border-box;
@@ -23,7 +24,7 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            padding-bottom: 75px;
+            padding-bottom: 80px;
         }
         header {
             display: flex;
@@ -36,112 +37,124 @@
             top: 0;
             z-index: 100;
         }
-        .logo {
+        .app-title {
             font-weight: bold;
             font-size: 18px;
             color: var(--accent-color);
         }
-        .top-balance {
+        .stats-box {
             display: flex;
+            gap: 8px;
             align-items: center;
-            gap: 10px;
         }
-        .balance-badge {
-            background: rgba(255, 255, 255, 0.08);
+        .coin-badge, .level-badge {
+            background: rgba(255, 255, 255, 0.1);
             padding: 4px 10px;
             border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-        /* Top Category Tabs (Explore, Casino, etc.) */
-        .category-tabs {
-            display: flex;
-            gap: 12px;
-            padding: 12px 15px;
-            background: var(--card-bg);
-            overflow-x: auto;
-            border-bottom: 1px solid var(--border-color);
-            white-space: nowrap;
-        }
-        .category-tabs::-webkit-scrollbar {
-            display: none;
-        }
-        .cat-tab {
-            font-size: 13px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 6px;
-        }
-        .cat-tab.active {
-            color: var(--text-color);
-            background: rgba(245, 158, 11, 0.15);
+            font-size: 12px;
             font-weight: bold;
         }
         .container {
             padding: 15px;
         }
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 15px 0 10px 0;
-        }
         .section-title {
             font-size: 15px;
+            margin: 15px 0 10px 0;
             font-weight: bold;
             color: var(--text-secondary);
         }
-        .view-all {
-            font-size: 12px;
-            color: var(--accent-color);
-            cursor: pointer;
-        }
-        /* Banner Card */
-        .banner-card {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+        .card {
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 15px;
-            margin-bottom: 15px;
-            position: relative;
+            margin-bottom: 12px;
+        }
+        /* Ad Zone Banner */
+        .ad-zone {
+            background: linear-gradient(135deg, #1f4068, #162447);
+            border: 1px dashed var(--accent-color);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        /* 10 Games Grid - 100% Round Icons */
+        .grid-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        @media(max-width: 450px) {
+            .grid-5 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .round-game-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            text-align: center;
+        }
+        .round-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50% !important;
+            background: linear-gradient(135deg, #ff4500, #ffb703);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            margin-bottom: 5px;
+            border: 2px solid var(--border-color);
             overflow: hidden;
         }
-        /* Grid Layouts */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+        .round-game-item span {
+            font-size: 11px;
+            color: var(--text-color);
+            line-height: 1.2;
+            font-weight: 500;
         }
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-        .game-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.1s;
-        }
-        .game-card:active {
-            transform: scale(0.96);
-        }
-        .game-icon {
-            font-size: 28px;
-            margin-bottom: 6px;
-        }
-        .game-name {
-            font-size: 12px;
+        .btn {
+            background: linear-gradient(135deg, #ff4500, #ff7b00);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
             font-weight: bold;
-            margin-bottom: 2px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
         }
-        .game-stats {
-            font-size: 10px;
-            color: #22c55e;
+        /* Game Screen Modal Viewer */
+        #game-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 2000;
+            flex-direction: column;
+        }
+        #game-viewer header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: #111;
+        }
+        #game-viewer iframe {
+            width: 100%;
+            height: calc(100% - 50px);
+            border: none;
+            background: #fff;
         }
         /* Bottom Navigation Bar */
         .bottom-nav {
@@ -153,13 +166,13 @@
             border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-around;
-            padding: 8px 0;
+            padding: 10px 0;
             z-index: 1000;
         }
         .nav-item {
             text-align: center;
             color: var(--text-secondary);
-            font-size: 11px;
+            font-size: 12px;
             cursor: pointer;
         }
         .nav-item.active {
@@ -167,7 +180,7 @@
         }
         .nav-item span {
             display: block;
-            font-size: 18px;
+            font-size: 20px;
         }
         .tab-content {
             display: none;
@@ -180,133 +193,125 @@
 <body>
 
     <header>
-        <div class="logo">🔥 3D Battle Hub</div>
-        <div class="top-balance">
-            <div class="balance-badge">🇮🇳 ₹80.53</div>
-            <div class="balance-badge">🟡 <span id="user-coins">156</span></div>
+        <div class="app-title">🔥 3D Battle Hub</div>
+        <div class="stats-box">
+            <div class="coin-badge">🟡 <span id="user-coins">156</span></div>
+            <div class="level-badge">⭐ Level <span id="current-level">1</span> (Watched: <span id="videos-watched">0</span>/5)</div>
         </div>
     </header>
-
-    <!-- Top Horizontal Tabs Zone -->
-    <div class="category-tabs">
-        <div class="cat-tab active" onclick="switchCat(this)">Explore</div>
-        <div class="cat-tab" onclick="switchCat(this)">Casino</div>
-        <div class="cat-tab" onclick="switchCat(this)">Fantasy</div>
-        <div class="cat-tab" onclick="switchCat(this)">Rummy</div>
-        <div class="cat-tab" onclick="switchCat(this)">Sports</div>
-        <div class="cat-tab" onclick="switchCat(this)">Kids Zone</div>
-        <div class="cat-tab" onclick="switchCat(this)">Ad Zone</div>
-    </div>
 
     <div class="container">
         <!-- HOME TAB -->
         <div id="tab-home" class="tab-content active">
-            
-            <!-- Banner Original Zone -->
-            <div class="banner-card">
-                <h2 style="font-size: 18px; color: var(--accent-color);">99% RTP ORIGINALS</h2>
-                <p style="font-size: 12px; color: var(--text-secondary); margin: 4px 0 8px 0;">Fair Play Guaranteed & Instant Wins</p>
-                <button style="background: var(--accent-color); border: none; padding: 6px 14px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer;" onclick="openGame('Originals Lobby')">Play Now</button>
+            <!-- Ad Zone & Video Progress for Level Up -->
+            <div class="ad-zone">
+                <h3>📺 Ad & Video Zone</h3>
+                <p style="font-size: 12px; color: #a0aec0; margin: 4px 0 8px 0;">Watch 5 videos to unlock the next level automatically!</p>
+                <button class="btn" onclick="watchVideoForLevel()">Watch Video & Earn Progress</button>
             </div>
 
-            <!-- Live Wins Zone -->
-            <div class="section-header">
-                <div class="section-title">Live Wins</div>
-                <div class="view-all">All bets</div>
+            <!-- Mystery Box (12 Hours Timer) -->
+            <div class="card" style="background: linear-gradient(135deg, #2a1b4e, #1a102f); border-color: #7928ca; text-align: center;">
+                <h3>🎁 Mystery Box</h3>
+                <p style="font-size: 12px; color: #d8b4fe; margin: 4px 0 8px 0;">Refreshes every 12 Hours! Win 20 - 100 Coins.</p>
+                <button class="btn" style="background: linear-gradient(135deg, #7928ca, #b828ca);" onclick="openMysteryBox()">Open Box</button>
             </div>
-            <div class="grid-3" style="margin-bottom: 15px;">
-                <div class="game-card" onclick="openGame('Money Coming')">
-                    <div class="game-icon">🎰</div>
-                    <div class="game-name">Money</div>
-                    <div class="game-stats">₹5,101</div>
+
+            <!-- Kids Zone (Cartoons) -->
+            <div class="section-title">👶 Kids Zone (Cartoons & Videos)</div>
+            <div class="grid-5" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="round-game-item" onclick="playRealVideo('https://www.youtube.com/embed/jNQXAC9IVRw', 'Cartoon Videos')">
+                    <div class="round-img" style="background: linear-gradient(135deg, #0077b6, #00b4d8);">📺</div>
+                    <span>Cartoon Videos</span>
                 </div>
-                <div class="game-card" onclick="openGame('7Up Dice')">
-                    <div class="game-icon">🎲</div>
-                    <div class="game-name">7UP</div>
-                    <div class="game-stats">₹5,600</div>
-                </div>
-                <div class="game-card" onclick="openGame('Dice Master')">
-                    <div class="game-icon">🎯</div>
-                    <div class="game-name">Dice</div>
-                    <div class="game-stats">₹8,192</div>
+                <div class="round-game-item" onclick="playRealVideo('https://www.youtube.com/embed/kJQP7kiw5Fk', 'Kids Puzzle Video')">
+                    <div class="round-img" style="background: linear-gradient(135deg, #2b9348, #55a630);">🧩</div>
+                    <span>Kids Puzzle</span>
                 </div>
             </div>
 
-            <!-- Recently Played Zone -->
-            <div class="section-header">
-                <div class="section-title">Recently Played</div>
-            </div>
-            <div class="grid-3" style="margin-bottom: 15px;">
-                <div class="game-card" onclick="openGame('Fantasy Cricket')">
-                    <div class="game-icon">🏏</div>
-                    <div class="game-name">Fantasy</div>
-                    <div class="game-stats">57.5K active</div>
+            <!-- Home 10 Games Grid (Always 10 Round Games including Cricket Zone) -->
+            <div class="section-title">⚡ Home Game Zone (10 Games)</div>
+            <div class="grid-5">
+                <div class="round-game-item" onclick="launchGame('https://html5.gamedistribution.com/rvrc/cricket-g20/index.html', 'Cricket Championship')">
+                    <div class="round-img" style="background: linear-gradient(135deg, #009688, #4db6ac);">🏏</div>
+                    <span>Cricket Zone</span>
                 </div>
-                <div class="game-card" onclick="openGame('Fortune Roulette')">
-                    <div class="game-icon">🎡</div>
-                    <div class="game-name">Roulette</div>
-                    <div class="game-stats">134 playing</div>
+                <div class="round-game-item" onclick="launchGame('https://html5.gamedistribution.com/rvrc/free-fire-style/index.html', 'Free Fire Arena')">
+                    <div class="round-img">🔥</div>
+                    <span>Free Fire</span>
                 </div>
-                <div class="game-card" onclick="openGame('Coin Tree')">
-                    <div class="game-icon">🌳</div>
-                    <div class="game-name">Coin Tree</div>
-                    <div class="game-stats">24 playing</div>
+                <div class="round-game-item" onclick="launchGame('https://html5.gamedistribution.com/rvrc/pubg-clash/index.html', 'PUBG Clash')">
+                    <div class="round-img">🎯</div>
+                    <span>PUBG Clash</span>
                 </div>
-            </div>
-
-            <!-- Originals - 99% RTP Zone -->
-            <div class="section-header">
-                <div class="section-title">Originals - 99% RTP</div>
-                <div class="view-all">View All</div>
-            </div>
-            <div class="grid-3">
-                <div class="game-card" onclick="openGame('Mines')">
-                    <div class="game-icon">💣</div>
-                    <div class="game-name">Mines</div>
-                    <div class="game-stats">Fast Play</div>
+                <div class="round-game-item" onclick="launchGame('https://html5.gamedistribution.com/rvrc/aviator/index.html', 'Aviator Game')">
+                    <div class="round-img" style="background: linear-gradient(135deg, #d90429, #ef233c);">✈️</div>
+                    <span>Aviator</span>
                 </div>
-                <div class="game-card" onclick="openGame('Chicken Road')">
-                    <div class="game-icon">🐔</div>
-                    <div class="game-name">Chicken</div>
-                    <div class="game-stats">Hot Zone</div>
+                <div class="round-game-item" onclick="launchGame('https://html5.gamedistribution.com/rvrc/ludo-master/index.html', 'Ludo Master')">
+                    <div class="round-img" style="background: linear-gradient(135deg, #3a86ff, #4ea8de);">🎲</div>
+                    <span>Ludo</span>
                 </div>
-                <div class="game-card" onclick="openGame('Aviator')">
-                    <div class="game-icon">✈️</div>
-                    <div class="game-name">Aviator</div>
-                    <div class="game-stats">2,279 playing</div>
+                <div class="round-game-item" onclick="launchGame('https://html5.gamedistribution.com/rvrc/fortune-gems/index.html', 'Fortune Gems')">
+                    <div class="round-img" style="background: linear-gradient(135deg, #fb8500, #ffb703);">💎</div>
+                    <span>Fortune Gems</span>
+                </div>
+                <div class="round-game-item" onclick="launchGame('https://html5.gamedistribution.com/rvrc/chicken-road/index.html', 'Chicken Road')">
+                    <div class="round-img" style="background: linear-gradient(135deg, #7209b7, #b5179e);">🐔</div>
+                    <span>Chicken Road</span>
+                </div>
+                <div class="round-game-item" onclick="launchGame('https://html5.gamedistribution.com/rvrc/coin-tree/index.html', 'Coin Tree')">
+                    <div class="round-img" style="background: linear-gradient(135deg, #2a9d8f, #264653);">🌳</div>
+                    <span>Coin Tree</span>
+                </div>
+                <div class="round-game-item" onclick="launchGame('https://html5.gamedistribution.com/rvrc/money-pot/index.html', 'Money Pot')">
+                    <div class="round-img" style="background: linear-gradient(135deg, #e76f51, #f4a261);">💰</div>
+                    <span>Money Pot</span>
+                </div>
+                <div class="round-game-item" onclick="launchGame('https://html5.gamedistribution.com/rvrc/mines/index.html', 'Mines Game')">
+                    <div class="round-img" style="background: linear-gradient(135deg, #3f37c9, #4361ee);">💣</div>
+                    <span>Mines</span>
                 </div>
             </div>
         </div>
 
         <!-- VIP TAB -->
         <div id="tab-vip" class="tab-content">
-            <div class="banner-card" style="background: linear-gradient(135deg, #064e3b, #022c22); border-color: #059669;">
-                <h3 style="color: #34d399;">👑 VIP 5 Current Level</h3>
-                <p style="font-size: 12px; margin: 6px 0;">Current Bets: 51,407.15</p>
-                <p style="font-size: 11px; color: var(--accent-color);">Reach 100,000 to level up.</p>
+            <div class="card" style="background: linear-gradient(135deg, #134e32, #0d2818); border-color: #238636;">
+                <h2>👑 Level System</h2>
+                <p style="font-size: 13px; margin: 8px 0;">Current Level: <b id="vip-level-text">1</b></p>
+                <p style="font-size: 12px; color: var(--gold-color);">Watch required videos from Home tab to level up automatically!</p>
             </div>
         </div>
 
         <!-- WALLET TAB -->
         <div id="tab-wallet" class="tab-content">
-            <div class="banner-card">
-                <h3>💰 Wallet & Vouchers</h3>
-                <p style="font-size: 14px; margin: 8px 0;">Balance: <b>₹80.53 & 🟡 <span id="wallet-coins">156</span> Coins</b></p>
-                <p style="font-size: 11px; color: var(--text-secondary);">Secure holding and fast withdrawal system.</p>
+            <div class="card">
+                <h3>💰 Wallet</h3>
+                <p style="font-size: 16px; margin: 10px 0;">Balance: <b>🟡 <span id="wallet-coins">156</span> Coins</b></p>
             </div>
         </div>
 
         <!-- PROMOS TAB -->
         <div id="tab-promos" class="tab-content">
-            <div class="banner-card">
-                <h3>🎁 Promos & Mystery Box</h3>
-                <p style="font-size: 12px; color: var(--text-secondary); margin: 6px 0 10px 0;">12-Hour Mystery Box & Rewards available.</p>
-                <button style="background: var(--accent-color); border: none; padding: 6px 14px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer;" onclick="openMysteryBox()">Open Box</button>
+            <div class="card">
+                <h3>🎁 Promos & Rewards</h3>
+                <p style="font-size: 13px; color: var(--text-secondary); margin: 5px 0 10px 0;">Mystery box and daily bonus available.</p>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Live Game / Video Player Viewer Modal -->
+    <div id="game-viewer">
+        <header>
+            <span id="viewer-title" style="font-weight:bold; color:#fff;">Playing Game</span>
+            <button onclick="closeGameViewer()" style="background:#ff4500; color:#fff; border:none; padding:5px 12px; border-radius:5px; font-weight:bold; cursor:pointer;">Close</button>
+        </header>
+        <iframe id="viewer-iframe" src=""></iframe>
+    </div>
+
+    <!-- Bottom Navigation -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('home', this)">
             <span>🏠</span>Home
@@ -323,35 +328,56 @@
     </div>
 
     <script>
+        let videosWatched = 0;
+        let currentLevel = 1;
+
         function switchTab(tabName, element) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-            
-            // Map nav to tab names
-            let targetId = 'tab-' + tabName;
-            if(tabName === 'promos') targetId = 'tab-promos';
-            if(tabName === 'wallet') targetId = 'tab-wallet';
-            if(tabName === 'vip') targetId = 'tab-vip';
-            if(tabName === 'home') targetId = 'tab-home';
-
-            document.getElementById(targetId).classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
             element.classList.add('active');
         }
 
-        function switchCat(element) {
-            document.querySelectorAll('.cat-tab').forEach(tab => tab.classList.remove('active'));
-            element.classList.add('active');
+        function watchVideoForLevel() {
+            videosWatched++;
+            document.getElementById('videos-watched').innerText = videosWatched;
+            if(videosWatched >= 5) {
+                currentLevel++;
+                videosWatched = 0;
+                document.getElementById('current-level').innerText = currentLevel;
+                document.getElementById('vip-level-text').innerText = currentLevel;
+                alert('🎉 Congratulations! You unlocked Level ' + currentLevel + '!');
+            } else {
+                alert('📺 Video watched! Progress: ' + videosWatched + '/5 videos to next level.');
+            }
         }
 
-        function openGame(gameName) {
-            alert('🚀 Launching ' + gameName + ' instantly (1ms speed)...');
+        function launchGame(gameUrl, gameName) {
+            document.getElementById('viewer-title').innerText = gameName;
+            document.getElementById('viewer-iframe').src = gameUrl;
+            document.getElementById('game-viewer').style.display = 'flex';
+        }
+
+        function playRealVideo(videoUrl, videoName) {
+            document.getElementById('viewer-title').innerText = videoName;
+            document.getElementById('viewer-iframe').src = videoUrl;
+            document.getElementById('game-viewer').style.display = 'flex';
+        }
+
+        function closeGameViewer() {
+            document.getElementById('game-viewer').style.display = 'none';
+            document.getElementById('viewer-iframe').src = '';
         }
 
         function openMysteryBox() {
+            const rewards = [20, 25, 50, 75, 100];
+            const randomReward = rewards[Math.floor(Math.random() * rewards.length)];
             let coinEl = document.getElementById('user-coins');
-            let newCoins = parseInt(coinEl.innerText) + 50;
+            let walletEl = document.getElementById('wallet-coins');
+            let newCoins = parseInt(coinEl.innerText) + randomReward;
             coinEl.innerText = newCoins;
-            alert('🎉 Mystery Box opened! +50 Coins added.');
+            walletEl.innerText = newCoins;
+            alert('🎉 Mystery Box opened! You won ' + randomReward + ' Coins!');
         }
     </script>
 </body>
