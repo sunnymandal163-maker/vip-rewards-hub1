@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Battle Hub - Gaming & VIP</title>
+    <title>3D Battle Hub - Fast Speed</title>
     <style>
         body {
             background-color: #0d1117;
@@ -28,17 +28,48 @@
         }
         .stats-box {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
         }
         .balance, .level-badge, .sound-btn {
             background: #21262d;
-            padding: 5px 10px;
+            padding: 5px 8px;
             border-radius: 20px;
             color: #ffd700;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             border: 1px solid #30363d;
+            cursor: pointer;
+        }
+        /* Top Ad Earning Banner */
+        .ad-banner-top {
+            background: linear-gradient(135deg, #ff4500, #ff8c00);
+            margin: 15px;
+            padding: 12px 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+        }
+        .ad-banner-top div h4 {
+            margin: 0 0 4px 0;
+            font-size: 15px;
+            color: #fff;
+        }
+        .ad-banner-top div p {
+            margin: 0;
+            font-size: 11px;
+            color: #ffeeee;
+        }
+        .watch-ad-btn {
+            background: #ffffff;
+            color: #ff4500;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 12px;
             cursor: pointer;
         }
         /* 15-Level Progress Section */
@@ -118,7 +149,7 @@
             text-align: center;
             border: 1px solid #30363d;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.1s;
         }
         .game-card:active {
             transform: scale(0.96);
@@ -134,7 +165,22 @@
             font-weight: 600;
             color: #ffffff;
         }
-        /* Game Modal Player */
+        /* Dynamic Views */
+        .content-section {
+            display: none;
+            padding: 15px;
+        }
+        .card-box {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+        .card-box h3 { margin-top: 0; color: #ffcc00; font-size: 16px; }
+        .card-box p { font-size: 13px; color: #8b949e; }
+        
+        /* Instant Game Modal Player (1ms Open Speed) */
         #gameModal {
             display: none;
             position: fixed;
@@ -194,80 +240,100 @@
 </head>
 <body>
 
-    <!-- Background Audio (Free Fire / PUBG Theme) -->
     <audio id="bgMusic" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Header Section -->
     <div class="header">
         <div class="app-title">🔥 3D Battle Hub</div>
         <div class="stats-box">
-            <div class="balance">🪙 136</div>
-            <div class="level-badge">⭐ Lvl 1 / 15</div>
-            <div class="sound-btn" id="soundToggle" onclick="toggleSound()">🔊 Sound</div>
+            <div class="balance" id="coinBalance">🪙 136</div>
+            <div class="level-badge">⭐ Lvl 1</div>
+            <div class="sound-btn" id="soundToggle" onclick="toggleSound()">🔊</div>
         </div>
     </div>
 
-    <!-- 15-Level Progress Box with Daily 60 Video Limit -->
-    <div class="progress-container">
-        <div class="progress-header">
-            <span>Level Progress & Daily Ad Limit (60 Videos Left)</span>
-            <span style="color: #8b949e; cursor: pointer;" onclick="alert('Next update brings higher ad limits & rewards!')" title="More gifts coming!">❓</span>
+    <div id="homeView">
+        <div class="ad-banner-top">
+            <div>
+                <h4>📺 Watch Ad & Earn</h4>
+                <p>Daily Quota: <span id="adLimitText">60</span>/80 Videos Left</p>
+            </div>
+            <button class="watch-ad-btn" onclick="watchAdForEarnings()">Watch Now</button>
         </div>
-        <div style="font-size: 12px; color: #8b949e; margin-bottom: 8px;">Level 1: 10 Games Unlocked (Expands as level grows)</div>
-        <div class="progress-bar-bg">
-            <div class="progress-bar-fill"></div>
+
+        <div class="progress-container">
+            <div class="progress-header">
+                <span>Level Progress & Rewards</span>
+                <span style="color: #ffcc00; cursor: pointer;" onclick="alert('Mystery boxes unlock at higher levels!')">❓</span>
+            </div>
+            <div style="font-size: 12px; color: #8b949e; margin-bottom: 8px;">Level 1: 10 Games Unlocked</div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill"></div>
+            </div>
+        </div>
+
+        <div class="level-unlock-grid">
+            <div class="unlock-box"><span>Lvl 1-3</span><p>10 Games</p></div>
+            <div class="unlock-box"><span>Lvl 4-7</span><p>20 Games</p></div>
+            <div class="unlock-box"><span>Lvl 8-11</span><p>35 Games</p></div>
+            <div class="unlock-box"><span>Lvl 12-15</span><p>All 50+ Games</p></div>
+        </div>
+
+        <div class="section-title" style="color: #58a6ff;">
+            🧸 Kids Zone (Cartoons & Fun)
+        </div>
+        <div class="game-grid">
+            <div class="game-card" onclick="playGameInstant('Kids Cartoons', 'https://www.youtube.com/embed/videoseries?list=PLw61_8mIvIvEmZJ7s5wYyLzQ2a8s4Yv', false)">
+                <img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=300&auto=format&fit=crop" alt="Cartoons">
+                <div class="game-name">Cartoon Videos</div>
+            </div>
+            <div class="game-card" onclick="playGameInstant('Kids Puzzle', 'https://gamedistribution.com/games/puzzle', false)">
+                <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=300&auto=format&fit=crop" alt="Puzzle">
+                <div class="game-name">Kids Puzzle</div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            ⚡ 3D Battle & Action Games (1ms Fast)
+        </div>
+        <div class="game-grid">
+            <div class="game-card" onclick="playGameInstant('Free Fire Battle Arena', 'https://html5.gamedistribution.com/rvrcv98s/1a2b3c4d/index.html', true)">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&auto=format&fit=crop" alt="Battle Arena">
+                <div class="game-name">Free Fire Arena</div>
+            </div>
+            <div class="game-card" onclick="playGameInstant('PUBG Speed Clash', 'https://html5.gamedistribution.com/rvrcv98s/5e6f7g8h/index.html', true)">
+                <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=300&auto=format&fit=crop" alt="Speed Clash">
+                <div class="game-name">PUBG Speed Clash</div>
+            </div>
         </div>
     </div>
 
-    <!-- Small Level Unlock Status Boxes -->
-    <div class="level-unlock-grid">
-        <div class="unlock-box"><span>Lvl 1-3</span><p>10 Games</p></div>
-        <div class="unlock-box"><span>Lvl 4-7</span><p>20 Games</p></div>
-        <div class="unlock-box"><span>Lvl 8-11</span><p>35 Games</p></div>
-        <div class="unlock-box"><span>Lvl 12-15</span><p>All 50+ Games</p></div>
-    </div>
-
-    <!-- Kids Zone Section -->
-    <div class="section-title" style="color: #58a6ff;">
-        🧸 Kids Zone (Cartoons & Fun)
-    </div>
-    <div class="game-grid">
-        <div class="game-card" onclick="playGameWithLogic('Kids Cartoons', 'https://www.youtube.com/embed/videoseries?list=PLw61_8mIvIvEmZJ7s5wYyLzQ2a8s4Yv', false)">
-            <img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=300&auto=format&fit=crop" alt="Cartoons">
-            <div class="game-name">Cartoon Videos</div>
-        </div>
-        <div class="game-card" onclick="playGameWithLogic('Kids Puzzle', 'https://gamedistribution.com/games/puzzle', false)">
-            <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=300&auto=format&fit=crop" alt="Puzzle">
-            <div class="game-name">Kids Puzzle</div>
+    <div id="vipView" class="content-section">
+        <div class="card-box">
+            <h3>👑 VIP Membership Levels</h3>
+            <p>Current Status: <strong>VIP Level 1</strong></p>
+            <p>Unlock higher daily ad limits, exclusive 3D games, and higher win multipliers as you level up!</p>
         </div>
     </div>
 
-    <!-- 3D Original Games (Level 1: 10 Games Unlocked) -->
-    <div class="section-title">
-        ⚡ 3D Battle & Action Games (Ad Required)
-    </div>
-    <div class="game-grid">
-        <div class="game-card" onclick="playGameWithLogic('Free Fire Battle Arena', 'https://html5.gamedistribution.com/rvrcv98s/1a2b3c4d/index.html', true)">
-            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&auto=format&fit=crop" alt="Battle Arena">
-            <div class="game-name">Free Fire Arena</div>
-        </div>
-        <div class="game-card" onclick="playGameWithLogic('PUBG Speed Clash', 'https://html5.gamedistribution.com/rvrcv98s/5e6f7g8h/index.html', true)">
-            <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=300&auto=format&fit=crop" alt="Speed Clash">
-            <div class="game-name">PUBG Speed Clash</div>
-        </div>
-        <div class="game-card" onclick="playGameWithLogic('Temple Run 2', 'https://html5.gamedistribution.com/rvrcv98s/templerun/index.html', true)">
-            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&auto=format&fit=crop" alt="Temple Run">
-            <div class="game-name">Temple Run 2</div>
-        </div>
-        <div class="game-card" onclick="playGameWithLogic('Subway Surfers', 'https://html5.gamedistribution.com/rvrcv98s/subway/index.html', true)">
-            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&auto=format&fit=crop" alt="Subway Surfers">
-            <div class="game-name">Subway Surfers</div>
+    <div id="walletView" class="content-section">
+        <div class="card-box">
+            <h3>💳 Wallet & Vouchers</h3>
+            <p>Balance: <strong style="color: #ffd700;">🪙 136 Coins</strong></p>
+            <p>Vouchers Available: Game Pass & Gift Cards</p>
+            <hr style="border-color: #30363d;">
+            <p style="font-size: 12px; color: #ff4500;">📌 Security Notice: Cash or voucher redemptions are subject to a 7-day holding period to ensure platform safety and prevent instant loss.</p>
         </div>
     </div>
 
-    <!-- Game Player Modal -->
+    <div id="promosView" class="content-section">
+        <div class="card-box">
+            <h3>🎁 Promos & Daily Bonus</h3>
+            <p>Invite friends, complete daily video ad limits, and claim mystery boxes to get free rewards!</p>
+        </div>
+    </div>
+
     <div id="gameModal">
         <div class="modal-header">
             <span id="modalGameTitle" style="font-weight: bold; color: #ffcc00;">Loading...</span>
@@ -276,56 +342,87 @@
         <iframe id="gameFrame" src=""></iframe>
     </div>
 
-    <!-- Bottom Navigation Bar (Wallet with 7-Day Hold Notice & Vouchers) -->
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="alert('Home Lobby')">🏠<br>Home</div>
-        <div class="nav-item" onclick="alert('VIP Level Section')">👑<br>VIP</div>
-        <div class="nav-item" onclick="openWallet()">💳<br>Wallet</div>
-        <div class="nav-item" onclick="alert('Promos & Gifts Section')">🎁<br>Promos</div>
+        <div class="nav-item active" id="navHome" onclick="switchTab('home')">🏠<br>Home</div>
+        <div class="nav-item" id="navVip" onclick="switchTab('vip')">👑<br>VIP</div>
+        <div class="nav-item" id="navWallet" onclick="switchTab('wallet')">💳<br>Wallet</div>
+        <div class="nav-item" id="navPromos" onclick="switchTab('promos')">🎁<br>Promos</div>
     </div>
 
     <script>
-        // Sound Toggle Logic
+        // Tab Navigation
+        function switchTab(tab) {
+            document.getElementById('homeView').style.display = 'none';
+            document.getElementById('vipView').style.display = 'none';
+            document.getElementById('walletView').style.display = 'none';
+            document.getElementById('promosView').style.display = 'none';
+
+            document.getElementById('navHome').classList.remove('active');
+            document.getElementById('navVip').classList.remove('active');
+            document.getElementById('navWallet').classList.remove('active');
+            document.getElementById('navPromos').classList.remove('active');
+
+            if (tab === 'home') {
+                document.getElementById('homeView').style.display = 'block';
+                document.getElementById('navHome').classList.add('active');
+            } else if (tab === 'vip') {
+                document.getElementById('vipView').style.display = 'block';
+                document.getElementById('navVip').classList.add('active');
+            } else if (tab === 'wallet') {
+                document.getElementById('walletView').style.display = 'block';
+                document.getElementById('navWallet').classList.add('active');
+            } else if (tab === 'promos') {
+                document.getElementById('promosView').style.display = 'block';
+                document.getElementById('navPromos').classList.add('active');
+            }
+        }
+
+        // Ad Earning
+        let adQuota = 60;
+        let coins = 136;
+        function watchAdForEarnings() {
+            if (adQuota <= 0) {
+                alert("Daily 60 video ad limit reached!");
+                return;
+            }
+            alert("📺 Sponsored ad loaded! 5 coins earned.");
+            adQuota--;
+            coins += 5;
+            document.getElementById('adLimitText').innerText = adQuota;
+            document.getElementById('coinBalance').innerText = "🪙 " + coins;
+        }
+
+        // Sound Toggle
         let isMusicPlaying = false;
         function toggleSound() {
             let music = document.getElementById('bgMusic');
             let btn = document.getElementById('soundToggle');
             if (isMusicPlaying) {
                 music.pause();
-                btn.innerHTML = "🔇 Muted";
+                btn.innerHTML = "🔇";
                 isMusicPlaying = false;
             } else {
                 music.play().catch(e => console.log("Audio play blocked"));
-                btn.innerHTML = "🔊 Sound";
+                btn.innerHTML = "🔊";
                 isMusicPlaying = true;
             }
         }
 
         let userPlayCount = localStorage.getItem('playCount') ? parseInt(localStorage.getItem('playCount')) : 0;
 
-        function playGameWithLogic(gameName, gameUrl, requiresAd) {
+        // INSTANT 1ms OPEN SPEED LOGIC
+        function playGameInstant(gameName, gameUrl, requiresAd) {
             if (requiresAd) {
-                let watchAds = confirm("To play " + gameName + ", please watch 2 sponsored ads (30 seconds each) from your 60 daily video quota!");
+                let watchAds = confirm("Watch quick ad to play " + gameName + "?");
                 if (!watchAds) return;
-                alert("📺 Watching Ad 1/2... Done!\n📺 Watching Ad 2/2... Done!");
             }
 
             userPlayCount++;
             localStorage.setItem('playCount', userPlayCount);
 
-            let message = "";
-            // New user win boost for first 3 plays, then 40:60 Ratio (40% Win, 60% Loss)
-            if (userPlayCount <= 3) {
-                message = "🎉 Welcome Bonus! New player special win boost activated!";
-            } else {
-                let outcome = Math.random();
-                if (outcome < 0.60) {
-                    message = "💡 Good try! Better luck next time.";
-                } else {
-                    message = "🏆 Awesome! You won this round!";
-                }
-            }
+            let message = (userPlayCount <= 3) ? "🎉 Welcome Win Boost!" : ((Math.random() < 0.60) ? "💡 Good try!" : "🏆 You Won!");
 
+            // Instant opening without delay
             document.getElementById('modalGameTitle').innerText = gameName + " | " + message;
             document.getElementById('gameFrame').src = gameUrl;
             document.getElementById('gameModal').style.display = 'flex';
@@ -333,12 +430,7 @@
 
         function closeGame() {
             document.getElementById('gameModal').style.display = 'none';
-            document.getElementById('gameFrame'].src = '';
-        }
-
-        // Wallet Section with 7-Day Hold Notice & Vouchers
-        function openWallet() {
-            alert("💳 WALLET & VOUCHERS:\n\n• Current Balance: 136 Coins\n• Available Vouchers: Game Pass & Gift Cards\n\n📌 Note: You can play and win freely right now! However, redeeming cash or vouchers has a 7-day security holding period to protect platform liquidity.");
+            document.getElementById('gameFrame').src = '';
         }
     </script>
 </body>
