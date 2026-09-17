@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Battle Hub - Final Pro</title>
+    <title>3D Battle Hub - 50 Games Pro</title>
     <style>
         :root {
-            --bg-color: #0b0e14;
-            --card-bg: #131822;
-            --border-color: #212a3b;
+            --bg-color: #080b10;
+            --card-bg: #111622;
+            --border-color: #1e2638;
             --accent-color: #f59e0b;
             --text-color: #ffffff;
             --text-secondary: #94a3b8;
@@ -44,20 +44,20 @@
         .top-balance {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .balance-badge {
             background: rgba(255, 255, 255, 0.08);
             padding: 4px 10px;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
         }
-        /* Top Category Tabs (Explore, Casino, Rummy, Sports, Kids Zone - Fantasy Removed) */
+        /* Top Category Tabs */
         .category-tabs {
             display: flex;
-            gap: 12px;
-            padding: 12px 15px;
+            gap: 10px;
+            padding: 10px 15px;
             background: var(--card-bg);
             overflow-x: auto;
             border-bottom: 1px solid var(--border-color);
@@ -70,12 +70,12 @@
             font-size: 13px;
             color: var(--text-secondary);
             cursor: pointer;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 6px;
         }
         .cat-tab.active {
             color: var(--text-color);
-            background: rgba(245, 158, 11, 0.15);
+            background: rgba(245, 158, 11, 0.2);
             font-weight: bold;
         }
         .container {
@@ -92,7 +92,7 @@
             font-weight: bold;
             color: var(--text-secondary);
         }
-        /* Permanent Ad Zone (Replacing 99% RTP banner) */
+        /* Permanent Ad Zone */
         .permanent-ad-zone {
             background: linear-gradient(135deg, #1e293b, #0f172a);
             border: 2px dashed var(--accent-color);
@@ -101,7 +101,7 @@
             text-align: center;
             margin-bottom: 15px;
         }
-        /* 10 Games Grid with 100% Round Icons */
+        /* 5 Games Grid with 100% Round Icons */
         .grid-5 {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -203,58 +203,44 @@
     <header>
         <div class="logo">🔥 3D Battle Hub</div>
         <div class="top-balance">
-            <div class="balance-badge">🇮🇳 ₹80.53</div>
+            <div class="balance-badge">₹80.53</div>
             <div class="balance-badge">🟡 <span id="user-coins">156</span></div>
         </div>
     </header>
 
-    <!-- Top Horizontal Tabs Zone (Filtered by Category) -->
     <div class="category-tabs">
-        <div class="cat-tab active" onclick="filterCategory('Explore', this)">Explore</div>
+        <div class="cat-tab active" onclick="filterCategory('All', this)">All Games (50)</div>
+        <div class="cat-tab" onclick="filterCategory('Cricket', this)">Cricket</div>
+        <div class="cat-tab" onclick="filterCategory('Racing', this)">Racing</div>
         <div class="cat-tab" onclick="filterCategory('Casino', this)">Casino</div>
         <div class="cat-tab" onclick="filterCategory('Rummy', this)">Rummy</div>
-        <div class="cat-tab" onclick="filterCategory('Sports', this)">Sports</div>
         <div class="cat-tab" onclick="filterCategory('Kids Zone', this)">Kids Zone</div>
     </div>
 
     <div class="container">
-        <!-- HOME TAB -->
         <div id="tab-home" class="tab-content active">
             
-            <!-- Permanent Ad Zone (Always visible at top) -->
             <div class="permanent-ad-zone">
-                <h3 style="font-size: 16px; color: var(--accent-color);">📺 PERMANENT AD ZONE</h3>
-                <p style="font-size: 12px; color: var(--text-secondary); margin: 4px 0 8px 0;">Watch sponsor ads & earn instant rewards!</p>
-                <button style="background: var(--accent-color); border: none; padding: 6px 14px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer;" onclick="watchAd()">Watch Ad Now</button>
+                <h3 style="font-size: 15px; color: var(--accent-color);">📺 PERMANENT AD ZONE</h3>
+                <p style="font-size: 11px; color: var(--text-secondary); margin: 3px 0 6px 0;">Watch sponsor ads & earn instant rewards!</p>
+                <button style="background: var(--accent-color); border: none; padding: 5px 12px; border-radius: 6px; font-weight: bold; font-size: 11px; cursor: pointer;" onclick="watchAd()">Watch Ad Now</button>
             </div>
 
-            <!-- Kids Zone (Strictly Real Cartoons Only) -->
-            <div id="kids-section">
+            <div id="kids-section" style="display:none;">
                 <div class="section-header">
-                    <div class="section-title">👶 Kids Zone (Real Cartoons Only)</div>
+                    <div class="section-title">👶 Kids Zone (Cartoons & Rhymes)</div>
                 </div>
-                <div class="grid-5" style="grid-template-columns: repeat(2, 1fr);">
-                    <div class="round-game-item" onclick="playRealVideo('https://www.youtube.com/embed/1qlZVGwUjxs', 'Kids Cartoon Rhymes')">
-                        <div class="round-img" style="background: linear-gradient(135deg, #0077b6, #00b4d8);">📺</div>
-                        <span>Cartoons</span>
+                <div class="grid-5" style="grid-template-columns: repeat(2, 1fr);" id="kids-grid">
                     </div>
-                    <div class="round-game-item" onclick="playRealVideo('https://www.youtube.com/embed/T6s2zR2Q3cM', 'Funny Cartoon Fun')">
-                        <div class="round-img" style="background: linear-gradient(135deg, #2b9348, #55a630);">🎈</div>
-                        <span>Funny Cartoons</span>
-                    </div>
-                </div>
             </div>
 
-            <!-- Dynamic Zone Games Grid (Changes based on selected top tab) -->
             <div class="section-header">
-                <div class="section-title" id="zone-title">⚡ Game Zone (10 Games)</div>
+                <div class="section-title" id="zone-title">⚡ All Games Hub (50 Games)</div>
             </div>
             <div class="grid-5" id="game-grid">
-                <!-- Dynamically populated games matching category -->
-            </div>
+                </div>
         </div>
 
-        <!-- VIP TAB -->
         <div id="tab-vip" class="tab-content">
             <div class="permanent-ad-zone" style="background: linear-gradient(135deg, #064e3b, #022c22); border-color: #059669;">
                 <h3 style="color: #34d399;">👑 VIP Level System</h3>
@@ -262,7 +248,6 @@
             </div>
         </div>
 
-        <!-- WALLET TAB -->
         <div id="tab-wallet" class="tab-content">
             <div class="permanent-ad-zone">
                 <h3>💰 Wallet & Vouchers</h3>
@@ -270,7 +255,6 @@
             </div>
         </div>
 
-        <!-- PROMOS TAB -->
         <div id="tab-promos" class="tab-content">
             <div class="permanent-ad-zone">
                 <h3>🎁 Promos & Mystery Box</h3>
@@ -280,7 +264,6 @@
         </div>
     </div>
 
-    <!-- Live Game / Video Player Viewer Modal -->
     <div id="game-viewer">
         <header>
             <span id="viewer-title" style="font-weight:bold; color:#fff;">Playing Content</span>
@@ -289,7 +272,6 @@
         <iframe id="viewer-iframe" src=""></iframe>
     </div>
 
-    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('home', this)">
             <span>🏠</span>Home
@@ -306,77 +288,126 @@
     </div>
 
     <script>
-        // Game lists mapped by category to show correct games per zone
-        const categoryGames = {
-            'Explore': [
-                {name: 'Cricket', icon: '🏏', bg: '#009688', url: 'https://html5.gamedistribution.com/rvrc/cricket-g20/index.html'},
-                {name: 'Free Fire', icon: '🔥', bg: '#ff4500', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
-                {name: 'PUBG Clash', icon: '🎯', bg: '#ff7b00', url: 'https://html5.gamedistribution.com/rvrc/pubg-clash/index.html'},
-                {name: 'Aviator', icon: '✈️', bg: '#d90429', url: 'https://html5.gamedistribution.com/rvrc/aviator/index.html'},
-                {name: 'Ludo', icon: '🎲', bg: '#3a86ff', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
-                {name: 'Gems', icon: '💎', bg: '#fb8500', url: 'https://html5.gamedistribution.com/rvrc/fortune-gems/index.html'},
-                {name: 'Chicken', icon: '🐔', bg: '#7209b7', url: 'https://html5.gamedistribution.com/rvrc/chicken-road/index.html'},
-                {name: 'Coin Tree', icon: '🌳', bg: '#2a9d8f', url: 'https://html5.gamedistribution.com/rvrc/coin-tree/index.html'},
-                {name: 'Money Pot', icon: '💰', bg: '#e76f51', url: 'https://html5.gamedistribution.com/rvrc/money-pot/index.html'},
-                {name: 'Mines', icon: '💣', bg: '#3f37c9', url: 'https://html5.gamedistribution.com/rvrc/mines/index.html'}
-            ],
-            'Casino': [
-                {name: 'Roulette', icon: '🎡', bg: '#9d4edd', url: 'https://html5.gamedistribution.com/rvrc/fortune-gems/index.html'},
-                {name: 'Fortune Gems', icon: '💎', bg: '#fb8500', url: 'https://html5.gamedistribution.com/rvrc/fortune-gems/index.html'},
-                {name: 'Money Pot', icon: '💰', bg: '#e76f51', url: 'https://html5.gamedistribution.com/rvrc/money-pot/index.html'},
-                {name: 'Mines', icon: '💣', bg: '#3f37c9', url: 'https://html5.gamedistribution.com/rvrc/mines/index.html'},
-                {name: 'Coin Tree', icon: '🌳', bg: '#2a9d8f', url: 'https://html5.gamedistribution.com/rvrc/coin-tree/index.html'}
-            ],
-            'Rummy': [
-                {name: 'Teen Patti', icon: '🃏', bg: '#b5179e', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
-                {name: 'Rummy Call', icon: '🎴', bg: '#7209b7', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
-                {name: 'Lucky Dice', icon: '🎲', bg: '#3a86ff', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'}
-            ],
-            'Sports': [
-                {name: 'Cricket', icon: '🏏', bg: '#009688', url: 'https://html5.gamedistribution.com/rvrc/cricket-g20/index.html'},
-                {name: 'Car Race', icon: '🏎️', bg: '#d90429', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
-                {name: 'Bike Race', icon: '🏍️', bg: '#ff7b00', url: 'https://html5.gamedistribution.com/rvrc/pubg-clash/index.html'},
-                {name: 'Horse Racing', icon: '🐎', bg: '#2b9348', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'}
-            ],
-            'Kids Zone': [
-                {name: 'Cartoon Videos', icon: '📺', bg: '#0077b6', url: 'https://www.youtube.com/embed/1qlZVGwUjxs'},
-                {name: 'Funny Cartoons', icon: '🎈', bg: '#55a630', url: 'https://www.youtube.com/embed/T6s2zR2Q3cM'}
-            ]
-        };
+        // Generating all 50 games dynamically with proper categories
+        const allGames = [
+            // Cricket & Sports (1-10)
+            {name: 'Cricket Pro', icon: '🏏', cat: 'Cricket', url: 'https://html5.gamedistribution.com/rvrc/cricket-g20/index.html'},
+            {name: 'Super Cricket', icon: '🥎', cat: 'Cricket', url: 'https://html5.gamedistribution.com/rvrc/cricket-g20/index.html'},
+            {name: 'T20 Cup', icon: '🏆', cat: 'Cricket', url: 'https://html5.gamedistribution.com/rvrc/cricket-g20/index.html'},
+            {name: 'Batting Master', icon: '🏏', cat: 'Cricket', url: 'https://html5.gamedistribution.com/rvrc/cricket-g20/index.html'},
+            {name: 'Stump Out', icon: '⚡', cat: 'Cricket', url: 'https://html5.gamedistribution.com/rvrc/cricket-g20/index.html'},
+            {name: 'Football Cup', icon: '⚽', cat: 'Sports', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Basketball', icon: '🏀', cat: 'Sports', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Tennis World', icon: '🎾', cat: 'Sports', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Badminton', icon: '🏸', cat: 'Sports', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Penalty Shoot', icon: '🥅', cat: 'Sports', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
 
-        function renderGames(category) {
+            // Racing Games (11-20)
+            {name: 'Car Race 3D', icon: '🏎️', cat: 'Racing', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Bike Stunt', icon: '🏍️', cat: 'Racing', url: 'https://html5.gamedistribution.com/rvrc/pubg-clash/index.html'},
+            {name: 'Horse Racing', icon: '🐎', cat: 'Racing', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Highway Rider', icon: '🚀', cat: 'Racing', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Cycle Race', icon: '🚲', cat: 'Racing', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Formula Speed', icon: '🏎️', cat: 'Racing', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Truck Trials', icon: '🚚', cat: 'Racing', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Drift King', icon: '🚙', cat: 'Racing', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Police Chase', icon: '🚓', cat: 'Racing', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Kart Master', icon: '🏎️', cat: 'Racing', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+
+            // Casino & Slots (21-35)
+            {name: 'Aviator Pro', icon: '✈️', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/aviator/index.html'},
+            {name: 'Fortune Gems', icon: '💎', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/fortune-gems/index.html'},
+            {name: 'Mines Boom', icon: '💣', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/mines/index.html'},
+            {name: 'Money Pot', icon: '💰', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/money-pot/index.html'},
+            {name: 'Coin Tree', icon: '🌳', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/coin-tree/index.html'},
+            {name: 'Chicken Road', icon: '🐔', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/chicken-road/index.html'},
+            {name: 'Roulette Spin', icon: '🎡', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/fortune-gems/index.html'},
+            {name: 'Gold Diggers', icon: '⛏️', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/money-pot/index.html'},
+            {name: 'Lucky Slots', icon: '🎰', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/fortune-gems/index.html'},
+            {name: 'Diamond Rush', icon: '💎', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/fortune-gems/index.html'},
+            {name: 'Magic Pot', icon: '🏺', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/money-pot/index.html'},
+            {name: 'Cash Vault', icon: '🏦', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/money-pot/index.html'},
+            {name: 'Plinko Win', icon: '🎯', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/mines/index.html'},
+            {name: 'Mega Spin', icon: '🌀', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/fortune-gems/index.html'},
+            {name: 'Bonus Drop', icon: '🎁', cat: 'Casino', url: 'https://html5.gamedistribution.com/rvrc/coin-tree/index.html'},
+
+            // Rummy & Card Games (36-50)
+            {name: 'Teen Patti', icon: '🃏', cat: 'Rummy', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
+            {name: 'Rummy Call', icon: '🎴', cat: 'Rummy', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
+            {name: 'Ludo Master', icon: '🎲', cat: 'Rummy', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
+            {name: 'Poker Star', icon: '♠️', cat: 'Rummy', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
+            {name: 'Blackjack', icon: '♣️', cat: 'Rummy', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
+            {name: 'Andar Bahar', icon: '🎴', cat: 'Rummy', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
+            {name: 'Dragon Tiger', icon: '🐉', cat: 'Rummy', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
+            {name: 'Call Break', icon: '🎴', cat: 'Rummy', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
+            {name: 'Solitaire', icon: '🎴', cat: 'Rummy', url: 'https://html5.gamedistribution.com/rvrc/ludo-master/index.html'},
+            {name: 'Free Fire Arena', icon: '🔥', cat: 'Action', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'PUBG Clash', icon: '🎯', cat: 'Action', url: 'https://html5.gamedistribution.com/rvrc/pubg-clash/index.html'},
+            {name: 'Knife Hit', icon: '🗡️', cat: 'Action', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'},
+            {name: 'Archery Pro', icon: '🏹', cat: 'Action', url: 'https://html5.gamedistribution.com/rvrc/pubg-clash/index.html'},
+            {name: 'Sniper 3D', icon: '🎯', cat: 'Action', url: 'https://html5.gamedistribution.com/rvrc/pubg-clash/index.html'},
+            {name: 'Battle Royale', icon: '🛡️', cat: 'Action', url: 'https://html5.gamedistribution.com/rvrc/free-fire-style/index.html'}
+        ];
+
+        const kidsVideos = [
+            {name: 'Cartoon Rhymes', icon: '📺', url: 'https://www.youtube.com/embed/1qlZVGwUjxs'},
+            {name: 'Funny Cartoons', icon: '🎈', url: 'https://www.youtube.com/embed/T6s2zR2Q3cM'},
+            {name: 'Kids Song Fun', icon: '🎵', url: 'https://www.youtube.com/embed/jNQXAC9IVRw'},
+            {name: 'Animated Tales', icon: '🦄', url: 'https://www.youtube.com/embed/kJQP7kiw5Fk'}
+        ];
+
+        function renderContent(category) {
             const grid = document.getElementById('game-grid');
             const kidsSection = document.getElementById('kids-section');
+            const kidsGrid = document.getElementById('kids-grid');
             const zoneTitle = document.getElementById('zone-title');
             
             grid.innerHTML = '';
-            
+            kidsGrid.innerHTML = '';
+
             if(category === 'Kids Zone') {
                 kidsSection.style.display = 'block';
-                zoneTitle.innerText = '👶 Kids Cartoons Zone';
-                categoryGames['Kids Zone'].forEach(item => {
-                    grid.innerHTML += `<div class="round-game-item" onclick="playRealVideo('${item.url}', '${item.name}')">
-                        <div class="round-img" style="background: ${item.bg}">${item.icon}</div>
+                zoneTitle.innerText = '👶 Kids Zone (Cartoons & Videos)';
+                kidsVideos.forEach(item => {
+                    kidsGrid.innerHTML += `<div class="round-game-item" onclick="playRealVideo('${item.url}', '${item.name}')">
+                        <div class="round-img" style="background: linear-gradient(135deg, #0077b6, #00b4d8);">${item.icon}</div>
+                        <span>${item.name}</span>
+                    </div>`;
+                });
+                // Also show a subset of games in grid
+                allGames.slice(0, 10).forEach(item => {
+                    grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.url}', '${item.name}')">
+                        <div class="round-img">${item.icon}</div>
                         <span>${item.name}</span>
                     </div>`;
                 });
             } else {
                 kidsSection.style.display = 'none';
-                zoneTitle.innerText = '⚡ ' + category + ' Game Zone';
-                const games = categoryGames[category] || categoryGames['Explore'];
-                games.forEach(item => {
-                    grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.url}', '${item.name}')">
-                        <div class="round-img" style="background: ${item.bg}">${item.icon}</div>
-                        <span>${item.name}</span>
-                    </div>`;
-                });
+                if(category === 'All') {
+                    zoneTitle.innerText = '⚡ All Games Hub (50 Games)';
+                    allGames.forEach(item => {
+                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.url}', '${item.name}')">
+                            <div class="round-img">${item.icon}</div>
+                            <span>${item.name}</span>
+                        </div>`;
+                    });
+                } else {
+                    zoneTitle.innerText = '⚡ ' + category + ' Games';
+                    const filtered = allGames.filter(g => g.cat === category);
+                    filtered.forEach(item => {
+                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.url}', '${item.name}')">
+                            <div class="round-img">${item.icon}</div>
+                            <span>${item.name}</span>
+                        </div>`;
+                    });
+                }
             }
         }
 
         function filterCategory(category, element) {
             document.querySelectorAll('.cat-tab').forEach(tab => tab.classList.remove('active'));
             element.classList.add('active');
-            renderGames(category);
+            renderContent(category);
         }
 
         function switchTab(tabName, element) {
@@ -414,9 +445,9 @@
             alert('🎉 Mystery Box opened! +50 Coins added.');
         }
 
-        // Initialize default Explore category games on load
+        // Load all 50 games on startup instantly
         window.onload = function() {
-            renderGames('Explore');
+            renderContent('All');
         };
     </script>
 </body>
