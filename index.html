@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Battle Hub - True Working Games</title>
+    <title>3D Battle Hub - Ultimate Playable Pro</title>
     <style>
         :root {
             --bg-color: #080b10;
@@ -160,7 +160,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 10px;
             width: 100%;
             height: calc(100% - 50px);
         }
@@ -208,7 +208,7 @@
     </header>
 
     <div class="category-tabs">
-        <div class="cat-tab active" onclick="filterCategory('All', this)">Top Games (10)</div>
+        <div class="cat-tab active" onclick="filterCategory('All', this)">Explore Hub</div>
         <div class="cat-tab" onclick="filterCategory('Cricket', this)">Cricket</div>
         <div class="cat-tab" onclick="filterCategory('Racing', this)">Racing</div>
         <div class="cat-tab" onclick="filterCategory('Casino', this)">Casino</div>
@@ -231,7 +231,7 @@
             </div>
 
             <div class="section-header">
-                <div class="section-title" id="zone-title">⚡ Top Featured Games</div>
+                <div class="section-title" id="zone-title">⚡ Featured Playable Games</div>
             </div>
             <div class="grid-5" id="game-grid"></div>
         </div>
@@ -283,17 +283,17 @@
     </div>
 
     <script>
-        const featuredGames = [
-            {name: 'Cricket Pro', icon: '🏏', cat: 'Cricket'},
-            {name: 'Super Cricket', icon: '🥎', cat: 'Cricket'},
-            {name: 'Car Race 3D', icon: '🏎️', cat: 'Racing'},
-            {name: 'Bike Stunt', icon: '🏍️', cat: 'Racing'},
-            {name: 'Aviator Pro', icon: '✈️', cat: 'Casino'},
-            {name: 'Fortune Gems', icon: '💎', cat: 'Casino'},
-            {name: 'Teen Patti', icon: '🃏', cat: 'Rummy'},
-            {name: 'Ludo Master', icon: '🎲', cat: 'Rummy'},
-            {name: 'Free Fire Arena', icon: '🔥', cat: 'Action'},
-            {name: 'PUBG Clash', icon: '🎯', cat: 'Action'}
+        const playableGames = [
+            {name: 'Cricket Pro', icon: '🏏', cat: 'Cricket', desc: 'Tap to Hit & Score Runs!'},
+            {name: 'Super Cricket', icon: '🥎', cat: 'Cricket', desc: 'Batting Challenge Game'},
+            {name: 'Car Race 3D', icon: '🏎️', cat: 'Racing', desc: 'Speed Racing Action!'},
+            {name: 'Bike Stunt', icon: '🏍️', cat: 'Racing', desc: 'Stunt Jump Racing!'},
+            {name: 'Aviator Pro', icon: '✈️', cat: 'Casino', desc: 'Flight Multiplier Game'},
+            {name: 'Fortune Gems', icon: '💎', cat: 'Casino', desc: 'Gem Match & Spin'},
+            {name: 'Teen Patti', icon: '🃏', cat: 'Rummy', desc: 'Card Strategy Game'},
+            {name: 'Ludo Master', icon: '🎲', cat: 'Rummy', desc: 'Classic Dice Board'},
+            {name: 'Free Fire Arena', icon: '🔥', cat: 'Action', desc: 'Shooting Combat'},
+            {name: 'PUBG Clash', icon: '🎯', cat: 'Action', desc: 'Survival Battle'}
         ];
 
         const kidsCartoons = [
@@ -321,8 +321,8 @@
                         <span>${item.name}</span>
                     </div>`;
                 });
-                featuredGames.slice(0, 6).forEach(item => {
-                    grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}', '${item.icon}')">
+                playableGames.slice(0, 6).forEach(item => {
+                    grid.innerHTML += `<div class="round-game-item" onclick="launchPlayableGame('${item.name}', '${item.icon}', '${item.desc}')">
                         <div class="round-img">${item.icon}</div>
                         <span>${item.name}</span>
                     </div>`;
@@ -330,18 +330,18 @@
             } else {
                 kidsSection.style.display = 'none';
                 if(category === 'All') {
-                    zoneTitle.innerText = '⚡ Top Featured Games';
-                    featuredGames.forEach(item => {
-                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}', '${item.icon}')">
+                    zoneTitle.innerText = '⚡ Featured Playable Games';
+                    playableGames.forEach(item => {
+                        grid.innerHTML += `<div class="round-game-item" onclick="launchPlayableGame('${item.name}', '${item.icon}', '${item.desc}')">
                             <div class="round-img">${item.icon}</div>
                             <span>${item.name}</span>
                         </div>`;
                     });
                 } else {
                     zoneTitle.innerText = '⚡ ' + category + ' Games';
-                    const filtered = featuredGames.filter(g => g.cat === category);
+                    const filtered = playableGames.filter(g => g.cat === category);
                     filtered.forEach(item => {
-                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}', '${item.icon}')">
+                        grid.innerHTML += `<div class="round-game-item" onclick="launchPlayableGame('${item.name}', '${item.icon}', '${item.desc}')">
                             <div class="round-img">${item.icon}</div>
                             <span>${item.name}</span>
                         </div>`;
@@ -363,17 +363,18 @@
             element.classList.add('active');
         }
 
-        function launchGame(gameName, icon) {
+        function launchPlayableGame(gameName, icon, desc) {
             document.getElementById('viewer-title').innerText = gameName;
             document.getElementById('viewer-body').innerHTML = `
                 <div style="background:#161b22; padding:15px; border-radius:12px; border:1px solid #30363d; max-width:340px; width:100%; text-align:center;">
                     <div style="font-size:35px; margin-bottom:5px;">${icon}</div>
-                    <h3 style="color:#f59e0b; margin-bottom:6px; font-size:16px;">${gameName} Live Arena</h3>
-                    <canvas id="activeGameCanvas" width="300" height="220" style="background:#000; border-radius:8px; border:1px solid #30363d; margin-bottom:10px; display:block; margin-left:auto; margin-right:auto;"></canvas>
-                    <p style="color:#22c55e; font-size:12px; font-weight:bold; margin-bottom:10px;" id="gameStatus">Game Active! Tap Action to play.</p>
+                    <h3 style="color:#f59e0b; margin-bottom:4px; font-size:16px;">${gameName}</h3>
+                    <p style="color:#94a3b8; font-size:11px; margin-bottom:10px;">${desc}</p>
+                    <canvas id="activeGameCanvas" width="300" height="200" style="background:#000; border-radius:8px; border:1px solid #30363d; margin-bottom:10px; display:block; margin-left:auto; margin-right:auto;"></canvas>
+                    <p style="color:#22c55e; font-size:12px; font-weight:bold; margin-bottom:10px;" id="gameStatus">Tap Play Button Below to Move & Score!</p>
                     <div style="display:flex; gap:8px;">
-                        <button onclick="gameAction()" style="background:#22c55e; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Action / Hit</button>
-                        <button onclick="restartActiveGame()" style="background:#ef4444; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Restart</button>
+                        <button onclick="gameAction()" style="background:#22c55e; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Play / Action</button>
+                        <button onclick="restartActiveGame()" style="background:#ef4444; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Reset</button>
                     </div>
                 </div>
             `;
@@ -383,9 +384,9 @@
 
         let animInterval = null;
         let objX = 20;
-        let objY = 110;
+        let objY = 100;
         let gameScore = 0;
-        let direction = 2;
+        let direction = 3;
 
         function startCanvasGameLoop() {
             gameScore = 0;
@@ -400,14 +401,17 @@
                 ctx.fillStyle = '#080b10';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
+                // Moving character/object
                 ctx.fillStyle = '#f59e0b';
                 ctx.beginPath();
                 ctx.arc(objX, objY, 15, 0, Math.PI * 2);
                 ctx.fill();
 
+                // Target zone
                 ctx.fillStyle = '#22c55e';
-                ctx.fillRect(240, 100, 20, 20);
+                ctx.fillRect(240, 90, 20, 20);
 
+                // Score text
                 ctx.fillStyle = '#ffffff';
                 ctx.font = 'bold 14px sans-serif';
                 ctx.fillText('Score: ' + gameScore, 15, 25);
@@ -416,18 +420,18 @@
                 if(objX > 280 || objX < 20) {
                     direction = -direction;
                 }
-            }, 30);
+            }, 25);
         }
 
         function gameAction() {
             gameScore += 10;
             direction = -direction;
-            document.getElementById('gameStatus').innerText = 'Scored! Score: ' + gameScore;
+            document.getElementById('gameStatus').innerText = 'Great Hit! Score: ' + gameScore;
         }
 
         function restartActiveGame() {
             startCanvasGameLoop();
-            document.getElementById('gameStatus').innerText = 'Game Restarted! Play now.';
+            document.getElementById('gameStatus').innerText = 'Game Reset! Play now.';
         }
 
         function playCartoon(cartoonName, videoUrl) {
