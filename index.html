@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Battle Hub - 100% Working Pro</title>
+    <title>3D Battle Hub - Final Real Working</title>
     <style>
         :root {
             --bg-color: #080b10;
@@ -160,7 +160,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 10px;
             width: 100%;
             height: calc(100% - 50px);
         }
@@ -255,7 +255,7 @@
             <div class="permanent-ad-zone">
                 <h3>🎁 Promos & Mystery Box</h3>
                 <p style="font-size: 12px; color: var(--text-secondary); margin: 6px 0 10px 0;">12-Hour Mystery Box & Rewards available.</p>
-                <button style="background: var(--accent-color); border: none; padding: 6px 14px; border-radius: 6px; font-weight: bold; font-size: 11px; cursor: pointer;" onclick="openMysteryBox()">Open Box</button>
+                <button style="background: var(--accent-color); border: none; padding: 6px 14px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer;" onclick="openMysteryBox()">Open Box</button>
             </div>
         </div>
     </div>
@@ -410,52 +410,71 @@
         function launchGame(gameName, icon) {
             document.getElementById('viewer-title').innerText = gameName;
             document.getElementById('viewer-body').innerHTML = `
-                <div style="background:#161b22; padding:20px; border-radius:15px; border:1px solid #30363d; max-width:340px; width:100%; text-align:center;">
-                    <div style="font-size:40px; margin-bottom:5px;">${icon}</div>
-                    <h3 style="color:#f59e0b; margin-bottom:8px; font-size:18px;">${gameName} Arena</h3>
-                    <canvas id="gameCanvas" width="280" height="200" style="background:#000; border-radius:8px; border:1px solid #30363d; margin-bottom:12px;"></canvas>
-                    <p style="color:#94a3b8; font-size:11px; margin-bottom:12px;">Tap buttons below to play and score points!</p>
+                <div style="background:#161b22; padding:15px; border-radius:12px; border:1px solid #30363d; max-width:340px; width:100%; text-align:center;">
+                    <div style="font-size:35px; margin-bottom:5px;">${icon}</div>
+                    <h3 style="color:#f59e0b; margin-bottom:6px; font-size:16px;">${gameName} Live Arena</h3>
+                    <canvas id="activeGameCanvas" width="300" height="220" style="background:#000; border-radius:8px; border:1px solid #30363d; margin-bottom:10px; display:block; margin-left:auto; margin-right:auto;"></canvas>
+                    <p style="color:#22c55e; font-size:12px; font-weight:bold; margin-bottom:10px;" id="gameStatus">Game Active! Tap Move/Action to play.</p>
                     <div style="display:flex; gap:8px;">
-                        <button onclick="scorePoint()" style="background:#22c55e; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Action / Hit</button>
-                        <button onclick="resetGame()" style="background:#ef4444; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Reset</button>
+                        <button onclick="gameAction()" style="background:#22c55e; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Action / Jump</button>
+                        <button onclick="restartActiveGame()" style="background:#ef4444; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Restart</button>
                     </div>
-                    <p id="scoreDisplay" style="color:#fff; margin-top:10px; font-weight:bold; font-size:13px;">Score: 0</p>
                 </div>
             `;
             document.getElementById('game-viewer').style.display = 'flex';
-            initCanvasGame();
+            startCanvasGameLoop();
         }
 
-        let score = 0;
-        function initCanvasGame() {
-            score = 0;
-            const canvas = document.getElementById('gameCanvas');
+        let animInterval = null;
+        let objX = 20;
+        let objY = 110;
+        let gameScore = 0;
+        let direction = 2;
+
+        function startCanvasGameLoop() {
+            gameScore = 0;
+            objX = 20;
+            const canvas = document.getElementById('activeGameCanvas');
             if(!canvas) return;
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#111622';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#f59e0b';
-            ctx.font = '16px sans-serif';
-            ctx.fillText('Tap Action to Play!', 70, 100);
+            
+            if(animInterval) clearInterval(animInterval);
+            
+            animInterval = setInterval(() => {
+                ctx.fillStyle = '#080b10';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw moving player object
+                ctx.fillStyle = '#f59e0b';
+                ctx.beginPath();
+                ctx.arc(objX, objY, 15, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Draw target coin
+                ctx.fillStyle = '#22c55e';
+                ctx.fillRect(240, 100, 20, 20);
+
+                // Draw score
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 14px sans-serif';
+                ctx.fillText('Score: ' + gameScore, 15, 25);
+
+                objX += direction;
+                if(objX > 280 || objX < 20) {
+                    direction = -direction;
+                }
+            }, 30);
         }
 
-        function scorePoint() {
-            score += 10;
-            const canvas = document.getElementById('gameCanvas');
-            if(!canvas) return;
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#080b10';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#22c55e';
-            ctx.font = 'bold 24px sans-serif';
-            ctx.fillText('Score: ' + score, 90, 100);
-            document.getElementById('scoreDisplay').innerText = 'Score: ' + score;
+        function gameAction() {
+            gameScore += 10;
+            direction = -direction;
+            document.getElementById('gameStatus').innerText = 'Scored! Score: ' + gameScore;
         }
 
-        function resetGame() {
-            score = 0;
-            initCanvasGame();
-            document.getElementById('scoreDisplay').innerText = 'Score: 0';
+        function restartActiveGame() {
+            startCanvasGameLoop();
+            document.getElementById('gameStatus').innerText = 'Game Restarted! Play now.';
         }
 
         function playCartoon(cartoonName, videoUrl) {
@@ -472,6 +491,7 @@
         }
 
         function closeGameViewer() {
+            if(animInterval) clearInterval(animInterval);
             document.getElementById('game-viewer').style.display = 'none';
             document.getElementById('viewer-body').innerHTML = '';
         }
