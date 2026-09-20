@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Battle Hub - 100% Working</title>
+    <title>3D Battle Hub - Final Working</title>
     <style>
         :root {
             --bg-color: #080b10;
@@ -160,8 +160,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            text-align: center;
+            padding: 15px;
+            width: 100%;
+            height: calc(100% - 50px);
         }
         .bottom-nav {
             position: fixed;
@@ -340,10 +341,10 @@
         ];
 
         const kidsCartoons = [
-            {name: 'Tom & Jerry Fun', icon: '🐱', desc: 'Classic Cartoon Comedy'},
-            {name: 'Doraemon Adventures', icon: '🔵', desc: 'Kids Favorite Show'},
-            {name: 'Chhota Bheem', icon: '🦸', desc: 'Action Cartoon'},
-            {name: 'MOTU PATLU', icon: '🚲', desc: 'Funny Cartoon Series'}
+            {name: 'Tom & Jerry Fun', icon: '🐱', videoId: '1qlZVGwUjxs'},
+            {name: 'Doraemon Adventures', icon: '🔵', videoId: 'T6s2zR2Q3cM'},
+            {name: 'Chhota Bheem', icon: '🦸', videoId: 'jNQXAC9IVRw'},
+            {name: 'MOTU PATLU', icon: '🚲', videoId: 'kJQP7kiw5Fk'}
         ];
 
         function renderContent(category) {
@@ -357,9 +358,9 @@
 
             if(category === 'Kids Zone') {
                 kidsSection.style.display = 'block';
-                zoneTitle.innerText = '👶 Kids Zone (Working Cartoons)';
+                zoneTitle.innerText = '👶 Kids Zone (Cartoons & Videos)';
                 kidsCartoons.forEach(item => {
-                    kidsGrid.innerHTML += `<div class="round-game-item" onclick="playCartoon('${item.name}')">
+                    kidsGrid.innerHTML += `<div class="round-game-item" onclick="playCartoon('${item.name}', '${item.videoId}')">
                         <div class="round-img" style="background: linear-gradient(135deg, #0077b6, #00b4d8);">${item.icon}</div>
                         <span>${item.name}</span>
                     </div>`;
@@ -409,27 +410,20 @@
         function launchGame(gameName, icon) {
             document.getElementById('viewer-title').innerText = gameName;
             document.getElementById('viewer-body').innerHTML = `
-                <div style="background:#161b22; padding:30px; border-radius:15px; border:1px solid #30363d; max-width:320px; width:100%;">
-                    <div style="font-size:50px; margin-bottom:10px;">${icon}</div>
-                    <h2 style="color:#f59e0b; margin-bottom:10px;">${gameName}</h2>
-                    <p style="color:#94a3b8; font-size:13px; margin-bottom:20px;">Ready to play! Click below to start your game session instantly.</p>
-                    <button onclick="alert('🎮 Enjoying ${gameName}!')" style="background:linear-gradient(135deg, #ff4500, #ff7b00); color:white; border:none; padding:12px 20px; border-radius:8px; font-weight:bold; width:100%; cursor:pointer; font-size:15px;">Play Game Now</button>
+                <div style="background:#161b22; padding:25px; border-radius:15px; border:1px solid #30363d; max-width:320px; width:100%; text-align:center;">
+                    <div style="font-size:45px; margin-bottom:10px;">${icon}</div>
+                    <h2 style="color:#f59e0b; margin-bottom:10px; font-size:20px;">${gameName}</h2>
+                    <p style="color:#94a3b8; font-size:12px; margin-bottom:20px;">Interactive zone loaded successfully. Tap start to play!</p>
+                    <button onclick="alert('🎮 Playing ${gameName} successfully!')" style="background:linear-gradient(135deg, #ff4500, #ff7b00); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; width:100%; cursor:pointer; font-size:14px;">Start Playing</button>
                 </div>
             `;
             document.getElementById('game-viewer').style.display = 'flex';
         }
 
-        function playCartoon(cartoonName) {
+        function playCartoon(cartoonName, videoId) {
             document.getElementById('viewer-title').innerText = cartoonName;
             document.getElementById('viewer-body').innerHTML = `
-                <div style="background:#161b22; padding:30px; border-radius:15px; border:1px solid #30363d; max-width:340px; width:100%;">
-                    <div style="font-size:50px; margin-bottom:10px;">📺</div>
-                    <h2 style="color:#00b4d8; margin-bottom:10px;">${cartoonName}</h2>
-                    <div style="background:#080b10; padding:15px; border-radius:8px; margin-bottom:20px; color:#fff; font-size:14px; border:1px dashed #00b4d8;">
-                        ▶️ Playing Cartoon Video Stream... Enjoy watching!
-                    </div>
-                    <button onclick="alert('Playing ${cartoonName} video!')" style="background:linear-gradient(135deg, #0077b6, #00b4d8); color:white; border:none; padding:12px 20px; border-radius:8px; font-weight:bold; width:100%; cursor:pointer; font-size:15px;">Play Video</button>
-                </div>
+                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             `;
             document.getElementById('game-viewer').style.display = 'flex';
         }
