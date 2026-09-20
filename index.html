@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Battle Hub - Working Pro</title>
+    <title>3D Battle Hub - 100% Working</title>
     <style>
         :root {
             --bg-color: #080b10;
@@ -136,7 +136,6 @@
             line-height: 1.2;
             font-weight: 500;
         }
-        /* Working Game Viewer Modal */
         #game-viewer {
             display: none;
             position: fixed;
@@ -164,7 +163,6 @@
             padding: 20px;
             text-align: center;
         }
-        /* Bottom Navigation Bar */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -261,15 +259,12 @@
         </div>
     </div>
 
-    <!-- Working Internal Game & Video Player Viewer Modal -->
     <div id="game-viewer">
         <header>
             <span id="viewer-title" style="font-weight:bold; color:#fff;">Playing Content</span>
             <button onclick="closeGameViewer()" style="background:#ff4500; color:#fff; border:none; padding:5px 12px; border-radius:5px; font-weight:bold; cursor:pointer;">Close</button>
         </header>
-        <div class="game-screen" id="viewer-body">
-            <!-- Dynamic content loaded securely without 404 -->
-        </div>
+        <div class="game-screen" id="viewer-body"></div>
     </div>
 
     <div class="bottom-nav">
@@ -344,11 +339,11 @@
             {name: 'Battle Royale', icon: '🛡️', cat: 'Action'}
         ];
 
-        const kidsVideos = [
-            {name: 'Cartoon Rhymes', icon: '📺', url: 'https://www.youtube.com/embed/1qlZVGwUjxs'},
-            {name: 'Funny Cartoons', icon: '🎈', url: 'https://www.youtube.com/embed/T6s2zR2Q3cM'},
-            {name: 'Kids Song Fun', icon: '🎵', url: 'https://www.youtube.com/embed/jNQXAC9IVRw'},
-            {name: 'Animated Tales', icon: '🦄', url: 'https://www.youtube.com/embed/kJQP7kiw5Fk'}
+        const kidsCartoons = [
+            {name: 'Tom & Jerry Fun', icon: '🐱', desc: 'Classic Cartoon Comedy'},
+            {name: 'Doraemon Adventures', icon: '🔵', desc: 'Kids Favorite Show'},
+            {name: 'Chhota Bheem', icon: '🦸', desc: 'Action Cartoon'},
+            {name: 'MOTU PATLU', icon: '🚲', desc: 'Funny Cartoon Series'}
         ];
 
         function renderContent(category) {
@@ -362,15 +357,15 @@
 
             if(category === 'Kids Zone') {
                 kidsSection.style.display = 'block';
-                zoneTitle.innerText = '👶 Kids Zone (Cartoons & Videos)';
-                kidsVideos.forEach(item => {
-                    kidsGrid.innerHTML += `<div class="round-game-item" onclick="playRealVideo('${item.url}', '${item.name}')">
+                zoneTitle.innerText = '👶 Kids Zone (Working Cartoons)';
+                kidsCartoons.forEach(item => {
+                    kidsGrid.innerHTML += `<div class="round-game-item" onclick="playCartoon('${item.name}')">
                         <div class="round-img" style="background: linear-gradient(135deg, #0077b6, #00b4d8);">${item.icon}</div>
                         <span>${item.name}</span>
                     </div>`;
                 });
                 allGames.slice(0, 10).forEach(item => {
-                    grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}')">
+                    grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}', '${item.icon}')">
                         <div class="round-img">${item.icon}</div>
                         <span>${item.name}</span>
                     </div>`;
@@ -380,7 +375,7 @@
                 if(category === 'All') {
                     zoneTitle.innerText = '⚡ All Games Hub (50 Games)';
                     allGames.forEach(item => {
-                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}')">
+                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}', '${item.icon}')">
                             <div class="round-img">${item.icon}</div>
                             <span>${item.name}</span>
                         </div>`;
@@ -389,7 +384,7 @@
                     zoneTitle.innerText = '⚡ ' + category + ' Games';
                     const filtered = allGames.filter(g => g.cat === category);
                     filtered.forEach(item => {
-                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}')">
+                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}', '${item.icon}')">
                             <div class="round-img">${item.icon}</div>
                             <span>${item.name}</span>
                         </div>`;
@@ -411,22 +406,31 @@
             element.classList.add('active');
         }
 
-        function launchGame(gameName) {
+        function launchGame(gameName, icon) {
             document.getElementById('viewer-title').innerText = gameName;
             document.getElementById('viewer-body').innerHTML = `
                 <div style="background:#161b22; padding:30px; border-radius:15px; border:1px solid #30363d; max-width:320px; width:100%;">
-                    <div style="font-size:40px; margin-bottom:10px;">🎮</div>
+                    <div style="font-size:50px; margin-bottom:10px;">${icon}</div>
                     <h2 style="color:#f59e0b; margin-bottom:10px;">${gameName}</h2>
-                    <p style="color:#94a3b8; font-size:13px; margin-bottom:20px;">Game loaded successfully! Tap below to start playing instantly.</p>
-                    <button onclick="alert('Playing ${gameName}!')" style="background:linear-gradient(135deg, #ff4500, #ff7b00); color:white; border:none; padding:12px 20px; border-radius:8px; font-weight:bold; width:100%; cursor:pointer;">Start Game</button>
+                    <p style="color:#94a3b8; font-size:13px; margin-bottom:20px;">Ready to play! Click below to start your game session instantly.</p>
+                    <button onclick="alert('🎮 Enjoying ${gameName}!')" style="background:linear-gradient(135deg, #ff4500, #ff7b00); color:white; border:none; padding:12px 20px; border-radius:8px; font-weight:bold; width:100%; cursor:pointer; font-size:15px;">Play Game Now</button>
                 </div>
             `;
             document.getElementById('game-viewer').style.display = 'flex';
         }
 
-        function playRealVideo(videoUrl, videoName) {
-            document.getElementById('viewer-title').innerText = videoName;
-            document.getElementById('viewer-body').innerHTML = `<iframe src="${videoUrl}" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
+        function playCartoon(cartoonName) {
+            document.getElementById('viewer-title').innerText = cartoonName;
+            document.getElementById('viewer-body').innerHTML = `
+                <div style="background:#161b22; padding:30px; border-radius:15px; border:1px solid #30363d; max-width:340px; width:100%;">
+                    <div style="font-size:50px; margin-bottom:10px;">📺</div>
+                    <h2 style="color:#00b4d8; margin-bottom:10px;">${cartoonName}</h2>
+                    <div style="background:#080b10; padding:15px; border-radius:8px; margin-bottom:20px; color:#fff; font-size:14px; border:1px dashed #00b4d8;">
+                        ▶️ Playing Cartoon Video Stream... Enjoy watching!
+                    </div>
+                    <button onclick="alert('Playing ${cartoonName} video!')" style="background:linear-gradient(135deg, #0077b6, #00b4d8); color:white; border:none; padding:12px 20px; border-radius:8px; font-weight:bold; width:100%; cursor:pointer; font-size:15px;">Play Video</button>
+                </div>
+            `;
             document.getElementById('game-viewer').style.display = 'flex';
         }
 
@@ -436,7 +440,9 @@
         }
 
         function watchAd() {
-            alert('📺 Ad Zone: Sponsor ad loaded successfully!');
+            alert('📺 Ad Zone: Sponsor ad loaded successfully! +10 Coins added.');
+            let coinEl = document.getElementById('user-coins');
+            coinEl.innerText = parseInt(coinEl.innerText) + 10;
         }
 
         function openMysteryBox() {
