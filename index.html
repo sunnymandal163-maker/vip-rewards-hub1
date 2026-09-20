@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Battle Hub - Final Real Working</title>
+    <title>3D Battle Hub - True Working Games</title>
     <style>
         :root {
             --bg-color: #080b10;
@@ -160,7 +160,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 15px;
             width: 100%;
             height: calc(100% - 50px);
         }
@@ -208,11 +208,10 @@
     </header>
 
     <div class="category-tabs">
-        <div class="cat-tab active" onclick="filterCategory('All', this)">All Games (50)</div>
+        <div class="cat-tab active" onclick="filterCategory('All', this)">Top Games (10)</div>
         <div class="cat-tab" onclick="filterCategory('Cricket', this)">Cricket</div>
         <div class="cat-tab" onclick="filterCategory('Racing', this)">Racing</div>
         <div class="cat-tab" onclick="filterCategory('Casino', this)">Casino</div>
-        <div class="cat-tab" onclick="filterCategory('Rummy', this)">Rummy</div>
         <div class="cat-tab" onclick="filterCategory('Kids Zone', this)">Kids Zone</div>
     </div>
 
@@ -232,7 +231,7 @@
             </div>
 
             <div class="section-header">
-                <div class="section-title" id="zone-title">⚡ All Games Hub (50 Games)</div>
+                <div class="section-title" id="zone-title">⚡ Top Featured Games</div>
             </div>
             <div class="grid-5" id="game-grid"></div>
         </div>
@@ -284,60 +283,17 @@
     </div>
 
     <script>
-        const allGames = [
+        const featuredGames = [
             {name: 'Cricket Pro', icon: '🏏', cat: 'Cricket'},
             {name: 'Super Cricket', icon: '🥎', cat: 'Cricket'},
-            {name: 'T20 Cup', icon: '🏆', cat: 'Cricket'},
-            {name: 'Batting Master', icon: '🏏', cat: 'Cricket'},
-            {name: 'Stump Out', icon: '⚡', cat: 'Cricket'},
-            {name: 'Football Cup', icon: '⚽', cat: 'Sports'},
-            {name: 'Basketball', icon: '🏀', cat: 'Sports'},
-            {name: 'Tennis World', icon: '🎾', cat: 'Sports'},
-            {name: 'Badminton', icon: '🏸', cat: 'Sports'},
-            {name: 'Penalty Shoot', icon: '🥅', cat: 'Sports'},
-
             {name: 'Car Race 3D', icon: '🏎️', cat: 'Racing'},
             {name: 'Bike Stunt', icon: '🏍️', cat: 'Racing'},
-            {name: 'Horse Racing', icon: '🐎', cat: 'Racing'},
-            {name: 'Highway Rider', icon: '🚀', cat: 'Racing'},
-            {name: 'Cycle Race', icon: '🚲', cat: 'Racing'},
-            {name: 'Formula Speed', icon: '🏎️', cat: 'Racing'},
-            {name: 'Truck Trials', icon: '🚚', cat: 'Racing'},
-            {name: 'Drift King', icon: '🚙', cat: 'Racing'},
-            {name: 'Police Chase', icon: '🚓', cat: 'Racing'},
-            {name: 'Kart Master', icon: '🏎️', cat: 'Racing'},
-
             {name: 'Aviator Pro', icon: '✈️', cat: 'Casino'},
             {name: 'Fortune Gems', icon: '💎', cat: 'Casino'},
-            {name: 'Mines Boom', icon: '💣', cat: 'Casino'},
-            {name: 'Money Pot', icon: '💰', cat: 'Casino'},
-            {name: 'Coin Tree', icon: '🌳', cat: 'Casino'},
-            {name: 'Chicken Road', icon: '🐔', cat: 'Casino'},
-            {name: 'Roulette Spin', icon: '🎡', cat: 'Casino'},
-            {name: 'Gold Diggers', icon: '⛏️', cat: 'Casino'},
-            {name: 'Lucky Slots', icon: '🎰', cat: 'Casino'},
-            {name: 'Diamond Rush', icon: '💎', cat: 'Casino'},
-            {name: 'Magic Pot', icon: '🏺', cat: 'Casino'},
-            {name: 'Cash Vault', icon: '🏦', cat: 'Casino'},
-            {name: 'Plinko Win', icon: '🎯', cat: 'Casino'},
-            {name: 'Mega Spin', icon: '🌀', cat: 'Casino'},
-            {name: 'Bonus Drop', icon: '🎁', cat: 'Casino'},
-
             {name: 'Teen Patti', icon: '🃏', cat: 'Rummy'},
-            {name: 'Rummy Call', icon: '🎴', cat: 'Rummy'},
             {name: 'Ludo Master', icon: '🎲', cat: 'Rummy'},
-            {name: 'Poker Star', icon: '♠️', cat: 'Rummy'},
-            {name: 'Blackjack', icon: '♣️', cat: 'Rummy'},
-            {name: 'Andar Bahar', icon: '🎴', cat: 'Rummy'},
-            {name: 'Dragon Tiger', icon: '🐉', cat: 'Rummy'},
-            {name: 'Call Break', icon: '🎴', cat: 'Rummy'},
-            {name: 'Solitaire', icon: '🎴', cat: 'Rummy'},
             {name: 'Free Fire Arena', icon: '🔥', cat: 'Action'},
-            {name: 'PUBG Clash', icon: '🎯', cat: 'Action'},
-            {name: 'Knife Hit', icon: '🗡️', cat: 'Action'},
-            {name: 'Archery Pro', icon: '🏹', cat: 'Action'},
-            {name: 'Sniper 3D', icon: '🎯', cat: 'Action'},
-            {name: 'Battle Royale', icon: '🛡️', cat: 'Action'}
+            {name: 'PUBG Clash', icon: '🎯', cat: 'Action'}
         ];
 
         const kidsCartoons = [
@@ -365,7 +321,7 @@
                         <span>${item.name}</span>
                     </div>`;
                 });
-                allGames.slice(0, 10).forEach(item => {
+                featuredGames.slice(0, 6).forEach(item => {
                     grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}', '${item.icon}')">
                         <div class="round-img">${item.icon}</div>
                         <span>${item.name}</span>
@@ -374,8 +330,8 @@
             } else {
                 kidsSection.style.display = 'none';
                 if(category === 'All') {
-                    zoneTitle.innerText = '⚡ All Games Hub (50 Games)';
-                    allGames.forEach(item => {
+                    zoneTitle.innerText = '⚡ Top Featured Games';
+                    featuredGames.forEach(item => {
                         grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}', '${item.icon}')">
                             <div class="round-img">${item.icon}</div>
                             <span>${item.name}</span>
@@ -383,7 +339,7 @@
                     });
                 } else {
                     zoneTitle.innerText = '⚡ ' + category + ' Games';
-                    const filtered = allGames.filter(g => g.cat === category);
+                    const filtered = featuredGames.filter(g => g.cat === category);
                     filtered.forEach(item => {
                         grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}', '${item.icon}')">
                             <div class="round-img">${item.icon}</div>
@@ -414,9 +370,9 @@
                     <div style="font-size:35px; margin-bottom:5px;">${icon}</div>
                     <h3 style="color:#f59e0b; margin-bottom:6px; font-size:16px;">${gameName} Live Arena</h3>
                     <canvas id="activeGameCanvas" width="300" height="220" style="background:#000; border-radius:8px; border:1px solid #30363d; margin-bottom:10px; display:block; margin-left:auto; margin-right:auto;"></canvas>
-                    <p style="color:#22c55e; font-size:12px; font-weight:bold; margin-bottom:10px;" id="gameStatus">Game Active! Tap Move/Action to play.</p>
+                    <p style="color:#22c55e; font-size:12px; font-weight:bold; margin-bottom:10px;" id="gameStatus">Game Active! Tap Action to play.</p>
                     <div style="display:flex; gap:8px;">
-                        <button onclick="gameAction()" style="background:#22c55e; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Action / Jump</button>
+                        <button onclick="gameAction()" style="background:#22c55e; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Action / Hit</button>
                         <button onclick="restartActiveGame()" style="background:#ef4444; color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; flex:1; cursor:pointer;">Restart</button>
                     </div>
                 </div>
@@ -444,17 +400,14 @@
                 ctx.fillStyle = '#080b10';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
-                // Draw moving player object
                 ctx.fillStyle = '#f59e0b';
                 ctx.beginPath();
                 ctx.arc(objX, objY, 15, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Draw target coin
                 ctx.fillStyle = '#22c55e';
                 ctx.fillRect(240, 100, 20, 20);
 
-                // Draw score
                 ctx.fillStyle = '#ffffff';
                 ctx.font = 'bold 14px sans-serif';
                 ctx.fillText('Score: ' + gameScore, 15, 25);
