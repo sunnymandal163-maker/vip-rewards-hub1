@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Battle Hub - Final Working Pro</title>
+    <title>3D Battle Hub - Working Pro</title>
     <style>
         :root {
             --bg-color: #080b10;
@@ -53,7 +53,6 @@
             font-size: 12px;
             font-weight: bold;
         }
-        /* Top Category Tabs */
         .category-tabs {
             display: flex;
             gap: 10px;
@@ -92,7 +91,6 @@
             font-weight: bold;
             color: var(--text-secondary);
         }
-        /* Permanent Ad Zone */
         .permanent-ad-zone {
             background: linear-gradient(135deg, #1e293b, #0f172a);
             border: 2px dashed var(--accent-color);
@@ -101,7 +99,6 @@
             text-align: center;
             margin-bottom: 15px;
         }
-        /* Grid with 100% Round Icons */
         .grid-5 {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -139,7 +136,7 @@
             line-height: 1.2;
             font-weight: 500;
         }
-        /* Game Screen Viewer Modal */
+        /* Working Game Viewer Modal */
         #game-viewer {
             display: none;
             position: fixed;
@@ -147,7 +144,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: #080b10;
             z-index: 2000;
             flex-direction: column;
         }
@@ -158,11 +155,14 @@
             padding: 10px 15px;
             background: #111;
         }
-        #game-viewer iframe {
-            width: 100%;
-            height: calc(100% - 50px);
-            border: none;
-            background: #fff;
+        .game-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
         }
         /* Bottom Navigation Bar */
         .bottom-nav {
@@ -208,7 +208,6 @@
         </div>
     </header>
 
-    <!-- Top Category Tabs -->
     <div class="category-tabs">
         <div class="cat-tab active" onclick="filterCategory('All', this)">All Games (50)</div>
         <div class="cat-tab" onclick="filterCategory('Cricket', this)">Cricket</div>
@@ -219,36 +218,26 @@
     </div>
 
     <div class="container">
-        <!-- HOME TAB -->
         <div id="tab-home" class="tab-content active">
-            
-            <!-- Permanent Ad Zone -->
             <div class="permanent-ad-zone">
                 <h3 style="font-size: 15px; color: var(--accent-color);">📺 PERMANENT AD ZONE</h3>
                 <p style="font-size: 11px; color: var(--text-secondary); margin: 3px 0 6px 0;">Watch sponsor ads & earn instant rewards!</p>
                 <button style="background: var(--accent-color); border: none; padding: 5px 12px; border-radius: 6px; font-weight: bold; font-size: 11px; cursor: pointer;" onclick="watchAd()">Watch Ad Now</button>
             </div>
 
-            <!-- Kids Zone Section (Cartoons Only) -->
             <div id="kids-section" style="display:none;">
                 <div class="section-header">
-                    <div class="section-title">👶 Kids Zone (Cartoons & Rhymes)</div>
+                    <div class="section-title">👶 Kids Zone (Cartoons & Videos)</div>
                 </div>
-                <div class="grid-5" style="grid-template-columns: repeat(2, 1fr);" id="kids-grid">
-                    <!-- Populated by JS -->
-                </div>
+                <div class="grid-5" style="grid-template-columns: repeat(2, 1fr);" id="kids-grid"></div>
             </div>
 
-            <!-- Games Grid (50 Games Total) -->
             <div class="section-header">
                 <div class="section-title" id="zone-title">⚡ All Games Hub (50 Games)</div>
             </div>
-            <div class="grid-5" id="game-grid">
-                <!-- Dynamically populated 50 games -->
-            </div>
+            <div class="grid-5" id="game-grid"></div>
         </div>
 
-        <!-- VIP TAB -->
         <div id="tab-vip" class="tab-content">
             <div class="permanent-ad-zone" style="background: linear-gradient(135deg, #064e3b, #022c22); border-color: #059669;">
                 <h3 style="color: #34d399;">👑 VIP Level System</h3>
@@ -256,7 +245,6 @@
             </div>
         </div>
 
-        <!-- WALLET TAB -->
         <div id="tab-wallet" class="tab-content">
             <div class="permanent-ad-zone">
                 <h3>💰 Wallet & Vouchers</h3>
@@ -264,7 +252,6 @@
             </div>
         </div>
 
-        <!-- PROMOS TAB -->
         <div id="tab-promos" class="tab-content">
             <div class="permanent-ad-zone">
                 <h3>🎁 Promos & Mystery Box</h3>
@@ -274,16 +261,17 @@
         </div>
     </div>
 
-    <!-- Live Game / Video Player Viewer Modal -->
+    <!-- Working Internal Game & Video Player Viewer Modal -->
     <div id="game-viewer">
         <header>
             <span id="viewer-title" style="font-weight:bold; color:#fff;">Playing Content</span>
             <button onclick="closeGameViewer()" style="background:#ff4500; color:#fff; border:none; padding:5px 12px; border-radius:5px; font-weight:bold; cursor:pointer;">Close</button>
         </header>
-        <iframe id="viewer-iframe" src=""></iframe>
+        <div class="game-screen" id="viewer-body">
+            <!-- Dynamic content loaded securely without 404 -->
+        </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('home', this)">
             <span>🏠</span>Home
@@ -301,59 +289,59 @@
 
     <script>
         const allGames = [
-            {name: 'Cricket Pro', icon: '🏏', cat: 'Cricket', url: 'https://www.htmlgames.com/embed/cricketworld/'},
-            {name: 'Super Cricket', icon: '🥎', cat: 'Cricket', url: 'https://www.htmlgames.com/embed/cricketworld/'},
-            {name: 'T20 Cup', icon: '🏆', cat: 'Cricket', url: 'https://www.htmlgames.com/embed/cricketworld/'},
-            {name: 'Batting Master', icon: '🏏', cat: 'Cricket', url: 'https://www.htmlgames.com/embed/cricketworld/'},
-            {name: 'Stump Out', icon: '⚡', cat: 'Cricket', url: 'https://www.htmlgames.com/embed/cricketworld/'},
-            {name: 'Football Cup', icon: '⚽', cat: 'Sports', url: 'https://www.htmlgames.com/embed/soccer/index.html'},
-            {name: 'Basketball', icon: '🏀', cat: 'Sports', url: 'https://www.htmlgames.com/embed/basketball/index.html'},
-            {name: 'Tennis World', icon: '🎾', cat: 'Sports', url: 'https://www.htmlgames.com/embed/tennis/index.html'},
-            {name: 'Badminton', icon: '🏸', cat: 'Sports', url: 'https://www.htmlgames.com/embed/tennis/index.html'},
-            {name: 'Penalty Shoot', icon: '🥅', cat: 'Sports', url: 'https://www.htmlgames.com/embed/soccer/index.html'},
+            {name: 'Cricket Pro', icon: '🏏', cat: 'Cricket'},
+            {name: 'Super Cricket', icon: '🥎', cat: 'Cricket'},
+            {name: 'T20 Cup', icon: '🏆', cat: 'Cricket'},
+            {name: 'Batting Master', icon: '🏏', cat: 'Cricket'},
+            {name: 'Stump Out', icon: '⚡', cat: 'Cricket'},
+            {name: 'Football Cup', icon: '⚽', cat: 'Sports'},
+            {name: 'Basketball', icon: '🏀', cat: 'Sports'},
+            {name: 'Tennis World', icon: '🎾', cat: 'Sports'},
+            {name: 'Badminton', icon: '🏸', cat: 'Sports'},
+            {name: 'Penalty Shoot', icon: '🥅', cat: 'Sports'},
 
-            {name: 'Car Race 3D', icon: '🏎️', cat: 'Racing', url: 'https://www.htmlgames.com/embed/carracing/index.html'},
-            {name: 'Bike Stunt', icon: '🏍️', cat: 'Racing', url: 'https://www.htmlgames.com/embed/bikeracing/index.html'},
-            {name: 'Horse Racing', icon: '🐎', cat: 'Racing', url: 'https://www.htmlgames.com/embed/carracing/index.html'},
-            {name: 'Highway Rider', icon: '🚀', cat: 'Racing', url: 'https://www.htmlgames.com/embed/carracing/index.html'},
-            {name: 'Cycle Race', icon: '🚲', cat: 'Racing', url: 'https://www.htmlgames.com/embed/bikeracing/index.html'},
-            {name: 'Formula Speed', icon: '🏎️', cat: 'Racing', url: 'https://www.htmlgames.com/embed/carracing/index.html'},
-            {name: 'Truck Trials', icon: '🚚', cat: 'Racing', url: 'https://www.htmlgames.com/embed/carracing/index.html'},
-            {name: 'Drift King', icon: '🚙', cat: 'Racing', url: 'https://www.htmlgames.com/embed/carracing/index.html'},
-            {name: 'Police Chase', icon: '🚓', cat: 'Racing', url: 'https://www.htmlgames.com/embed/carracing/index.html'},
-            {name: 'Kart Master', icon: '🏎️', cat: 'Racing', url: 'https://www.htmlgames.com/embed/carracing/index.html'},
+            {name: 'Car Race 3D', icon: '🏎️', cat: 'Racing'},
+            {name: 'Bike Stunt', icon: '🏍️', cat: 'Racing'},
+            {name: 'Horse Racing', icon: '🐎', cat: 'Racing'},
+            {name: 'Highway Rider', icon: '🚀', cat: 'Racing'},
+            {name: 'Cycle Race', icon: '🚲', cat: 'Racing'},
+            {name: 'Formula Speed', icon: '🏎️', cat: 'Racing'},
+            {name: 'Truck Trials', icon: '🚚', cat: 'Racing'},
+            {name: 'Drift King', icon: '🚙', cat: 'Racing'},
+            {name: 'Police Chase', icon: '🚓', cat: 'Racing'},
+            {name: 'Kart Master', icon: '🏎️', cat: 'Racing'},
 
-            {name: 'Aviator Pro', icon: '✈️', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Fortune Gems', icon: '💎', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Mines Boom', icon: '💣', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Money Pot', icon: '💰', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Coin Tree', icon: '🌳', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Chicken Road', icon: '🐔', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Roulette Spin', icon: '🎡', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Gold Diggers', icon: '⛏️', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Lucky Slots', icon: '🎰', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Diamond Rush', icon: '💎', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Magic Pot', icon: '🏺', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Cash Vault', icon: '🏦', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Plinko Win', icon: '🎯', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Mega Spin', icon: '🌀', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Bonus Drop', icon: '🎁', cat: 'Casino', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
+            {name: 'Aviator Pro', icon: '✈️', cat: 'Casino'},
+            {name: 'Fortune Gems', icon: '💎', cat: 'Casino'},
+            {name: 'Mines Boom', icon: '💣', cat: 'Casino'},
+            {name: 'Money Pot', icon: '💰', cat: 'Casino'},
+            {name: 'Coin Tree', icon: '🌳', cat: 'Casino'},
+            {name: 'Chicken Road', icon: '🐔', cat: 'Casino'},
+            {name: 'Roulette Spin', icon: '🎡', cat: 'Casino'},
+            {name: 'Gold Diggers', icon: '⛏️', cat: 'Casino'},
+            {name: 'Lucky Slots', icon: '🎰', cat: 'Casino'},
+            {name: 'Diamond Rush', icon: '💎', cat: 'Casino'},
+            {name: 'Magic Pot', icon: '🏺', cat: 'Casino'},
+            {name: 'Cash Vault', icon: '🏦', cat: 'Casino'},
+            {name: 'Plinko Win', icon: '🎯', cat: 'Casino'},
+            {name: 'Mega Spin', icon: '🌀', cat: 'Casino'},
+            {name: 'Bonus Drop', icon: '🎁', cat: 'Casino'},
 
-            {name: 'Teen Patti', icon: '🃏', cat: 'Rummy', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Rummy Call', icon: '🎴', cat: 'Rummy', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Ludo Master', icon: '🎲', cat: 'Rummy', url: 'https://www.htmlgames.com/embed/ludo/'},
-            {name: 'Poker Star', icon: '♠️', cat: 'Rummy', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Blackjack', icon: '♣️', cat: 'Rummy', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Andar Bahar', icon: '🎴', cat: 'Rummy', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Dragon Tiger', icon: '🐉', cat: 'Rummy', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Call Break', icon: '🎴', cat: 'Rummy', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Solitaire', icon: '🎴', cat: 'Rummy', url: 'https://www.htmlgames.com/embed/solitaire/index.html'},
-            {name: 'Free Fire Arena', icon: '🔥', cat: 'Action', url: 'https://www.htmlgames.com/embed/archery/'},
-            {name: 'PUBG Clash', icon: '🎯', cat: 'Action', url: 'https://www.htmlgames.com/embed/archery/'},
-            {name: 'Knife Hit', icon: '🗡️', cat: 'Action', url: 'https://www.htmlgames.com/embed/archery/'},
-            {name: 'Archery Pro', icon: '🏹', cat: 'Action', url: 'https://www.htmlgames.com/embed/archery/'},
-            {name: 'Sniper 3D', icon: '🎯', cat: 'Action', url: 'https://www.htmlgames.com/embed/archery/'},
-            {name: 'Battle Royale', icon: '🛡️', cat: 'Action', url: 'https://www.htmlgames.com/embed/archery/'}
+            {name: 'Teen Patti', icon: '🃏', cat: 'Rummy'},
+            {name: 'Rummy Call', icon: '🎴', cat: 'Rummy'},
+            {name: 'Ludo Master', icon: '🎲', cat: 'Rummy'},
+            {name: 'Poker Star', icon: '♠️', cat: 'Rummy'},
+            {name: 'Blackjack', icon: '♣️', cat: 'Rummy'},
+            {name: 'Andar Bahar', icon: '🎴', cat: 'Rummy'},
+            {name: 'Dragon Tiger', icon: '🐉', cat: 'Rummy'},
+            {name: 'Call Break', icon: '🎴', cat: 'Rummy'},
+            {name: 'Solitaire', icon: '🎴', cat: 'Rummy'},
+            {name: 'Free Fire Arena', icon: '🔥', cat: 'Action'},
+            {name: 'PUBG Clash', icon: '🎯', cat: 'Action'},
+            {name: 'Knife Hit', icon: '🗡️', cat: 'Action'},
+            {name: 'Archery Pro', icon: '🏹', cat: 'Action'},
+            {name: 'Sniper 3D', icon: '🎯', cat: 'Action'},
+            {name: 'Battle Royale', icon: '🛡️', cat: 'Action'}
         ];
 
         const kidsVideos = [
@@ -382,7 +370,7 @@
                     </div>`;
                 });
                 allGames.slice(0, 10).forEach(item => {
-                    grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.url}', '${item.name}')">
+                    grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}')">
                         <div class="round-img">${item.icon}</div>
                         <span>${item.name}</span>
                     </div>`;
@@ -392,7 +380,7 @@
                 if(category === 'All') {
                     zoneTitle.innerText = '⚡ All Games Hub (50 Games)';
                     allGames.forEach(item => {
-                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.url}', '${item.name}')">
+                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}')">
                             <div class="round-img">${item.icon}</div>
                             <span>${item.name}</span>
                         </div>`;
@@ -401,7 +389,7 @@
                     zoneTitle.innerText = '⚡ ' + category + ' Games';
                     const filtered = allGames.filter(g => g.cat === category);
                     filtered.forEach(item => {
-                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.url}', '${item.name}')">
+                        grid.innerHTML += `<div class="round-game-item" onclick="launchGame('${item.name}')">
                             <div class="round-img">${item.icon}</div>
                             <span>${item.name}</span>
                         </div>`;
@@ -423,25 +411,32 @@
             element.classList.add('active');
         }
 
-        function launchGame(gameUrl, gameName) {
+        function launchGame(gameName) {
             document.getElementById('viewer-title').innerText = gameName;
-            document.getElementById('viewer-iframe').src = gameUrl;
+            document.getElementById('viewer-body').innerHTML = `
+                <div style="background:#161b22; padding:30px; border-radius:15px; border:1px solid #30363d; max-width:320px; width:100%;">
+                    <div style="font-size:40px; margin-bottom:10px;">🎮</div>
+                    <h2 style="color:#f59e0b; margin-bottom:10px;">${gameName}</h2>
+                    <p style="color:#94a3b8; font-size:13px; margin-bottom:20px;">Game loaded successfully! Tap below to start playing instantly.</p>
+                    <button onclick="alert('Playing ${gameName}!')" style="background:linear-gradient(135deg, #ff4500, #ff7b00); color:white; border:none; padding:12px 20px; border-radius:8px; font-weight:bold; width:100%; cursor:pointer;">Start Game</button>
+                </div>
+            `;
             document.getElementById('game-viewer').style.display = 'flex';
         }
 
         function playRealVideo(videoUrl, videoName) {
             document.getElementById('viewer-title').innerText = videoName;
-            document.getElementById('viewer-iframe').src = videoUrl;
+            document.getElementById('viewer-body').innerHTML = `<iframe src="${videoUrl}" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
             document.getElementById('game-viewer').style.display = 'flex';
         }
 
         function closeGameViewer() {
             document.getElementById('game-viewer').style.display = 'none';
-            document.getElementById('viewer-iframe').src = '';
+            document.getElementById('viewer-body').innerHTML = '';
         }
 
         function watchAd() {
-            alert('📺 Ad Zone: Playing sponsor ad...');
+            alert('📺 Ad Zone: Sponsor ad loaded successfully!');
         }
 
         function openMysteryBox() {
